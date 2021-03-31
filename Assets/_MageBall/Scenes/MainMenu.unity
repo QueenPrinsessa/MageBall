@@ -140,6 +140,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 5552474502010000560, guid: 1dcd42aba4a5c39448964b3416bc8c97,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
+      objectReference: {fileID: 0}
     - target: {fileID: 5552474503100130116, guid: 1dcd42aba4a5c39448964b3416bc8c97,
         type: 3}
       propertyPath: index
@@ -681,6 +686,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Join Game
       objectReference: {fileID: 0}
+    - target: {fileID: 5552474502010000560, guid: 1dcd42aba4a5c39448964b3416bc8c97,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
+      objectReference: {fileID: 0}
     - target: {fileID: 5552474503100130116, guid: 1dcd42aba4a5c39448964b3416bc8c97,
         type: 3}
       propertyPath: index
@@ -943,7 +953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e2cef15e60efc4fb9b9f824b1e0b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipInputField: {fileID: 1075665605}
+  networkManager: {fileID: 740842219}
+  ipAddressInputField: {fileID: 1075665605}
+  titleScreenPanel: {fileID: 1346768017}
 --- !u!4 &446731828
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,6 +1105,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681867118}
   m_CullTransparentMesh: 1
+--- !u!1 &740842217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 740842220}
+  - component: {fileID: 740842219}
+  - component: {fileID: 740842218}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &740842218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740842217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Port: 7777
+  NoDelay: 1
+  Interval: 10
+  FastResend: 2
+  CongestionWindow: 0
+  SendWindowSize: 4096
+  ReceiveWindowSize: 4096
+  debugLog: 0
+  statisticsGUI: 0
+  statisticsLog: 0
+--- !u!114 &740842219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740842217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1254abc816c064db300ef7936fd542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  PersistNetworkManagerToOfflineScene: 0
+  runInBackground: 1
+  autoStartServerBuild: 1
+  serverTickRate: 30
+  serverBatching: 1
+  serverBatchInterval: 0
+  offlineScene: 
+  onlineScene: Assets/_MageBall/Scenes/MainMenu.unity
+  transport: {fileID: 740842218}
+  networkAddress: localhost
+  maxConnections: 4
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 8021760743681711217, guid: f71868b9ba8155d469df12889c4a8d77,
+    type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  minimumNumberOfPlayers: 2
+  menuScene: Assets/_MageBall/Scenes/MainMenu.unity
+  networkRoomPlayerPrefab: {fileID: 4365084273300691981, guid: f71868b9ba8155d469df12889c4a8d77,
+    type: 3}
+--- !u!4 &740842220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740842217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1330.1077, y: 644.9488, z: -393.7526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &754236879 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5552474503100130116, guid: 1dcd42aba4a5c39448964b3416bc8c97,
@@ -1508,6 +1610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552474502010000560, guid: 1dcd42aba4a5c39448964b3416bc8c97,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
       objectReference: {fileID: 0}
     - target: {fileID: 5552474503100130116, guid: 1dcd42aba4a5c39448964b3416bc8c97,
         type: 3}
@@ -2429,6 +2536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Create Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552474502010000560, guid: 1dcd42aba4a5c39448964b3416bc8c97,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
       objectReference: {fileID: 0}
     - target: {fileID: 5552474503100130120, guid: 1dcd42aba4a5c39448964b3416bc8c97,
         type: 3}

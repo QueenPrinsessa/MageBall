@@ -8,12 +8,12 @@ namespace MageBall
 {
     public class NameInput : MonoBehaviour
     {
-        private const string PlayerPrefsDisplayNameKey = "DisplayName";
+        public const string PlayerPrefsDisplayNameKey = "DisplayName";
 
         private TMP_InputField inputField;
         [SerializeField, Tooltip("Buttons that aren't pressable unless a name has been set")] private MenuButton[] lockedButtons;
 
-        public static string DisplayName { get; private set; }
+        public string DisplayName { get; private set; }
 
         private void Awake()
         {

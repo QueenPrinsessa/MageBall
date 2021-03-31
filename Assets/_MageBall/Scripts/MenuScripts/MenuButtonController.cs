@@ -14,7 +14,7 @@ namespace MageBall
         private SortedDictionary<int, MenuButton> menuButtons = new SortedDictionary<int, MenuButton>();
         private float menuLockDuration = 0.1f;
         private float menuLockTimer;
-        
+
         public int Index { get; set; } = 0;
         public bool Interactable { get; private set; } = true;
 
@@ -22,15 +22,18 @@ namespace MageBall
         {
             MenuButton[] menuButtons = GetComponentsInChildren<MenuButton>();
 
+            int currentMaxIndex = 0;
             foreach (MenuButton menuButton in menuButtons)
             {
+                if (menuButton.Index > currentMaxIndex)
+                    currentMaxIndex = menuButton.Index;
                 this.menuButtons.Add(menuButton.Index, menuButton);
                 menuButton.buttonSelected += OnButtonSelected;
             }
 
             SetTopButtonAsSelected();
 
-            maxIndex = menuButtons.Length - 1;
+            maxIndex = currentMaxIndex;
         }
 
         private void OnButtonSelected()
@@ -76,8 +79,22 @@ namespace MageBall
 
             float verticalAxis = Input.GetAxisRaw("Vertical");
 
-            if (!menuButtons[Index].Selectable && verticalAxis == 0)
-                SetTopButtonAsSelected();
+            if (menuButtons.ContainsKey(Index))
+            {
+                if (!menuButtons[Index].Selectable && verticalAxis == 0)
+                    SetTopButtonAsSelected();
+            }
+            else
+            {
+                if (Index < maxIndex)
+                    Index++;
+                else
+                    Index = 0;
+
+                if (menuButtons.ContainsKey(Index) && menuButtons[Index].Selectable)
+                    hasKeyBeenPressed = true;
+                return;
+            }
 
             if (verticalAxis != 0)
             {
@@ -99,7 +116,7 @@ namespace MageBall
                         Index = maxIndex;
                 }
 
-                if(menuButtons[Index].Selectable)
+                if (menuButtons.ContainsKey(Index) && menuButtons[Index].Selectable)
                     hasKeyBeenPressed = true;
             }
             else

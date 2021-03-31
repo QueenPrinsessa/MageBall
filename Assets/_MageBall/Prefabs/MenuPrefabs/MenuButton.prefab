@@ -289,8 +289,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 5552474503100130116}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: SelectButtonOnHover
+          m_TargetAssemblyTypeName: MageBall.MenuButton, Assembly-CSharp
+          m_MethodName: SelectMenuButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
