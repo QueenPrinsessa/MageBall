@@ -60,7 +60,7 @@ namespace MageBall
         public void JoinGame()
         {
             string ipAddress = ipAddressInputField.text;
-
+            ipAddress = ipAddress.Trim();
             networkManager.networkAddress = ipAddress;
             networkManager.StartClient();
 
