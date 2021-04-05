@@ -197,6 +197,9 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolateScale: 1
+  syncScale: 1
 --- !u!143 &1500411766523681501
 CharacterController:
   m_ObjectHideFlags: 0
@@ -229,6 +232,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   cameraFollow: {fileID: 1563699214550501902}
   thirdPersonCamPrefab: {fileID: 7294957378755441486, guid: 9f63054bbd4740c4287fde40c6f0b6ee,
     type: 3}
+  speed: 8
+  jumpHeight: 0.9
+  gravity: -20
