@@ -9,8 +9,6 @@ namespace MageBall
     {
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private Transform cameraFollow;
-        [SerializeField] private GameObject thirdPersonCamPrefab;
-        private CinemachineVirtualCamera thirdPersonCam;
         private CharacterController controller;
         [SerializeField] private float speed = 8f;
         [SerializeField] private float jumpHeight = 0.9f;
@@ -28,10 +26,7 @@ namespace MageBall
 
         public void Start()
         {
-            thirdPersonCam = Instantiate(thirdPersonCamPrefab).GetComponent<CinemachineVirtualCamera>();
-            thirdPersonCam.Follow = cameraFollow;
             Cursor.lockState = CursorLockMode.Locked;
-            thirdPersonCam.enabled = true;
             controller = GetComponent<CharacterController>();
         }
 

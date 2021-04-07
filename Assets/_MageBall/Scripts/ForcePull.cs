@@ -5,100 +5,36 @@ using Mirror;
 namespace MageBall
 {
 
-	public class ForcePull : MonoBehaviour
-	{
-		
-		private Transform player; //destination of pull
-		private string pullableTag = "pullable";
+    public class ForcePull : Spell
+    {
 
-		[SerializeField] //remove serializeField when you found a good number
-		private float modifier = 1.0f;
-		Vector3 pullForce; //direction of the force that pulls
+        [SerializeField]
+        private float modifier = 10.0f;
 
-		[Tooltip("The distance threshold in which the object is considered pulled to the hand")]
-		public float positionDistanceThreshold;
-
-		[Tooltip("The distance threshold in which the object's velocity is set to maximum")]
-		public float velocityDistanceThreshold;
-
-		[Tooltip("The maximum velocity of the object being pulled")]
-		public float maxVelocity;
-
-
-		void Update()
-		{
-			RaycastHit hit;
-			if (Input.GetMouseButtonDown(0))
-			{
-				if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
-				{
-					if (hit.transform.tag.Equals(pullableTag))
-					{
-						StartCoroutine(PullObject(hit.transform));
-					}
-				}
-			}
-		}
-
-        private void Start()
+        private void Update()
         {
-			player = FindObjectOfType<LocalPlayer>().transform;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                CastSpell();
+            }
         }
 
-        IEnumerator PullObject(Transform t)
-		{
-			Rigidbody r = t.GetComponent<Rigidbody>();
-			while (true)
-			{
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Ray ray = new Ray(transform.position, transform.forward);
+            Gizmos.DrawRay(ray);
+        }
 
-				//	If the player right-clicks, stop pulling
-				if (Input.GetMouseButtonDown(1))
-				{
-					break;
-				}
-				float distanceToHand = Vector3.Distance(t.position, player.position);
-				/*
-					If the object is withihn the distance threshold, consider it pulled all the way and:
-					1) Set the object's position to the hand position
-					2) make it's parent be the hand object
-					3) Constrain its movement, but not rotation
-					4) Set its velocity to be the forward vector of the camera * the throw velocity
-					5) Break out of the coroutine
-				*/
-				if (distanceToHand < positionDistanceThreshold)
-				{
-					t.position = player.position;
-					t.parent = player;
-					r.constraints = RigidbodyConstraints.FreezePosition;
-					break;
-				}
-
-				//	Calculate the pull direction vector
-				Vector3 pullDirection = player.position - t.position;
-
-				//	Normalize it and multiply by the force modifier
-				pullForce = pullDirection.normalized * modifier;
-
-				/*
-					Check if the velocity magnitude of the object is less than the maximum velocity
-					and
-					check if the distance to hand is greater than the distance threshold
-				*/
-				if (r.velocity.magnitude < maxVelocity && distanceToHand > velocityDistanceThreshold)
-				{
-
-					//	Add force that takes the object's mass into account
-					r.AddForce(pullForce, ForceMode.Force);
-				}
-				else
-				{
-
-					// Set a constant velocity to the object
-					r.velocity = pullDirection.normalized * maxVelocity;
-				}
-
-				yield return null;
-			}
-		}
-	}
+        public override void CastSpell()
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            {
+                Vector3 pullDirection = transform.position - hit.transform.position;
+                Vector3 pullForce = pullDirection.normalized * modifier;
+                if (hit.rigidbody != null)
+                    hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);
+            }
+        }
+    }
 }
