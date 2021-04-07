@@ -11,31 +11,10 @@ namespace MageBall
     {
         private static readonly string DefaultPlayerName = "Player";
 
-        [Header("UI")]
-        [SerializeField] private GameObject lobbyUI;
-        [SerializeField] private TMP_Text[] playerNameTexts = new TMP_Text[4];
-        [SerializeField] private TMP_Text[] playerReadyTexts = new TMP_Text[4];
-        [SerializeField] private MenuButton startGameButton;
-
-        [SyncVar(hook = nameof(OnDisplayNameChanged))]
-        [HideInInspector] public string displayName = "Loading...";
-        [SyncVar(hook = nameof(OnReadyStatusChanged))]
-        [HideInInspector] public bool isReady;
+        [SyncVar]
+        private string displayName = "Loading...";
 
         public string DisplayName => displayName;
-        public bool IsReady => isReady;
-
-        private bool isHost;
-
-        public bool IsHost
-        {
-            set
-            {
-                isHost = value;
-                startGameButton.gameObject.SetActive(isHost);
-            }
-            get => isHost;
-        }
 
         private NetworkManagerMageBall networkManager;
 
@@ -50,14 +29,6 @@ namespace MageBall
             }
         }
 
-        public override void OnStartAuthority()
-        {
-            string displayName = PlayerPrefs.GetString(NameInput.PlayerPrefsDisplayNameKey, DefaultPlayerName);
-            CmdSetDisplayName(displayName);
-
-            lobbyUI.SetActive(true);
-        }
-
         [Command]
         private void CmdSetDisplayName(string displayName)
         {
@@ -66,80 +37,19 @@ namespace MageBall
 
         public override void OnStartClient()
         {
-            //NetworkManager.NetworkRoomPlayers.Add(this);
-            UpdateDisplay();
+            DontDestroyOnLoad(gameObject); //might be removeable
+            NetworkManager.NetworkGamePlayers.Add(this);
         }
 
         public override void OnStopClient()
         {
-            //NetworkManager.NetworkRoomPlayers.Remove(this);
-            UpdateDisplay();
+            NetworkManager.NetworkGamePlayers.Remove(this);
         }
 
-        private void OnDisplayNameChanged(string oldDisplayName, string newDisplayName) => UpdateDisplay();
-
-        private void OnReadyStatusChanged(bool oldStatus, bool newStatus) => UpdateDisplay();
-
-        private void UpdateDisplay()
+        [Server]
+        public void SetDisplayName(string displayName)
         {
-            if (!hasAuthority)
-            {
-                foreach (NetworkRoomPlayerMageBall player in NetworkManager.NetworkRoomPlayers)
-                {
-                    if (player.hasAuthority)
-                    {
-                        //player.UpdateDisplay();
-                        break;
-                    }
-                }
-
-                return;
-            }
-
-            for (int i = 0; i < playerNameTexts.Length; i++)
-            {
-                playerNameTexts[i].text = "Waiting for player...";
-                playerReadyTexts[i].text = "";
-            }
-
-            for (int i = 0; i < NetworkManager.NetworkRoomPlayers.Count; i++)
-            {
-                playerNameTexts[i].text = NetworkManager.NetworkRoomPlayers[i].DisplayName;
-                playerReadyTexts[i].text = NetworkManager.NetworkRoomPlayers[i].IsReady ? "Ready" : "Not Ready";
-            }
-        }
-
-        public void CheckIfReadyToStart(bool readyToStart)
-        {
-            if (!IsHost)
-                return;
-
-            startGameButton.Selectable = readyToStart;
-        }
-
-        [Command]
-        public void CmdToggleReady()
-        {
-            isReady = !IsReady;
-            NetworkManager.NotifyPlayersOfReadyState();
-        }
-
-        [Command]
-        public void CmdStartGame()
-        {
-            if (NetworkManager.NetworkRoomPlayers[0].connectionToClient != connectionToClient)
-                return;
-
-            //Start game
-            Debug.Log("Pressed start game button.");
-        }
-
-        public void Disconnect()
-        {
-            if (IsHost)
-                NetworkManager.StopHost();
-            else
-                NetworkManager.StopClient();
+            this.displayName = displayName;
         }
     }
 }

@@ -13,18 +13,30 @@ namespace MageBall
         [SerializeField, Scene] private string menuScene = string.Empty;
 
         [Header("Room")]
-        [SerializeField] private NetworkRoomPlayerMageBall networkRoomPlayerPrefab = null;
+        [SerializeField] private NetworkRoomPlayerMageBall networkRoomPlayerPrefab;
+
+        [Header("Game")]
+        [SerializeField] private NetworkGamePlayerMageBall gamePlayerPrefab;
+        [SerializeField] private GameObject playerSpawnSystem;
+
+        private string arenaPrefix = "Arena_";
 
         public static event Action clientConnected;
         public static event Action clientDisconnected;
         public static event Action stopClient;
+        public static event Action<NetworkConnection> serverReadied;
 
         public List<NetworkRoomPlayerMageBall> NetworkRoomPlayers { get; } = new List<NetworkRoomPlayerMageBall>();
-        
+        public List<NetworkGamePlayerMageBall> NetworkGamePlayers { get; } = new List<NetworkGamePlayerMageBall>();
 
         public override void OnClientConnect(NetworkConnection conn)
         {
-            base.OnClientConnect(conn);
+            if (!clientLoadedScene)
+            {
+                if (!NetworkClient.ready) NetworkClient.Ready();
+                NetworkClient.AddPlayer();
+            }
+
             clientConnected?.Invoke();
         }
 
@@ -34,7 +46,7 @@ namespace MageBall
             clientDisconnected?.Invoke();
         }
 
-        public override void OnStopClient() 
+        public override void OnStopClient()
         {
             stopClient?.Invoke();
         }
@@ -104,6 +116,50 @@ namespace MageBall
                     return false;
 
             return true;
+        }
+
+        public void StartGame()
+        {
+            if (SceneManager.GetActiveScene().path == menuScene)
+            {
+                if (!IsReadyToStartMatch())
+                    return;
+
+                ServerChangeScene("Arena_01");
+            }
+        }
+
+        public override void ServerChangeScene(string newSceneName)
+        {
+            if (SceneManager.GetActiveScene().path == menuScene && newSceneName.StartsWith(arenaPrefix))
+            {
+                for (int i = NetworkRoomPlayers.Count; i-- > 0;)
+                {
+                    NetworkConnection connection = NetworkRoomPlayers[i].connectionToClient;
+                    NetworkGamePlayerMageBall gamePlayerInstance = Instantiate(gamePlayerPrefab);
+                    gamePlayerInstance.SetDisplayName(NetworkRoomPlayers[i].DisplayName);
+
+                    NetworkServer.Destroy(connection.identity.gameObject);
+                    NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
+                }
+            }
+
+            base.ServerChangeScene(newSceneName);
+        }
+
+        public override void OnServerSceneChanged(string sceneName)
+        {
+            if (!sceneName.StartsWith(arenaPrefix))
+                return;
+
+            GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+            NetworkServer.Spawn(playerSpawnSystemInstance);
+        }
+
+        public override void OnServerReady(NetworkConnection conn)
+        {
+            base.OnServerReady(conn);
+            serverReadied?.Invoke(conn);
         }
     }
 }
