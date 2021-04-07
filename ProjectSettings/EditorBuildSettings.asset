@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_MageBall/Scenes/MainMenu.unity
     guid: fe02d0aab7e540b4ea36c2951397d6fa
+  - enabled: 1
+    path: Assets/_MageBall/Scenes/Arenas/Arena_01.unity
+    guid: 9650f4d3fd2bcd543abf7efc8e9b0957
   m_configObjects: {}

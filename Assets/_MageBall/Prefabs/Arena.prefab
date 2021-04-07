@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4425891712297913568}
   - component: {fileID: 4425891712297913569}
   - component: {fileID: 4425891712297913574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arena
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1797,7 +1797,7 @@ GameObject:
   - component: {fileID: 4678440897093750961}
   - component: {fileID: 1963113654140077052}
   - component: {fileID: 121653673774284928}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}

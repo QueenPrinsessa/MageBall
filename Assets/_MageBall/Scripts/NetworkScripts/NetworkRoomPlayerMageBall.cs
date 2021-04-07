@@ -18,9 +18,9 @@ namespace MageBall
         [SerializeField] private MenuButton startGameButton;
 
         [SyncVar(hook = nameof(OnDisplayNameChanged))]
-        [HideInInspector] public string displayName = "Loading...";
+        [HideInInspector] private string displayName = "Loading...";
         [SyncVar(hook = nameof(OnReadyStatusChanged))]
-        [HideInInspector] public bool isReady;
+        [HideInInspector] private bool isReady;
 
         public string DisplayName => displayName;
         public bool IsReady => isReady;
@@ -130,8 +130,15 @@ namespace MageBall
             if (NetworkManager.NetworkRoomPlayers[0].connectionToClient != connectionToClient)
                 return;
 
-            //Start game
-            Debug.Log("Pressed start game button.");
+            NetworkManager.StartGame();
+        }
+
+        public void Disconnect()
+        {
+            if (IsHost)
+                NetworkManager.StopHost();
+            else
+                NetworkManager.StopClient();
         }
     }
 }
