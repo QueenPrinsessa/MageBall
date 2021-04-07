@@ -17,6 +17,7 @@ namespace MageBall
 
         public static event Action clientConnected;
         public static event Action clientDisconnected;
+        public static event Action stopClient;
 
         public List<NetworkRoomPlayerMageBall> NetworkRoomPlayers { get; } = new List<NetworkRoomPlayerMageBall>();
         
@@ -31,6 +32,11 @@ namespace MageBall
         {
             base.OnClientConnect(conn);
             clientDisconnected?.Invoke();
+        }
+
+        public override void OnStopClient() 
+        {
+            stopClient?.Invoke();
         }
 
         public override void OnServerConnect(NetworkConnection conn)

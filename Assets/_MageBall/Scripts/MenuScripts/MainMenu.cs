@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MageBall
 {
@@ -18,7 +16,11 @@ namespace MageBall
 
         private void Start()
         {
+            if (networkManager == null)
+                networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
+
             menuButtonController = titleScreenPanel.GetComponent<MenuButtonController>();
+            NetworkManagerMageBall.stopClient += OnStopClient;
         }
 
         private void OnEnable()
@@ -32,6 +34,16 @@ namespace MageBall
             NetworkManagerMageBall.clientConnected -= OnClientConnected;
             NetworkManagerMageBall.clientDisconnected -= OnClientDisconnected;
 
+        }
+
+        private void OnDestroy()
+        {
+            NetworkManagerMageBall.stopClient -= OnStopClient;
+        }
+
+        private void OnStopClient()
+        {
+            titleScreenPanel.SetActive(true);
         }
 
         private void OnClientConnected()

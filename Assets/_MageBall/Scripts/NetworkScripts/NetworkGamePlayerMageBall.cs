@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MageBall
 {
-    public class NetworkRoomPlayerMageBall : NetworkBehaviour
+    public class NetworkGamePlayerMageBall : NetworkBehaviour
     {
         private static readonly string DefaultPlayerName = "Player";
 
@@ -66,13 +66,13 @@ namespace MageBall
 
         public override void OnStartClient()
         {
-            NetworkManager.NetworkRoomPlayers.Add(this);
+            //NetworkManager.NetworkRoomPlayers.Add(this);
             UpdateDisplay();
         }
 
         public override void OnStopClient()
         {
-            NetworkManager.NetworkRoomPlayers.Remove(this);
+            //NetworkManager.NetworkRoomPlayers.Remove(this);
             UpdateDisplay();
         }
 
@@ -88,7 +88,7 @@ namespace MageBall
                 {
                     if (player.hasAuthority)
                     {
-                        player.UpdateDisplay();
+                        //player.UpdateDisplay();
                         break;
                     }
                 }

@@ -79,22 +79,8 @@ namespace MageBall
 
             float verticalAxis = Input.GetAxisRaw("Vertical");
 
-            if (menuButtons.ContainsKey(Index))
-            {
-                if (!menuButtons[Index].Selectable && verticalAxis == 0)
-                    SetTopButtonAsSelected();
-            }
-            else
-            {
-                if (Index < maxIndex)
-                    Index++;
-                else
-                    Index = 0;
-
-                if (menuButtons.ContainsKey(Index) && menuButtons[Index].Selectable)
-                    hasKeyBeenPressed = true;
+            if(!IsOnAvailableMenuButton(verticalAxis))
                 return;
-            }
 
             if (verticalAxis != 0)
             {
@@ -121,6 +107,30 @@ namespace MageBall
             }
             else
                 hasKeyBeenPressed = false;
+        }
+
+        private bool IsOnAvailableMenuButton(float verticalAxis)
+        {
+            if (menuButtons.ContainsKey(Index))
+            {
+                if (!menuButtons[Index].Selectable && verticalAxis == 0)
+                    SetTopButtonAsSelected();
+
+                return true;
+            }
+            else
+            {
+                if (Index < maxIndex && verticalAxis < 0)
+                    Index++;
+                else if (Index < maxIndex && verticalAxis > 0)
+                    Index--;
+                else
+                    Index = 0;
+
+                if (menuButtons.ContainsKey(Index) && menuButtons[Index].Selectable)
+                    hasKeyBeenPressed = true;
+                return hasKeyBeenPressed;
+            }
         }
 
         public void DisableInteraction()
