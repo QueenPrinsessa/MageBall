@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ball
+  m_Name: BallInner
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -120,9 +120,9 @@ Material:
     - Color_5c834c8ba00c4cad904bbb3771462675: {r: 1, g: 0.25943398, b: 0.9210445,
         a: 0}
     - Color_e772b18d99334362ab2fecc834ca362b: {r: 0, g: 0.9903991, b: 1, a: 0}
-    - _BaseColor: {r: 1, g: 0, b: 0.6938925, a: 1}
+    - _BaseColor: {r: 1, g: 0.9176471, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 6.566037, g: 0, b: 2.6126642, a: 1}
+    - _EmissionColor: {r: 0.42240426, g: 0.08223155, b: 0.049811818, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3835638757935618261
