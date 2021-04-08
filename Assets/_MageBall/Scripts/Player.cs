@@ -12,16 +12,16 @@ namespace MageBall
         [SerializeField] private GameObject thirdPersonCamPrefab;
         private CinemachineVirtualCamera thirdPersonCam;
         private CharacterController controller;
-        [SerializeField] private float speed = 8f;
+        private float speed = 0f;
+        [SerializeField] private float maxSpeed = 10f;
+        [SerializeField] private float forceMagnitude = 4f; 
         [SerializeField] private float jumpHeight = 0.9f;
-        [SerializeField] private float gravity = -20.0f;
-        //private float gravityTime;
-        //private bool gravityForce;
+        [SerializeField] private float gravity = -10.0f;
         private float mouseSensitivity = 0.5f;
         private float cameraSpeed = 300f;
         private float xRotation = 0f;
         private float groundCheckDistance = 0.25f;
-        private Vector2 moveAxis;
+        private Vector3 moveDirection;
         private Vector2 lookAxis;
         private Vector3 velocity;
         private bool isGrounded;
@@ -56,30 +56,51 @@ namespace MageBall
             float xRotAngle = lookAxis.y * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime;
             xRotation -= xRotAngle;
             xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
             cameraFollow.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-
             lookAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-            moveAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
             Quaternion rotation = transform.rotation * Quaternion.AngleAxis(lookAxis.x * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime, Vector3.up);
             transform.rotation = rotation;
 
-            if (IsGrounded() && this.velocity.y < 0)
-                this.velocity.y = 0;
+            Vector3 inputDirection = new Vector3(horizontal, 0, vertical);
+            Vector3 transformDirection = transform.TransformDirection(inputDirection);
+            
+            if(horizontal != 0 || vertical != 0)
+            {
+                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, maxSpeed);
+            }
+            else
+            {
+                speed = Mathf.Max(speed - forceMagnitude * Time.deltaTime * 1.5f, 0);
+            }
 
-            Vector3 direction = (transform.right * moveAxis.x + transform.forward * moveAxis.y).normalized;
-            Vector3 velocity = direction * speed * Time.fixedDeltaTime;
-            controller.Move(velocity);
+            Debug.Log(speed);
+           
+            Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
+
+            moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
+            controller.Move(moveDirection);
+
+            if (IsGrounded())
+            {
+                moveDirection.y = 0;
+                velocity.y = 0;
+            }
+
+            
 
             if (Input.GetButton("Jump") && IsGrounded())
                 this.velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
 
-            this.velocity.y += gravity * Time.fixedDeltaTime * 2;
-            controller.Move(this.velocity * Time.fixedDeltaTime);
-            
+            this.velocity.y += gravity * Time.deltaTime;
+            controller.Move(this.velocity * Time.deltaTime);
+
         }
-        //Physics.Raycast(new Ray(transform.position, -transform.up), out RaycastHit hit, groundCheckDistance)
+
         private bool IsGrounded()
         {
 
@@ -95,7 +116,6 @@ namespace MageBall
             }
  
             Debug.DrawRay(transform.position, -transform.up * groundCheckDistance);
-            Debug.Log(raycastHit.collider);
             return raycastHit.collider != null;
         }
 
