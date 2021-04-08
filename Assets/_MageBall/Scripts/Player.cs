@@ -26,7 +26,7 @@ namespace MageBall
         private Vector3 velocity;
         private bool isGrounded;
 
-        public override void OnStartLocalPlayer()
+        public override void OnStartAuthority()
         {
             thirdPersonCam = Instantiate(thirdPersonCamPrefab).GetComponent<CinemachineVirtualCamera>();
             thirdPersonCam.Follow = cameraFollow;
@@ -38,7 +38,7 @@ namespace MageBall
         [ClientCallback]
         private void Update()
         {
-            if (!isLocalPlayer)
+            if (!hasAuthority)
                 return;
 
             if (Input.GetKeyDown(KeyCode.F1))
@@ -50,7 +50,7 @@ namespace MageBall
         [Client]
         private void FixedUpdate()
         {
-            if (!isLocalPlayer)
+            if (!hasAuthority)
                 return;
 
             float xRotAngle = lookAxis.y * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime;
