@@ -78,7 +78,7 @@ namespace MageBall
                 speed = Mathf.Max(speed - forceMagnitude * Time.deltaTime * 1.5f, 0);
             }
 
-            Debug.Log(speed);
+             //Debug.Log(speed);
            
             Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
 
@@ -91,8 +91,6 @@ namespace MageBall
                 velocity.y = 0;
             }
 
-            
-
             if (Input.GetButton("Jump") && IsGrounded())
                 this.velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
 
@@ -101,11 +99,14 @@ namespace MageBall
 
         }
 
+        private Color rayColor;
+
         private bool IsGrounded()
         {
 
             Physics.Raycast(new Ray(transform.position, -transform.up), out RaycastHit raycastHit, groundCheckDistance, groundLayerMask); //switch to sphere cast for better results
-            Color rayColor;
+
+#if UNITY_EDITOR
             if(raycastHit.collider != null) // if the raycast is not null it has hit something
             {
                 rayColor = Color.green; // green for grounded
@@ -114,8 +115,7 @@ namespace MageBall
             {
                 rayColor = Color.red; // red for floating?
             }
- 
-            Debug.DrawRay(transform.position, -transform.up * groundCheckDistance);
+#endif
             return raycastHit.collider != null;
         }
 
@@ -139,7 +139,10 @@ namespace MageBall
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            if (rayColor == null)
+                return;
+
+            Gizmos.color = rayColor;
             Ray groundCheckRay = new Ray(transform.position, -transform.up);
             Gizmos.DrawLine(groundCheckRay.origin, (groundCheckRay.direction.normalized * groundCheckDistance) + groundCheckRay.origin);
         }
