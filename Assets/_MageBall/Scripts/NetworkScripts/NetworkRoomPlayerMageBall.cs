@@ -136,9 +136,31 @@ namespace MageBall
         public void Disconnect()
         {
             if (IsHost)
-                NetworkManager.StopHost();
-            else
-                NetworkManager.StopClient();
+            {
+                for (int i = NetworkManager.NetworkRoomPlayers.Count; i-- > 0;)
+                {
+                    if(NetworkManager.NetworkRoomPlayers[i] != this)
+                        TargetDisconnect(NetworkManager.NetworkRoomPlayers[i].connectionToClient);
+                }
+                StartCoroutine(StopHost());
+                return;
+            }
+
+            NetworkManager.StopClient();
+        }
+
+        [TargetRpc]
+        public void TargetDisconnect(NetworkConnection connection)
+        {
+            Debug.Log("TargetDisconnect");
+            NetworkManager.StopClient();
+        }
+
+        private IEnumerator StopHost()
+        {
+            yield return new WaitUntil(() => NetworkManager.NetworkRoomPlayers.Count == 1);
+
+            NetworkManager.StopHost();
         }
     }
 }
