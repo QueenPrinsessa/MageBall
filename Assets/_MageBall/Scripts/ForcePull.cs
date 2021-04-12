@@ -11,26 +11,12 @@ namespace MageBall
         [SerializeField]
         private float modifier = 10.0f;
 
-        private void Update()
+        [Command]
+        public override void CmdCastSpell()
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Physics.Raycast(castPoint.position, castPoint.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
-                CastSpell();
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Ray ray = new Ray(transform.position, transform.forward);
-            Gizmos.DrawRay(ray);
-        }
-
-        public override void CastSpell()
-        {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
-            {
-                Vector3 pullDirection = transform.position - hit.transform.position;
+                Vector3 pullDirection = castPoint.position - hit.transform.position;
                 Vector3 pullForce = pullDirection.normalized * modifier;
                 if (hit.rigidbody != null)
                     hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);

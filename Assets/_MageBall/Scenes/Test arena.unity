@@ -1138,10 +1138,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena
       objectReference: {fileID: 0}
+    - target: {fileID: 6931478180008376707, guid: 1ef127b4ee05687458f79d13b5438f65,
+        type: 3}
+      propertyPath: sceneId
+      value: 2351769766
+      objectReference: {fileID: 0}
     - target: {fileID: 7076444017482643901, guid: 1ef127b4ee05687458f79d13b5438f65,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 548434352}
+    - target: {fileID: 7322045200441264026, guid: 1ef127b4ee05687458f79d13b5438f65,
+        type: 3}
+      propertyPath: sceneId
+      value: 1918773807
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef127b4ee05687458f79d13b5438f65, type: 3}

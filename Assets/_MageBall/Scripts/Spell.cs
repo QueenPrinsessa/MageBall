@@ -1,8 +1,18 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spell : MonoBehaviour
+public abstract class Spell : NetworkBehaviour
 {
-    public abstract void CastSpell();
+    protected Transform castPoint;
+
+    public override void OnStartServer()
+    {
+        castPoint = Camera.main.transform;
+    }
+
+    [Command]
+    public virtual void CmdCastSpell() { }
+
 }
