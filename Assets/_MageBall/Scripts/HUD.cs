@@ -4,76 +4,57 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
-public class HUD : NetworkBehaviour
+namespace MageBall
 {
-    [SerializeField] private Text time;
-    [SerializeField] private Text scoreTeam1;
-    [SerializeField] private Text scoreTeam2;
-    [SerializeField] private int minutes = 10;
-    private int seconds = 0;
-    private bool takingAway = false;
-    private bool gameEnded = false;
-
-    [SerializeField]  private Slider manaBar;
-    [SerializeField] private float fillSpeed = 0.5f;
-    [SerializeField] private ParticleSystem particleSystem;
-    private float fullMana = 1f;
-    
-
-    void Start()
+    public class HUD : NetworkBehaviour
     {
-        time.text = minutes + ":0" + seconds;
-        //manaBar = gameObject.GetComponent<ManaBar>();
-    }
+        [Header("UI")]
+        [SerializeField] private Text time;
+        [SerializeField] private Text blueTeamScoreText;
+        [SerializeField] private Text redTeamScoreText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!takingAway && minutes >= 0 && seconds >= 0) 
-        {
-            StartCoroutine(Timer());
-        }
-        if (seconds >= 10)
-            time.text = minutes + ":" + seconds;
-        else
-            time.text = minutes + ":0" + seconds;
+        public override void OnStartAuthority()
+        { 
+            ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
+            MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
-        if (minutes == 0 && seconds == 0)
-        {
-            EndGame();
+            if (scoreHandler != null)
+                scoreHandler.scoreChanged += OnScoreChanged;
+            if (matchTimer != null)
+                matchTimer.timeChanged += OnTimeChanged;
         }
 
-        if (manaBar.value < fullMana)
+        [ClientCallback]
+        private void OnDestroy()
         {
-            manaBar.value += fillSpeed * Time.deltaTime;
-            if (!particleSystem.isPlaying)
-                particleSystem.Play();  
+            ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
+            MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
+
+            if (scoreHandler != null)
+                scoreHandler.scoreChanged -= OnScoreChanged;
+            if (matchTimer != null)
+                matchTimer.timeChanged -= OnTimeChanged;
         }
-        else
-            particleSystem.Stop();
 
-        if (Input.GetKeyDown(KeyCode.F)) manaBar.value -= 0.6f;
-
-    }
-
-    void EndGame()
-    {
-        gameEnded = true;
-        StopCoroutine(Timer());
-        //gameoverUI.SetActive(true);
-    }
-    
-    IEnumerator Timer()
-    {
-        takingAway = true;
-        yield return new WaitForSeconds(1);
-        if (seconds == 0)
+        private void OnTimeChanged(int minutes, int seconds)
         {
-            minutes--;
-            seconds = 59;
+            if (seconds >= 10)
+                time.text = minutes + ":" + seconds;
+            else
+                time.text = minutes + ":0" + seconds;
         }
-        else
-        seconds--;
-        takingAway = false;
+
+        private void OnScoreChanged(Team team, int newScore)
+        {
+            switch (team)
+            {
+                case Team.Red:
+                    redTeamScoreText.text = newScore.ToString();
+                    break;
+                case Team.Blue:
+                    blueTeamScoreText.text = newScore.ToString();
+                    break;
+            }
+        }
     }
 }

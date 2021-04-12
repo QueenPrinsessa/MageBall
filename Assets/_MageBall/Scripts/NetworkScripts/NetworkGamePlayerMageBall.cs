@@ -11,11 +11,7 @@ namespace MageBall
     {
         private static readonly string DefaultPlayerName = "Player";
 
-        [SyncVar]
-        private string displayName = "Loading...";
-
-        public string DisplayName => displayName;
-
+        [SyncVar] private string displayName = "Loading...";
         private NetworkManagerMageBall networkManager;
 
         private NetworkManagerMageBall NetworkManager
@@ -29,6 +25,12 @@ namespace MageBall
             }
         }
 
+        [SyncVar] private Vector3 spawnPosition;
+        [SyncVar] private Quaternion spawnRotation;
+        [SyncVar] private GameObject playerGameObject;
+
+        public string DisplayName => displayName ?? DefaultPlayerName;
+
         [Command]
         private void CmdSetDisplayName(string displayName)
         {
@@ -37,7 +39,7 @@ namespace MageBall
 
         public override void OnStartClient()
         {
-            DontDestroyOnLoad(gameObject); //might be removeable
+            DontDestroyOnLoad(gameObject); //might be unnecessary
             NetworkManager.NetworkGamePlayers.Add(this);
         }
 
@@ -50,6 +52,33 @@ namespace MageBall
         public void SetDisplayName(string displayName)
         {
             this.displayName = displayName;
+        }
+
+        [Server]
+        public void SetPlayerGameObject(GameObject gameObject, Vector3 spawnPosition, Quaternion spawnRotation)
+        {
+            playerGameObject = gameObject;
+            this.spawnPosition = spawnPosition;
+            this.spawnRotation = spawnRotation;
+        }
+
+        [TargetRpc]
+        public void TargetResetPosition()
+        {
+            playerGameObject.GetComponent<Player>().enabled = false;
+            playerGameObject.transform.position = spawnPosition;
+            playerGameObject.transform.rotation = spawnRotation;
+            StartCoroutine(EnablePlayerControls());
+        }
+
+        [ClientCallback]
+        private IEnumerator EnablePlayerControls()
+        {
+            if (playerGameObject == null)
+                yield break;
+
+            yield return new WaitForSeconds(1);
+            playerGameObject.GetComponent<Player>().enabled = true;
         }
     }
 }
