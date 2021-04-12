@@ -72,6 +72,9 @@ namespace MageBall
             GameObject playerInstance = Instantiate(playerPrefab, position, rotation);
             NetworkServer.Spawn(playerInstance, connection);
 
+            NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
+            networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
+
             if (currentTeam == Team.Blue)
             {
                 currentTeam = Team.Red;
