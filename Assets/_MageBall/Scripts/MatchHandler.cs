@@ -8,8 +8,8 @@ namespace MageBall
     public class MatchHandler : NetworkBehaviour
     {
 
-        private Vector3 ballStartPosition;
-        private Quaternion ballStartRotation;
+        [SyncVar] private Vector3 ballStartPosition;
+        [SyncVar] private Quaternion ballStartRotation;
         private Rigidbody ballRigidbody;
 
         private GameObject ball;
@@ -64,10 +64,16 @@ namespace MageBall
                 networkGamePlayer.TargetResetPosition(); 
             }
 
-            ball.transform.position = ballStartPosition;
-            ball.transform.rotation = ballStartRotation;
+            RpcResetBall(ball);
             ballRigidbody.velocity = Vector3.zero;
             ballRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        [ClientRpc]
+        private void RpcResetBall(GameObject ball)
+        {
+            ball.transform.position = ballStartPosition;
+            ball.transform.rotation = ballStartRotation;
         }
 
     }
