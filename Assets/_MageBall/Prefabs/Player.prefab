@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7262027884932643805}
   - component: {fileID: 2129918115802722747}
   - component: {fileID: 4880671619888796807}
+  - component: {fileID: 7757474190639793733}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,9 +143,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  cameraFollow: {fileID: 1563699214550501902}
-  thirdPersonCamPrefab: {fileID: 7294957378755441486, guid: 9f63054bbd4740c4287fde40c6f0b6ee,
-    type: 3}
   maxSpeed: 10
   forceMagnitude: 4
   jumpHeight: 0.9
@@ -181,6 +179,31 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   HUD: {fileID: 4990025705050446181}
+--- !u!114 &7757474190639793733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179090357016361475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1863b4160ea4094f9c36616452dfef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 0}
+  thirdPersonCam: {fileID: 0}
+  verticalRotateMin: -80
+  verticalRotateMax: 80
+  cameraVerticalRotationMultiplier: 2
+  cameraHorizontalRotationMultiplier: 2
+  cameraInputHorizontal: 0
+  cameraInputVertical: 0
+  invertHorizontal: 0
+  invertVertical: 0
+  cameraSide: 1
+  allowCameraToggle: 1
+  cameraSideToggleSpeed: 1
 --- !u!1001 &1534179356658806912
 PrefabInstance:
   m_ObjectHideFlags: 0
