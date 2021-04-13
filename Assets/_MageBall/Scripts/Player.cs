@@ -60,11 +60,11 @@ namespace MageBall
             cameraFollow.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
             lookAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            Quaternion rotation = transform.rotation * Quaternion.AngleAxis(lookAxis.x * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime, Vector3.up);
+            transform.rotation = rotation;
 
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
-            Quaternion rotation = transform.rotation * Quaternion.AngleAxis(lookAxis.x * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime, Vector3.up);
-            transform.rotation = rotation;
 
             Vector3 inputDirection = new Vector3(horizontal, 0, vertical);
             Vector3 transformDirection = transform.TransformDirection(inputDirection);
