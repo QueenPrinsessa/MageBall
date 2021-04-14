@@ -25,7 +25,7 @@ namespace MageBall
 
         private void OnCollisionEnter(Collision collision)
         {
-            Vector3 explosionPoint = collision.GetContact(0).point;
+            Vector3 explosionPoint = transform.position;
             Collider[] colliders = Physics.OverlapSphere(explosionPoint, radius, LayerMasks.ballLayer | LayerMasks.groundLayer);
 
             foreach (Collider collider in colliders)

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2958128035698285669}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 3606733632085325172}
   m_RootOrder: 0
@@ -176,9 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  flightSpeed: 60
-  radius: 5
-  explosionForce: 1000
+  flightSpeed: 50
+  radius: 8
+  explosionForce: 1500
 --- !u!114 &-8987871216110443510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!135 &4403369487306535221
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -227,5 +227,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0.8}
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

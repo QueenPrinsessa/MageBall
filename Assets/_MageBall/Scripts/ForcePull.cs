@@ -8,13 +8,13 @@ namespace MageBall
     public class ForcePull : Spell
     {
 
-        [SerializeField]
-        private float modifier = 30.0f;
+        [SerializeField] private float modifier = 15.0f;
+        [SerializeField] private float hitRadius = 0.2f;
 
         [Command]
         public override void CmdCastSpell()
         {
-            if (Physics.Raycast(aimPosition, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
                 Vector3 pullDirection = aimPosition - hit.transform.position;
                 Vector3 pullForce = pullDirection.normalized * modifier;
