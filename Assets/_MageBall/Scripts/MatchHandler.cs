@@ -64,17 +64,12 @@ namespace MageBall
                 networkGamePlayer.TargetResetPosition();
             }
 
-            RpcResetBall(ball);
+            ball.transform.position = ballStartPosition;
+            ball.transform.rotation = ballStartRotation;
             ballRigidbody.velocity = Vector3.zero;
             ballRigidbody.angularVelocity = Vector3.zero;
         }
 
-        [ClientRpc]
-        private void RpcResetBall(GameObject ball)
-        {
-            ball.transform.position = ballStartPosition;
-            ball.transform.rotation = ballStartRotation;
-        }
 
     }
 }
