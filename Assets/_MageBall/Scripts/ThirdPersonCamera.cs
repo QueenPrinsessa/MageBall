@@ -73,7 +73,7 @@ namespace MageBall
             Cursor.lockState = CursorLockMode.Locked; 
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!hasAuthority)
                 return;
@@ -91,11 +91,11 @@ namespace MageBall
 
             if (invertMouseY)
             {
-                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.deltaTime;
+                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
             }
             else
             {
-                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.deltaTime;
+                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
             }
 
             //Clamp X rotation
@@ -106,7 +106,7 @@ namespace MageBall
 
             //Rotate player for Y, not camera
             int mouseXInvertionFactor = invertMouseX ? -1 : 1;
-            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * cameraHorizontalRotationMultiplier * Time.deltaTime, Vector3.up);
+            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * cameraHorizontalRotationMultiplier * Time.fixedDeltaTime, Vector3.up);
         }
 
 
