@@ -30,7 +30,6 @@ namespace MageBall
 
             foreach (Collider collider in colliders)
             {
-                Debug.Log(collider.gameObject.tag);
                 Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
                 if (rigidbody == null)
                     continue;

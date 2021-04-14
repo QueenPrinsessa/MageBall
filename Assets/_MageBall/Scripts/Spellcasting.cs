@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MageBall
 { 
-    public class SpellCast : NetworkBehaviour
+    public class Spellcasting : NetworkBehaviour
     {
         [SerializeField] private Spell mainSpell;
         [SerializeField] private Spell offhandSpell;
@@ -15,6 +15,9 @@ namespace MageBall
         [Client]
         void Update()
         {
+            if (!hasAuthority)
+                return;
+
             if (Input.GetButtonDown("Fire1"))
             {
                 mainSpell.CmdCastSpell();

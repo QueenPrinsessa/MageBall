@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f38d1bf10d3384ab9dca3d09987f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  syncMode: 1
+  syncInterval: 0
   modifier: 30
 --- !u!114 &2500617132447201991
 MonoBehaviour:
@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17372e030a479842992b174ec7e2551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  syncMode: 1
+  syncInterval: 0
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
 --- !u!114 &5658431015673118289
