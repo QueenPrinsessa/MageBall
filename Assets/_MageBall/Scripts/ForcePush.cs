@@ -13,7 +13,7 @@ namespace MageBall
         [Command]
         public override void CmdCastSpell()
         {
-            GameObject projectile = Instantiate(forcePushPrefab, aimPoint.position, aimPoint.rotation);
+            GameObject projectile = Instantiate(forcePushPrefab, aimPosition, aimRotation);
             NetworkServer.Spawn(projectile);
         }
     }

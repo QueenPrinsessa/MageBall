@@ -14,9 +14,9 @@ namespace MageBall
         [Command]
         public override void CmdCastSpell()
         {
-            if (Physics.Raycast(aimPoint.position, aimPoint.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.Raycast(aimPosition, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
-                Vector3 pullDirection = aimPoint.position - hit.transform.position;
+                Vector3 pullDirection = aimPosition - hit.transform.position;
                 Vector3 pullForce = pullDirection.normalized * modifier;
                 if (hit.rigidbody != null)
                     hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);
