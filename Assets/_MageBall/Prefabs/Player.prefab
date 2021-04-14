@@ -140,9 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   maxSpeed: 10
   forceMagnitude: 4
   jumpHeight: 0.9
@@ -191,16 +188,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1863b4160ea4094f9c36616452dfef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFollow: {fileID: 0}
-  thirdPersonCam: {fileID: 0}
-  verticalRotateMin: -80
-  verticalRotateMax: 80
-  cameraVerticalRotationMultiplier: 2
-  cameraHorizontalRotationMultiplier: 2
+  cameraFollow: {fileID: 1563699214550501902}
+  thirdPersonCameraPrefab: {fileID: 7294957378755441486, guid: 9f63054bbd4740c4287fde40c6f0b6ee,
+    type: 3}
   cameraInputHorizontal: 0
   cameraInputVertical: 0
-  invertHorizontal: 0
-  invertVertical: 0
+  invertMouseY: 0
+  invertMouseX: 0
+  minXRotation: -80
+  maxXRotation: 80
   cameraSide: 1
   allowCameraToggle: 1
   cameraSideToggleSpeed: 1
