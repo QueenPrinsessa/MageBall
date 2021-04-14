@@ -26,19 +26,8 @@ namespace MageBall
 
         public void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             controller = GetComponent<CharacterController>();
         }
-
-        private void Update()
-        {
-
-            if (Input.GetKeyDown(KeyCode.F1))
-                Cursor.lockState = CursorLockMode.None;
-            else if (Input.GetKeyDown(KeyCode.F2))
-                Cursor.lockState = CursorLockMode.Locked;
-        }
-
 
         private void FixedUpdate()
         {

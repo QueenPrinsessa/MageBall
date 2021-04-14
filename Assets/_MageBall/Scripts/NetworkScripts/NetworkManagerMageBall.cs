@@ -108,8 +108,8 @@ namespace MageBall
 
         private bool IsReadyToStartMatch()
         {
-            if (numPlayers < minimumNumberOfPlayers)
-                return false;
+            //if (numPlayers < minimumNumberOfPlayers)
+            //    return false;
 
             foreach (NetworkRoomPlayerMageBall player in NetworkRoomPlayers)
                 if (!player.IsReady)

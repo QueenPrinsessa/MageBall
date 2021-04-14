@@ -9,24 +9,27 @@ namespace MageBall
     public class ThirdPersonCamera : NetworkBehaviour
     {
 
+        [SerializeField] private Transform cameraFollow;
+        [SerializeField] private GameObject thirdPersonCameraPrefab;
 
-        private Transform cameraFollow;
-        private CinemachineVirtualCamera thirdPersonCam; // the main vcam that we're using
-        [SerializeField] private GameObject thirdPersonCamPrefab;
-        private float verticalRotateMin = -80f;
-        private float verticalRotateMax = 80f;
+        private CinemachineVirtualCamera thirdPersonVirtualCamera;
 
         //Camera Movement Multiplier
-        private float cameraVerticalRotationMultiplier = 2f;
-        private float cameraHorizontalRotationMultiplier = 2f;
+        private float cameraVerticalRotationMultiplier = 100f;
+        private float cameraHorizontalRotationMultiplier = 100f;
 
         //Camera Input Values
         public float cameraInputHorizontal;
         public float cameraInputVertical;
 
+        //Inverting vertical and horizontal is usually called invert X and invert Y since they refer to inverting the mouse direction
         [Header("Invert Camera Controls")]
-        public bool invertHorizontal = false;
-        public bool invertVertical = false;
+        public bool invertMouseY = false;
+        public bool invertMouseX = false;
+
+        [Header("X Rotation Clamping")]
+        [SerializeField, Range(-90f, 90f)] private float minXRotation = -80f;
+        [SerializeField, Range(-90f, 90f)] private float maxXRotation = 80f;
 
         [Header("Toggles which side the camera should start on. 1 = Right, 0 = Left")]
         public float cameraSide = 1f;
@@ -41,80 +44,69 @@ namespace MageBall
 
         // current camera rotation values
         private float cameraX = 0f;
-        private float cameraY = 0f;
 
         // if we are switching sides
         private bool doCameraSideToggle = false;
         private float sideToggleTime = 0f;
+
         // where we are in the transition from side to side
         private float desiredCameraSide = 1f;
 
-        private void start()
+        public CinemachineVirtualCamera ThirdPersonVirtualCamera => thirdPersonVirtualCamera;
+
+        public override void OnStartAuthority()
         {
-            if (thirdPersonCam == null)
+            GameObject thirdPersonCamera = Instantiate(thirdPersonCameraPrefab);
+
+            if (thirdPersonVirtualCamera == null)
             {
-                // try to grab the thirdPersonCam from this object
-                thirdPersonCam = GetComponent<CinemachineVirtualCamera>();
+                thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
+                thirdPersonVirtualCamera.Follow = cameraFollow;
+                thirdPersonVirtualCamera.enabled = true;
+                followCam = thirdPersonVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
             }
             else
             {
-                Debug.Log("Need to connect your 3rd person thirdPersonCam to the CameraController!");
+                Debug.LogError("Need to connect your 3rd person camera to the CameraController!");
             }
+
+            Cursor.lockState = CursorLockMode.Locked; 
         }
-
-        //public override void OnStartAuthority() // how the fk does mirror work
-        //{
-        //    if(thirdPersonCam == null)
-        //    {   
-        //        thirdPersonCam = Instantiate(thirdPersonCamPrefab).GetComponent<CinemachineVirtualCamera>();
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Need to connect your 3rd person thirdPersonCam to the CameraController!");
-        //    }
-
-        //    thirdPersonCam.Follow = cameraFollow;
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //    thirdPersonCam.enabled = true;
-        //}
-
-
 
         private void Update()
         {
-            // make sure we have a handle to the follow component
-            if (followCam == null)
+            if (!hasAuthority)
+                return;
+
+            //Since everything that follows depends on the Camera Follow existing
+            //A guard statement is more appropriate than wrapping everything in an if statement
+            if (cameraFollow == null)
             {
-                followCam = thirdPersonCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+                Debug.LogError("Camera follow not assigned in script.");
+                return;
             }
 
-            cameraInputHorizontal = -Input.GetAxis("Mouse X");
+            cameraInputHorizontal = Input.GetAxis("Mouse X");
             cameraInputVertical = Input.GetAxis("Mouse Y");
-       
 
-
-            if (cameraFollow != null)
+            if (invertMouseY)
             {
-                if (invertHorizontal)
-                {
-                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical;
-                }
-                else
-                {
-                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical;
-                }
-
-                if (invertVertical)
-                {
-                cameraY -= cameraHorizontalRotationMultiplier * cameraInputHorizontal;
-                }
-                else
-                {
-                cameraY += cameraHorizontalRotationMultiplier * cameraInputHorizontal;
-                }
-
-                cameraFollow.eulerAngles = new Vector3(cameraX, cameraY, 0.0f);
+                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.deltaTime;
             }
+            else
+            {
+                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.deltaTime;
+            }
+
+            //Clamp X rotation
+            cameraX = Mathf.Clamp(cameraX, minXRotation, maxXRotation);
+
+            //Use local angles
+            cameraFollow.localEulerAngles = new Vector3(cameraX, 0.0f, 0.0f);
+
+            //Rotate player for Y, not camera
+            int mouseXInvertionFactor = invertMouseX ? -1 : 1;
+            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * cameraHorizontalRotationMultiplier * Time.deltaTime, Vector3.up);
         }
 
 
