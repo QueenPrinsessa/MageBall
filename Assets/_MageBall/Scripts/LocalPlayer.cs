@@ -8,7 +8,7 @@ namespace MageBall
     public class LocalPlayer : MonoBehaviour
     {
         [SerializeField] private LayerMask groundLayerMask;
-        [SerializeField] private Transform cameraFollow;
+        //[SerializeField] private Transform cameraFollow;
         private CharacterController controller;
         [SerializeField] private float speed = 8f;
         [SerializeField] private float jumpHeight = 0.9f;
@@ -16,8 +16,8 @@ namespace MageBall
         //private float gravityTime;
         //private bool gravityForce;
         private float mouseSensitivity = 0.5f;
-        private float cameraSpeed = 300f;
-        private float xRotation = 0f;
+        //private float cameraSpeed = 300f;
+        //private float xRotation = 0f;
         private float groundCheckDistance = 0.25f;
         private Vector2 moveAxis;
         private Vector2 lookAxis;
@@ -26,34 +26,23 @@ namespace MageBall
 
         public void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             controller = GetComponent<CharacterController>();
         }
-
-        private void Update()
-        {
-
-            if (Input.GetKeyDown(KeyCode.F1))
-                Cursor.lockState = CursorLockMode.None;
-            else if (Input.GetKeyDown(KeyCode.F2))
-                Cursor.lockState = CursorLockMode.Locked;
-        }
-
 
         private void FixedUpdate()
         {
 
-            float xRotAngle = lookAxis.y * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime;
-            xRotation -= xRotAngle;
-            xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-            cameraFollow.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            //float xRotAngle = lookAxis.y * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime;
+            //xRotation -= xRotAngle;
+            //xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+            //cameraFollow.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
 
-            lookAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-            moveAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            //lookAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            //moveAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            Quaternion rotation = transform.rotation * Quaternion.AngleAxis(lookAxis.x * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime, Vector3.up);
-            transform.rotation = rotation;
+            //Quaternion rotation = transform.rotation * Quaternion.AngleAxis(lookAxis.x * cameraSpeed * mouseSensitivity * Time.fixedDeltaTime, Vector3.up);
+            //transform.rotation = rotation;
 
             if (IsGrounded() && this.velocity.y < 0)
                 this.velocity.y = 0;
