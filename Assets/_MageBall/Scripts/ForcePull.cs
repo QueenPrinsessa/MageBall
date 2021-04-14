@@ -9,14 +9,14 @@ namespace MageBall
     {
 
         [SerializeField]
-        private float modifier = 10.0f;
+        private float modifier = 30.0f;
 
         [Command]
         public override void CmdCastSpell()
         {
-            if (Physics.Raycast(castPoint.position, castPoint.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.Raycast(aimPoint.position, aimPoint.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
-                Vector3 pullDirection = castPoint.position - hit.transform.position;
+                Vector3 pullDirection = aimPoint.position - hit.transform.position;
                 Vector3 pullForce = pullDirection.normalized * modifier;
                 if (hit.rigidbody != null)
                     hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);

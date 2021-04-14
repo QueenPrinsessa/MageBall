@@ -8,43 +8,38 @@ namespace MageBall
     public class ForcePushProjectile : NetworkBehaviour
     {
 
-        [SerializeField] private float pushSpeed = 10;
-        
-        private Vector3 pushLastPos;
+        [SerializeField] private float flightSpeed = 20;
+        [SerializeField] private float radius = 2f;
+        [SerializeField] private float explosionForce = 2000f;
 
-        
         public override  void  OnStartServer()
         {
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 4f);
         }
 
         [Server]
         void Update()
         {
-            pushLastPos = transform.position;
-            transform.position += transform.forward * pushSpeed * Time.deltaTime;
+            transform.Translate(transform.forward * flightSpeed * Time.deltaTime, Space.World);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!collision.gameObject.CompareTag(Tags.BallTag))
-            {
-                return;
+            Vector3 explosionPoint = collision.GetContact(0).point;
+            Collider[] colliders = Physics.OverlapSphere(explosionPoint, radius, LayerMasks.ballLayer | LayerMasks.groundLayer);
 
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log(collider.gameObject.tag);
+                Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
+                if (rigidbody == null)
+                    continue;
+
+                rigidbody.AddExplosionForce(explosionForce, explosionPoint, radius);
             }
 
-            Rigidbody rigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            if (rigidbody == null)
-            {
-                return;
-            }
-
-            ContactPoint contactPoint = collision.contacts[0];
-
-            rigidbody.AddForce(-contactPoint.normal * pushSpeed, ForceMode.Impulse);
-            Destroy(gameObject);
-
-
+            if(colliders.Length > 0)
+                Destroy(gameObject);
         }
     }
 }

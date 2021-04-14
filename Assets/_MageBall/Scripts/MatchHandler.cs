@@ -61,7 +61,7 @@ namespace MageBall
             foreach (NetworkGamePlayerMageBall networkGamePlayer in NetworkManager.NetworkGamePlayers)
             {
                 Debug.Log($"Resetting player {networkGamePlayer.DisplayName}");
-                networkGamePlayer.TargetResetPosition(); 
+                networkGamePlayer.TargetResetPosition();
             }
 
             RpcResetBall(ball);

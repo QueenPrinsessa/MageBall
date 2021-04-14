@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spell : NetworkBehaviour
+namespace MageBall
 {
-    protected Transform castPoint;
-
-    public override void OnStartServer()
+    public abstract class Spell : NetworkBehaviour
     {
-        castPoint = Camera.main.transform;
+        protected Transform aimPoint;
+
+        private void Start()
+        {
+            aimPoint = GetComponent<ThirdPersonCamera>().ThirdPersonVirtualCamera.transform;
+        }
+
+        [Command]
+        public virtual void CmdCastSpell(Vector3 position, Quaternion rotation) { }
+
     }
-
-    [Command]
-    public virtual void CmdCastSpell() { }
-
 }
