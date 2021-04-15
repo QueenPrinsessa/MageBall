@@ -11,9 +11,13 @@ För att öppna med Unity Hub:
 5. Öppna valfri scen under _MageBall -> Scenes
 
 Testa multiplayerfunktionalitet:
-1. Skapa en build (ctrl+shift+b)
-2. Starta projektet i playmode och builden samtidigt (självklart kan ni starta builden flera gånger och ansluta flera spelare)
-3. Hosta på en av klienterna
-4. Joina på den andra
+
+Host:
+1. hosta ett game.
+2. starta spelet när alla spelare har joinat och ready up.
+
+Non Host player:
+1. skriver in hostens ip address och joina.
+2. ready up.
 
 I mappen /Assets/\_MageBall/Scripts/ ligger vår kod.
