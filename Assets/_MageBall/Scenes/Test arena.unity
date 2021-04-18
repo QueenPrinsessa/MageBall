@@ -1154,7 +1154,6 @@ PrefabInstance:
     - target: {fileID: 6931478180008376707, guid: 1ef127b4ee05687458f79d13b5438f65,
         type: 3}
       propertyPath: sceneId
-      value: 549031530
       objectReference: {fileID: 0}
     - target: {fileID: 7076444017482643901, guid: 1ef127b4ee05687458f79d13b5438f65,
         type: 3}
@@ -1164,7 +1163,6 @@ PrefabInstance:
     - target: {fileID: 7322045200441264026, guid: 1ef127b4ee05687458f79d13b5438f65,
         type: 3}
       propertyPath: sceneId
-      value: 2700297153
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef127b4ee05687458f79d13b5438f65, type: 3}

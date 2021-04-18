@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3085337723083032212}
   - component: {fileID: 3085337723083032213}
   - component: {fileID: 3085337723083032214}
-  - component: {fileID: 2633104025221200076}
-  - component: {fileID: 524994215046561067}
+  - component: {fileID: 8402276572749556863}
+  - component: {fileID: 7386123596916984094}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
@@ -64,7 +64,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &3085337723083032214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &2633104025221200076
+--- !u!114 &8402276572749556863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,7 +104,7 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!114 &524994215046561067
+--- !u!114 &7386123596916984094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -65,7 +65,7 @@ namespace MageBall
         [TargetRpc]
         public void TargetResetPosition()
         {
-            playerGameObject.GetComponent<Player>().enabled = false;
+            playerGameObject.GetComponent<PlayerMovement>().enabled = false;
             playerGameObject.transform.position = spawnPosition;
             playerGameObject.transform.rotation = spawnRotation;
             StartCoroutine(EnablePlayerControls());
@@ -78,7 +78,7 @@ namespace MageBall
                 yield break;
 
             yield return new WaitForSeconds(1);
-            playerGameObject.GetComponent<Player>().enabled = true;
+            playerGameObject.GetComponent<PlayerMovement>().enabled = true;
         }
     }
 }
