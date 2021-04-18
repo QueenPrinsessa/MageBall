@@ -16,6 +16,7 @@ Alla:
 Skriv in ett namn för att få tillgång till host & join funktionalitet.
 
 Host:
+(Notera att port 7777 kan behöva port forwardas för att köra med någon annan online)
 1. Hosta ett game genom att trycka create game.
 2. Starta spelet när alla spelare har joinat och ready up.
 
