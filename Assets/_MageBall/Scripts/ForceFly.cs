@@ -5,36 +5,24 @@ using Mirror;
 
 namespace MageBall
 {
-    public class ForceFly : MonoBehaviour
+    public class ForceFly : Spell
     {
-        void Update()
+        [Command]
+        public override void CmdCastSpell()
         {
-            if(Input.GetKeyDown(KeyCode.F)) //(Input.GetButtonDown("Fire1"))
-            {
-                CastSpell();
-            }
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Ray ray = new Ray(transform.position, transform.forward);
-            Gizmos.DrawRay(ray);
-        }
-        public void CastSpell()
-        {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.Raycast(aimPosition, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
                 if (hit.rigidbody != null)
                 {
                     if(hit.rigidbody.useGravity == true)
                     {
                         hit.rigidbody.useGravity = false;
-                        StartCoroutine(Timer());
+                        StartCoroutine(EnableGravity());
                     }
                 }
             }
         }
-        private IEnumerator Timer()
+        private IEnumerator EnableGravity()
         {
             yield return new WaitForSeconds(5);
             GameObject ball = GameObject.FindGameObjectWithTag(Tags.BallTag);
