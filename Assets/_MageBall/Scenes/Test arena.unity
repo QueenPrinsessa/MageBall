@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 573085764}
   - component: {fileID: 573085763}
   - component: {fileID: 573085767}
+  - component: {fileID: 573085768}
   m_Layer: 3
   m_Name: Test Player
   m_TagString: Untagged
@@ -667,13 +668,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573085762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2e09ca6f6ab5f647822d5ebfa41168d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
+--- !u!114 &573085768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573085762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef20f976592fc404da5b8ec537652e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &884415471
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1138,10 +1151,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena
       objectReference: {fileID: 0}
+    - target: {fileID: 6931478180008376707, guid: 1ef127b4ee05687458f79d13b5438f65,
+        type: 3}
+      propertyPath: sceneId
+      value: 549031530
+      objectReference: {fileID: 0}
     - target: {fileID: 7076444017482643901, guid: 1ef127b4ee05687458f79d13b5438f65,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 548434352}
+    - target: {fileID: 7322045200441264026, guid: 1ef127b4ee05687458f79d13b5438f65,
+        type: 3}
+      propertyPath: sceneId
+      value: 2700297153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef127b4ee05687458f79d13b5438f65, type: 3}
