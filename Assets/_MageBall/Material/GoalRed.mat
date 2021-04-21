@@ -21,19 +21,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GoalRed
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8582fc2679780d1488af47831416f0dc,
+    type: 3}
   m_ShaderKeywords: _ALPHAMODULATE_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_40a28713661247ac8cd290fac7f0b27b:
+        m_Texture: {fileID: 2800000, guid: d3671e6ae7cb5ae4aaf04323dbae1446, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -91,7 +95,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - FresnelPower: 8
+    - Vector1_a7090b752ee2453ab9a8bb75023d1d78: 0.05
     - _AlphaClip: 0
+    - _AlphaClipping: 0
     - _Blend: 3
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -101,7 +108,9 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeHeight: 0.5
     - _EnvironmentReflections: 1
+    - _Fill: 0.4
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -118,8 +127,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
+    - Vector2_fee89051b2774df8937535989d2da3ef: {r: 9, g: 3, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 28.51895, g: 0, b: 1.3953553, a: 1}
+    - _MainColor: {r: 2, g: 0, b: 0.13333334, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
