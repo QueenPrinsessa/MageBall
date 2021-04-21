@@ -10,11 +10,12 @@ namespace MageBall
 
         [SyncVar] private Vector3 ballStartPosition;
         [SyncVar] private Quaternion ballStartRotation;
+        [SyncVar] private float ballInitialMass;
         private Rigidbody ballRigidbody;
 
         private GameObject ball;
         private NetworkManagerMageBall networkManager;
-
+        private Goal[] goals;
         private NetworkManagerMageBall NetworkManager
         {
             get
@@ -32,8 +33,9 @@ namespace MageBall
             ballStartPosition = ball.transform.position;
             ballStartRotation = ball.transform.rotation;
             ballRigidbody = ball.GetComponent<Rigidbody>();
+            ballInitialMass = ballRigidbody.mass;
 
-            Goal[] goals = FindObjectsOfType<Goal>();
+            goals = FindObjectsOfType<Goal>();
 
             foreach (Goal goal in goals)
                 goal.score += OnScore;
@@ -51,25 +53,57 @@ namespace MageBall
         [Server]
         private void OnScore(Team team)
         {
-            Debug.Log("Reset triggered");
-            ResetBallAndPlayerToSpawnPositions();
+            SetGoalCollidersEnabled(false);
+            StartCoroutine(ResetGameObjects());
         }
 
         [Server]
-        public void ResetBallAndPlayerToSpawnPositions()
+        private IEnumerator ResetGameObjects()
+        {
+            yield return new WaitForSeconds(NetworkManager.WaitBeforeResetAfterGoalInSeconds);
+            ResetPlayerPosition();
+            DestroySpellGameObjects();
+            ResetBall();
+            SetGoalCollidersEnabled(true);
+        }
+
+        [Server]
+        private void SetGoalCollidersEnabled(bool enabled)
+        {
+            foreach (Goal goal in goals)
+            {
+                goal.GoalCollider.enabled = enabled;
+            }
+        }
+
+        [Server]
+        private void ResetPlayerPosition()
         {
             foreach (NetworkGamePlayerMageBall networkGamePlayer in NetworkManager.NetworkGamePlayers)
             {
                 Debug.Log($"Resetting player {networkGamePlayer.DisplayName}");
-                networkGamePlayer.TargetResetPosition();
+                networkGamePlayer.TargetResetPlayer();
             }
+        }
 
+        [Server]
+        private void DestroySpellGameObjects()
+        {
+            GameObject[] spells = GameObject.FindGameObjectsWithTag(Tags.SpellTag);
+
+            foreach (GameObject spell in spells)
+                NetworkServer.Destroy(spell);
+        }
+
+        [Server]
+        private void ResetBall()
+        {
             ball.transform.position = ballStartPosition;
             ball.transform.rotation = ballStartRotation;
             ballRigidbody.velocity = Vector3.zero;
             ballRigidbody.angularVelocity = Vector3.zero;
+            ballRigidbody.useGravity = true;
+            ballRigidbody.mass = ballInitialMass;
         }
-
-
     }
 }
