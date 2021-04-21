@@ -20,6 +20,21 @@ namespace MageBall
         public int RedTeamScore => redTeamScore;
         public int BlueTeamScore => blueTeamScore;
 
+        public Winner Winner
+        {
+            get
+            {
+                Winner winner = Winner.RedTeam;
+
+                if (blueTeamScore > redTeamScore)
+                    winner = Winner.BlueTeam;
+                else if (blueTeamScore == redTeamScore)
+                    winner = Winner.Tie;
+
+                return winner;
+            }
+        }
+
         public override void OnStartServer()
         {
             Goal[] goals = FindObjectsOfType<Goal>();

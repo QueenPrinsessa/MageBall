@@ -24,6 +24,10 @@ namespace MageBall
         private float waitBeforeControlsEnableInSeconds = 3;
         [SerializeField, Tooltip("The time in seconds before a reset occurs after a goal.")]
         private float waitBeforeResetAfterGoalInSeconds = 1.5f;
+        [SerializeField, Tooltip("The time in seconds before players are returned to lobby.")]
+        private float waitBeforeReturnToLobbyInSeconds = 3f;
+        [SerializeField]
+        private int matchLengthInMinutes = 5;
 
         private string arenaPrefix = "Arena_";
 
@@ -36,6 +40,8 @@ namespace MageBall
         public List<NetworkGamePlayerMageBall> NetworkGamePlayers { get; } = new List<NetworkGamePlayerMageBall>();
         public float WaitBeforeControlsEnableInSeconds => waitBeforeControlsEnableInSeconds;
         public float WaitBeforeResetAfterGoalInSeconds => waitBeforeResetAfterGoalInSeconds;
+        public float WaitBeforeReturnToLobbyInSeconds => waitBeforeReturnToLobbyInSeconds;
+        public int MatchLength => matchLengthInMinutes;
 
         public override void OnClientConnect(NetworkConnection conn)
         {
@@ -137,6 +143,11 @@ namespace MageBall
             }
         }
 
+        public void ReturnToLobby()
+        {
+            ServerChangeScene("MainMenu");
+        }
+
         public override void ServerChangeScene(string newSceneName)
         {
             if (SceneManager.GetActiveScene().path == menuScene && newSceneName.StartsWith(arenaPrefix))
@@ -149,6 +160,18 @@ namespace MageBall
 
                     NetworkServer.Destroy(connection.identity.gameObject);
                     NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
+                }
+            }
+            else if (newSceneName == "MainMenu")
+            {
+                for (int i = NetworkGamePlayers.Count; i-- > 0;)
+                {
+                    NetworkConnection connection = NetworkGamePlayers[i].connectionToClient;
+                    NetworkRoomPlayerMageBall roomPlayerInstance = Instantiate(networkRoomPlayerPrefab);
+                    //roomPlayerInstance.SetDisplayName(NetworkGamePlayers[i].DisplayName);
+
+                    NetworkServer.Destroy(connection.identity.gameObject);
+                    NetworkServer.ReplacePlayerForConnection(connection, roomPlayerInstance.gameObject);
                 }
             }
 
@@ -169,5 +192,6 @@ namespace MageBall
             base.OnServerReady(conn);
             serverReadied?.Invoke(conn);
         }
+
     }
 }

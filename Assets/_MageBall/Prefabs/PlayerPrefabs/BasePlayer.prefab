@@ -136,6 +136,7 @@ MonoBehaviour:
   blueTeamScoreText: {fileID: 6091325555084865001}
   redTeamScoreText: {fileID: 7644316091271414813}
   goalScoredUI: {fileID: 7290513291582222553}
+  matchEndUI: {fileID: 7747601595495523525}
 --- !u!114 &1425847055805290944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +471,12 @@ MonoBehaviour:
 --- !u!1 &7290513291582222553 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2311864365758139678, guid: 57ef7327020bea0438fed648453fbf3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4987876579337076167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7747601595495523525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3367986395063965954, guid: 57ef7327020bea0438fed648453fbf3e,
     type: 3}
   m_PrefabInstance: {fileID: 4987876579337076167}
   m_PrefabAsset: {fileID: 0}

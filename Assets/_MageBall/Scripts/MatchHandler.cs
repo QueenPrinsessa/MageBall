@@ -39,15 +39,35 @@ namespace MageBall
 
             foreach (Goal goal in goals)
                 goal.score += OnScore;
+
+            MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
+
+            if (matchTimer != null)
+                matchTimer.matchEnd += OnMatchEnd;
         }
 
         [ServerCallback]
         private void OnDestroy()
         {
-            Goal[] goals = FindObjectsOfType<Goal>();
-
             foreach (Goal goal in goals)
                 goal.score -= OnScore;
+
+            MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
+
+            if (matchTimer != null)
+                matchTimer.matchEnd -= OnMatchEnd;
+        }
+
+        [Server]
+        private void OnMatchEnd()
+        {
+            SetGoalCollidersEnabled(false);
+            StartCoroutine(ReturnToLobby());
+        }
+        private IEnumerator ReturnToLobby()
+        {
+            yield return new WaitForSeconds(NetworkManager.WaitBeforeReturnToLobbyInSeconds);
+            //NetworkManager.ReturnToLobby();
         }
 
         [Server]

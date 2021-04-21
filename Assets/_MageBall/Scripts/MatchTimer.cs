@@ -9,9 +9,6 @@ namespace MageBall
     public class MatchTimer : NetworkBehaviour
     {
         //This should probably be obtained from somewhere else later.
-        [Header("Game settings")]
-        [SerializeField] private int matchLength = 5;
-
         private Coroutine timerRoutine;
         private bool hasMatchEnded = false;
 
@@ -22,12 +19,12 @@ namespace MageBall
         /// Minutes, seconds
         /// </summary>
         public event Action<int, int> timeChanged;
-
-        private bool HasMatchEnded => hasMatchEnded;
+        public event Action matchEnd;
 
         public override void OnStartServer()
         {
-            minutes = matchLength;
+            NetworkManagerMageBall networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
+            minutes = networkManager.MatchLength;
             timeChanged?.Invoke(minutes, seconds);
             timerRoutine = StartCoroutine(Timer());
         }
@@ -60,8 +57,7 @@ namespace MageBall
         {
             hasMatchEnded = true;
             StopCoroutine(timerRoutine);
-
-            //Turn on win/loss UI here?
+            matchEnd?.Invoke();
         }
     }
 }

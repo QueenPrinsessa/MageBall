@@ -14,6 +14,7 @@ namespace MageBall
         [SerializeField] private TMP_Text blueTeamScoreText;
         [SerializeField] private TMP_Text redTeamScoreText;
         [SerializeField] private GameObject goalScoredUI;
+        [SerializeField] private GameObject matchEndUI;
 
         private NetworkManagerMageBall networkManager;
 
@@ -35,8 +36,12 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.scoreChanged += OnScoreChanged;
+
             if (matchTimer != null)
+            {
                 matchTimer.timeChanged += OnTimeChanged;
+                matchTimer.matchEnd += OnMatchEnd;
+            }
         }
 
         [ClientCallback]
@@ -47,8 +52,55 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.scoreChanged -= OnScoreChanged;
+
             if (matchTimer != null)
+            {
                 matchTimer.timeChanged -= OnTimeChanged;
+                matchTimer.matchEnd -= OnMatchEnd;
+            }
+        }
+
+        private void OnMatchEnd()
+        {
+            Debug.Log("On match end");
+
+            if (matchEndUI == null)
+                return;
+
+            Debug.Log("scorehandler");
+
+            ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
+
+            if (scoreHandler == null)
+            {
+                Debug.LogError("There is no ScoreHandler in the current scene. Did you forget to add one?");
+                return;
+            }
+
+            Debug.Log("match end UI");
+
+            matchEndUI.SetActive(true);
+
+            TMP_Text matchEndText = matchEndUI.GetComponentInChildren<TMP_Text>();
+
+            if (matchEndText == null)
+            {
+                Debug.LogError("There is no match end text in the match end UI!");
+                return;
+            }
+
+            switch (scoreHandler.Winner)
+            {
+                case Winner.RedTeam:
+                    matchEndText.text = "<color=\"red\">RED</color> TEAM WINS!";
+                    break;
+                case Winner.BlueTeam:
+                    matchEndText.text = "<color=\"blue\">BLUE</color> TEAM WINS!";
+                    break;
+                case Winner.Tie:
+                    matchEndText.text = "IT'S A TIE!";
+                    break;
+            }
         }
 
         private void OnTimeChanged(int minutes, int seconds)
