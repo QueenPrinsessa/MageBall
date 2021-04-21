@@ -14,6 +14,7 @@ namespace MageBall
         [SerializeField] private TMP_Text blueTeamScoreText;
         [SerializeField] private TMP_Text redTeamScoreText;
         [SerializeField] private GameObject goalScoredUI;
+        [SerializeField] private GameObject matchEndUI;
 
         private NetworkManagerMageBall networkManager;
 
@@ -35,8 +36,12 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.scoreChanged += OnScoreChanged;
+
             if (matchTimer != null)
+            {
                 matchTimer.timeChanged += OnTimeChanged;
+                matchTimer.matchEnd += OnMatchEnd;
+            }
         }
 
         [ClientCallback]
@@ -47,8 +52,52 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.scoreChanged -= OnScoreChanged;
+
             if (matchTimer != null)
+            {
                 matchTimer.timeChanged -= OnTimeChanged;
+                matchTimer.matchEnd -= OnMatchEnd;
+            }
+        }
+
+        private void OnMatchEnd()
+        {
+            if (matchEndUI == null)
+                return;
+
+            ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
+
+            if (scoreHandler == null)
+            {
+                Debug.LogError("There is no ScoreHandler in the current scene. Did you forget to add one?");
+                return;
+            }
+
+            matchEndUI.SetActive(true);
+
+            TMP_Text matchEndText = matchEndUI.GetComponentInChildren<TMP_Text>();
+
+            if (matchEndText == null)
+            {
+                Debug.LogError("There is no match end text in the match end UI!");
+                return;
+            }
+
+            switch (scoreHandler.Winner)
+            {
+                case Winner.RedTeam:
+                    Debug.Log("Red team victory");
+                    //Set victory/loss text here
+                    break;
+                case Winner.BlueTeam:
+                    Debug.Log("Blue team victory");
+                    //Set victory/loss text here
+                    break;
+                case Winner.Tie:
+                    Debug.Log("Tie");
+                    //Set victory/loss text here
+                    break;
+            }
         }
 
         private void OnTimeChanged(int minutes, int seconds)
