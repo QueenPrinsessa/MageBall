@@ -79,6 +79,8 @@ MonoBehaviour:
     type: 3}
   waitBeforeControlsEnableInSeconds: 3
   waitBeforeResetAfterGoalInSeconds: 1.5
+  waitBeforeReturnToLobbyInSeconds: 3
+  matchLengthInMinutes: 5
 --- !u!114 &5081799449140713998
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,8 @@ namespace MageBall
     public class MainMenu : MonoBehaviour
     {
         [Header("Networking")]
-        [SerializeField] private NetworkManagerMageBall networkManager;
+        [SerializeField] private GameObject networkManagerPrefab;
+        private NetworkManagerMageBall networkManager;
 
         [Header("UI")]
         [SerializeField] private TMP_InputField ipAddressInputField;
@@ -16,8 +17,20 @@ namespace MageBall
 
         private void Start()
         {
-            if (networkManager == null)
+            Cursor.lockState = CursorLockMode.None;
+
+            if (networkManager == null && NetworkManager.singleton == null)
+            {
+                GameObject networkManagerGameObject = Instantiate(networkManagerPrefab);
+                networkManager = networkManagerGameObject.GetComponent<NetworkManagerMageBall>();
+                if (networkManager == null)
+                    Debug.LogError("There is no NetworkManagerMageBall component on the networkmanager prefab. Did you accidentally use the default NetworkManager instead?");
+            }
+            else if (networkManager == null)
+            {
                 networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
+                titleScreenPanel.SetActive(false);
+            }
 
             menuButtonController = titleScreenPanel.GetComponent<MenuButtonController>();
             NetworkManagerMageBall.stopClient += OnStopClient;

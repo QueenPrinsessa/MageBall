@@ -1164,7 +1164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e2cef15e60efc4fb9b9f824b1e0b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkManager: {fileID: 0}
+  networkManagerPrefab: {fileID: 5081799449140713997, guid: d99fc23f9c5241b46b219fb1052d8299,
+    type: 3}
   ipAddressInputField: {fileID: 2273640540812001898}
   titleScreenPanel: {fileID: 2273640541086127166}
 --- !u!1 &2273640542136171507

@@ -67,7 +67,7 @@ namespace MageBall
         private IEnumerator ReturnToLobby()
         {
             yield return new WaitForSeconds(NetworkManager.WaitBeforeReturnToLobbyInSeconds);
-            //NetworkManager.ReturnToLobby();
+            NetworkManager.ReturnToLobby();
         }
 
         [Server]

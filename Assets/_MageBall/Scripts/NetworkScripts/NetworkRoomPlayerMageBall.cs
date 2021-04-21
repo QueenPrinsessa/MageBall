@@ -64,8 +64,15 @@ namespace MageBall
             this.displayName = displayName;
         }
 
+        [Server]
+        public void SetIsHost(bool isHost)
+        {
+            IsHost = isHost;
+        }
+
         public override void OnStartClient()
         {
+            DontDestroyOnLoad(gameObject);
             NetworkManager.NetworkRoomPlayers.Add(this);
             UpdateDisplay();
         }
