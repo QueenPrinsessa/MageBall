@@ -139,13 +139,25 @@ namespace MageBall
                 if (!IsReadyToStartMatch())
                     return;
 
-                ServerChangeScene("Arena_01");
+                ServerChangeScene(Scenes.Arena01);
             }
         }
 
         public void ReturnToLobby()
         {
-            ServerChangeScene("MainMenu");
+            ServerChangeScene(Scenes.MainMenu);
+        }
+
+        public void ServerChangeScene(Scenes scene)
+        {
+            ServerChangeScene(GetSceneName(scene));
+        }
+
+        private string GetSceneName(Scenes scene)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex((int)scene);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            return sceneName;
         }
 
         public override void ServerChangeScene(string newSceneName)
@@ -157,18 +169,19 @@ namespace MageBall
                     NetworkConnection connection = NetworkRoomPlayers[i].connectionToClient;
                     NetworkGamePlayerMageBall gamePlayerInstance = Instantiate(gamePlayerPrefab);
                     gamePlayerInstance.SetDisplayName(NetworkRoomPlayers[i].DisplayName);
+                    gamePlayerInstance.SetIsHost(NetworkRoomPlayers[i].IsHost);
 
                     NetworkServer.Destroy(connection.identity.gameObject);
                     NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
                 }
             }
-            else if (newSceneName == "MainMenu")
+            else if (newSceneName == GetSceneName(Scenes.MainMenu))
             {
                 for (int i = NetworkGamePlayers.Count; i-- > 0;)
                 {
                     NetworkConnection connection = NetworkGamePlayers[i].connectionToClient;
                     NetworkRoomPlayerMageBall roomPlayerInstance = Instantiate(networkRoomPlayerPrefab);
-                    //roomPlayerInstance.SetDisplayName(NetworkGamePlayers[i].DisplayName);
+                    roomPlayerInstance.SetIsHost(NetworkGamePlayers[i].IsHost);
 
                     NetworkServer.Destroy(connection.identity.gameObject);
                     NetworkServer.ReplacePlayerForConnection(connection, roomPlayerInstance.gameObject);

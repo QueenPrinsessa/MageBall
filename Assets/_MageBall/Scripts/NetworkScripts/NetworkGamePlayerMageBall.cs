@@ -32,6 +32,8 @@ namespace MageBall
 
         public string DisplayName => displayName ?? DefaultPlayerName;
 
+        public bool IsHost { get; private set; }
+
         [Command]
         private void CmdSetDisplayName(string displayName)
         {
@@ -40,7 +42,7 @@ namespace MageBall
 
         public override void OnStartClient()
         {
-            DontDestroyOnLoad(gameObject); //might be unnecessary
+            DontDestroyOnLoad(gameObject);
             NetworkManager.NetworkGamePlayers.Add(this);
         }
 
@@ -53,6 +55,12 @@ namespace MageBall
         public void SetDisplayName(string displayName)
         {
             this.displayName = displayName;
+        }
+
+        [Server]
+        public void SetIsHost(bool isHost)
+        {
+            IsHost = isHost;
         }
 
         [Server]
