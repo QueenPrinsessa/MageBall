@@ -91,11 +91,11 @@ namespace MageBall
 
             if (invertMouseY)
             {
-                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
+                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
             }
             else
             {
-                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
+                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
             }
 
             //Clamp X rotation
