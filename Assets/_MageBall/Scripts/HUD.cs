@@ -62,8 +62,12 @@ namespace MageBall
 
         private void OnMatchEnd()
         {
+            Debug.Log("On match end");
+
             if (matchEndUI == null)
                 return;
+
+            Debug.Log("scorehandler");
 
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
 
@@ -72,6 +76,8 @@ namespace MageBall
                 Debug.LogError("There is no ScoreHandler in the current scene. Did you forget to add one?");
                 return;
             }
+
+            Debug.Log("match end UI");
 
             matchEndUI.SetActive(true);
 
@@ -83,19 +89,24 @@ namespace MageBall
                 return;
             }
 
+            Debug.Log(scoreHandler.Winner);
+
             switch (scoreHandler.Winner)
             {
                 case Winner.RedTeam:
                     Debug.Log("Red team victory");
                     //Set victory/loss text here
+                    matchEndText.text = "RED TEAM WINS!";
                     break;
                 case Winner.BlueTeam:
                     Debug.Log("Blue team victory");
                     //Set victory/loss text here
+                    matchEndText.text = "Blue team wins!";
                     break;
                 case Winner.Tie:
                     Debug.Log("Tie");
                     //Set victory/loss text here
+                    matchEndText.text = "The match is a tie!";
                     break;
             }
         }

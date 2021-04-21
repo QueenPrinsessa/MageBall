@@ -41,7 +41,7 @@ namespace MageBall
                 if (seconds <= 0)
                 {
                     minutes--;
-                    seconds = 59;
+                    seconds = 10;
                 }
                 else
                     seconds--;
