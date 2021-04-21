@@ -35,7 +35,7 @@ namespace MageBall
                 }
             }
 
-            CmdSetAim(cameraPosition.position, aimPoint.forward, aimPoint.rotation);
+            CmdSetAim(cameraPosition.position + aimPoint.forward.normalized * (transform.position - cameraPosition.position).magnitude, aimPoint.forward, aimPoint.rotation);
         }
 
         [Command]

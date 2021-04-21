@@ -7,10 +7,13 @@ namespace MageBall
 {
     public class ForceFly : Spell
     {
+
+        [SerializeField] private float hitRadius = 0.2f;
+
         [Command]
         public override void CmdCastSpell()
         {
-            if (Physics.Raycast(aimPosition, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
                 if (hit.rigidbody != null)
                 {
