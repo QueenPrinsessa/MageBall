@@ -89,24 +89,16 @@ namespace MageBall
                 return;
             }
 
-            Debug.Log(scoreHandler.Winner);
-
             switch (scoreHandler.Winner)
             {
                 case Winner.RedTeam:
-                    Debug.Log("Red team victory");
-                    //Set victory/loss text here
-                    matchEndText.text = "RED TEAM WINS!";
+                    matchEndText.text = "<color=\"red\">RED</color> TEAM WINS!";
                     break;
                 case Winner.BlueTeam:
-                    Debug.Log("Blue team victory");
-                    //Set victory/loss text here
-                    matchEndText.text = "Blue team wins!";
+                    matchEndText.text = "<color=\"blue\">BLUE</color> TEAM WINS!";
                     break;
                 case Winner.Tie:
-                    Debug.Log("Tie");
-                    //Set victory/loss text here
-                    matchEndText.text = "The match is a tie!";
+                    matchEndText.text = "IT'S A TIE!";
                     break;
             }
         }
