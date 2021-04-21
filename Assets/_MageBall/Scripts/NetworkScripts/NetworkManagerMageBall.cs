@@ -19,6 +19,12 @@ namespace MageBall
         [SerializeField] private NetworkGamePlayerMageBall gamePlayerPrefab;
         [SerializeField] private GameObject playerSpawnSystem;
 
+        [Header("Settings")]
+        [SerializeField, Tooltip("The time in seconds before a player gains control of their character at the start of the game and after goals.")] 
+        private float waitBeforeControlsEnableInSeconds = 3;
+        [SerializeField, Tooltip("The time in seconds before a reset occurs after a goal.")]
+        private float waitBeforeResetAfterGoalInSeconds = 1.5f;
+
         private string arenaPrefix = "Arena_";
 
         public static event Action clientConnected;
@@ -28,6 +34,8 @@ namespace MageBall
 
         public List<NetworkRoomPlayerMageBall> NetworkRoomPlayers { get; } = new List<NetworkRoomPlayerMageBall>();
         public List<NetworkGamePlayerMageBall> NetworkGamePlayers { get; } = new List<NetworkGamePlayerMageBall>();
+        public float WaitBeforeControlsEnableInSeconds => waitBeforeControlsEnableInSeconds;
+        public float WaitBeforeResetAfterGoalInSeconds => waitBeforeResetAfterGoalInSeconds;
 
         public override void OnClientConnect(NetworkConnection conn)
         {

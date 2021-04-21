@@ -13,6 +13,8 @@ namespace MageBall
         private BoxCollider goalCollider;
         public event Action<Team> score;
 
+        public BoxCollider GoalCollider => goalCollider;
+
         public override void OnStartServer()
         {
             goalCollider = GetComponent<BoxCollider>();

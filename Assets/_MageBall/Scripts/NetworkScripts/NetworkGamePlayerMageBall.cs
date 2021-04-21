@@ -63,9 +63,13 @@ namespace MageBall
         }
 
         [TargetRpc]
-        public void TargetResetPosition()
+        public void TargetResetPlayer()
         {
+            if (playerGameObject == null)
+                return;
+
             playerGameObject.GetComponent<PlayerMovement>().enabled = false;
+            playerGameObject.GetComponent<Spellcasting>().enabled = false;
             playerGameObject.transform.position = spawnPosition;
             playerGameObject.transform.rotation = spawnRotation;
             StartCoroutine(EnablePlayerControls());
@@ -77,8 +81,9 @@ namespace MageBall
             if (playerGameObject == null)
                 yield break;
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
+            playerGameObject.GetComponent<Spellcasting>().enabled = true;
         }
     }
 }
