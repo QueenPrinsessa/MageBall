@@ -8,9 +8,10 @@ namespace MageBall
 {
     public class PlayerSpawnSystem : NetworkBehaviour
     {
-        [SerializeField] private GameObject playerPrefab;
-        private static List<Transform> redSpawnPoints = new List<Transform>(); // Change into red & blue player spawns
-        private static List<Transform> blueSpawnPoints = new List<Transform>(); // Change into red & blue player spawns
+        [SerializeField] private GameObject redTeamPlayerPrefab;
+        [SerializeField] private GameObject blueTeamPlayerPrefab;
+        private static List<Transform> redSpawnPoints = new List<Transform>(); 
+        private static List<Transform> blueSpawnPoints = new List<Transform>();
 
         private int nextIndex = 0;
         private Team currentTeam = Team.Red;
@@ -68,12 +69,14 @@ namespace MageBall
 
             Vector3 position = (currentTeam == Team.Red) ? redSpawnPoints[nextIndex].position : blueSpawnPoints[nextIndex].position;
             Quaternion rotation = (currentTeam == Team.Red) ? redSpawnPoints[nextIndex].rotation : blueSpawnPoints[nextIndex].rotation;
+            GameObject playerPrefab = (currentTeam == Team.Red) ? redTeamPlayerPrefab : blueTeamPlayerPrefab;
 
             GameObject playerInstance = Instantiate(playerPrefab, position, rotation);
             NetworkServer.Spawn(playerInstance, connection);
 
             NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
             networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
+            networkGamePlayer.SetTeam(currentTeam);
 
             if (currentTeam == Team.Blue)
             {

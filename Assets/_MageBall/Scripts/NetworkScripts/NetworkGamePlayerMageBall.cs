@@ -12,6 +12,7 @@ namespace MageBall
         private static readonly string DefaultPlayerName = "Player";
 
         [SyncVar] private string displayName = "Loading...";
+        [SyncVar] private Team team;
         private NetworkManagerMageBall networkManager;
 
         private NetworkManagerMageBall NetworkManager
@@ -52,6 +53,12 @@ namespace MageBall
         public void SetDisplayName(string displayName)
         {
             this.displayName = displayName;
+        }
+
+        [Server]
+        public void SetTeam(Team team)
+        {
+            this.team = team;
         }
 
         [Server]
