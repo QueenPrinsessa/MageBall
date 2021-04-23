@@ -8,6 +8,7 @@ namespace MageBall
     public class PlayerMovement : NetworkBehaviour
     {
         private CharacterController controller;
+        private Animator animator;
         private float speed = 0f;
         [SerializeField] private float maxSpeed = 10f;
         [SerializeField] private float forceMagnitude = 4f; 
@@ -20,6 +21,7 @@ namespace MageBall
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
         }
 
         [Client]
@@ -43,8 +45,10 @@ namespace MageBall
                 speed = Mathf.Max(speed - forceMagnitude * Time.deltaTime * 1.5f, 0);
             }
 
-             //Debug.Log(speed);
-           
+            animator.SetFloat("Speed", speed);
+
+            //Debug.Log(speed);
+
             Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
 
             moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
