@@ -13,7 +13,7 @@ namespace MageBall
         private Button button;
         private MenuButtonController menuButtonController;
         private Animator animator;
-        public event Action buttonSelected;
+        public event Action ButtonSelected;
 
         public int Index => index;
         public bool Interactable { get; set; } = true;
@@ -52,6 +52,7 @@ namespace MageBall
 
         }
 
+        //  Används i Unity för att triggera animation event
         public void InvokeButtonClick()
         {
             if (!Interactable)
@@ -60,12 +61,13 @@ namespace MageBall
             button.onClick?.Invoke();
         }
 
+        // Den används i Unity inspectorn
         public void SelectMenuButton()
         {
             if (!Selectable)
                 return;
 
-            buttonSelected?.Invoke();
+            ButtonSelected?.Invoke();
             menuButtonController.Index = index;
             button.Select();
         }
