@@ -10,7 +10,7 @@ namespace MageBall
     public class HUD : NetworkBehaviour
     {
         [Header("UI")]
-        [SerializeField] private TMP_Text time;
+        [SerializeField] private TMP_Text timeText;
         [SerializeField] private TMP_Text blueTeamScoreText;
         [SerializeField] private TMP_Text redTeamScoreText;
         [SerializeField] private GameObject goalScoredUI;
@@ -42,6 +42,18 @@ namespace MageBall
                 matchTimer.timeChanged += OnTimeChanged;
                 matchTimer.matchEnd += OnMatchEnd;
             }
+
+            if (scoreHandler == null)
+            {
+                Debug.LogError("OnStartAuthority, scoreHandler not found");
+                return;
+            }
+                
+            if (matchTimer == null)
+            {
+                Debug.LogError("OnStartAuthority, matchTimer not found");
+                return;
+            }   
         }
 
         [ClientCallback]
@@ -58,17 +70,28 @@ namespace MageBall
                 matchTimer.timeChanged -= OnTimeChanged;
                 matchTimer.matchEnd -= OnMatchEnd;
             }
+
+            if (scoreHandler == null)
+            {
+                Debug.LogError("OnDestroy, scoreHandler not found");
+                return;
+            }
+            
+            if (matchTimer == null)
+            {
+                Debug.LogError("OnDestroy, matchTimer not found");
+                return;
+            }      
         }
 
         private void OnMatchEnd()
         {
-            Debug.Log("On match end");
-
             if (matchEndUI == null)
+            {
+                Debug.LogError("OnMatchEnd, matchEndUI not found");
                 return;
-
-            Debug.Log("scorehandler");
-
+            }
+               
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
 
             if (scoreHandler == null)
@@ -76,8 +99,6 @@ namespace MageBall
                 Debug.LogError("There is no ScoreHandler in the current scene. Did you forget to add one?");
                 return;
             }
-
-            Debug.Log("match end UI");
 
             matchEndUI.SetActive(true);
 
@@ -106,9 +127,9 @@ namespace MageBall
         private void OnTimeChanged(int minutes, int seconds)
         {
             if (seconds >= 10)
-                time.text = minutes + ":" + seconds;
+                timeText.text = minutes + ":" + seconds;
             else
-                time.text = minutes + ":0" + seconds;
+                timeText.text = minutes + ":0" + seconds;
         }
 
         private void OnScoreChanged(Team team, int newScore)
@@ -118,6 +139,12 @@ namespace MageBall
             if (goalScoredText != null)
                 goalScoredText.text = $"<color=\"{team.ToString().ToLower()}\">{team.ToString().ToUpper()}</color> TEAM SCORES";
             StartCoroutine(DisableGoalScoredUI());
+
+            if (goalScoredText == null)
+            {
+                Debug.LogError("OnScoreChanged, goalScoreText not found");
+                return;
+            }
 
             switch (team)
             {
