@@ -28,7 +28,7 @@ namespace MageBall
                 if (menuButton.Index > currentMaxIndex)
                     currentMaxIndex = menuButton.Index;
                 this.menuButtons.Add(menuButton.Index, menuButton);
-                menuButton.buttonSelected += OnButtonSelected;
+                menuButton.ButtonSelected += OnButtonSelected;
             }
 
             SetTopButtonAsSelected();

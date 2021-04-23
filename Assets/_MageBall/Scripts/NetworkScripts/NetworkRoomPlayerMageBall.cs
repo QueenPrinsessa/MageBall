@@ -159,7 +159,6 @@ namespace MageBall
         [TargetRpc]
         public void TargetDisconnect(NetworkConnection connection)
         {
-            Debug.Log("TargetDisconnect");
             NetworkManager.StopClient();
         }
 
