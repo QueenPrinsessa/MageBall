@@ -43,7 +43,7 @@ namespace MageBall
                 speed = Mathf.Max(speed - forceMagnitude * Time.deltaTime * 1.5f, 0);
             }
 
-             //Debug.Log(speed);
+            
            
             Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
 
@@ -64,23 +64,11 @@ namespace MageBall
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
         }
-
-        private Color rayColor;
+        
 
         private bool IsGrounded()
         {
             Physics.Raycast(new Ray(transform.position, -transform.up), out RaycastHit raycastHit, groundCheckDistance);
-
-#if UNITY_EDITOR
-            if(raycastHit.collider != null) // if the raycast is not null it has hit something
-            {
-                rayColor = Color.green; // green for grounded
-            }
-            else
-            {
-                rayColor = Color.red; // red for floating?
-            }
-#endif
             return raycastHit.collider != null;
         }
 
@@ -96,7 +84,7 @@ namespace MageBall
         [Command]
         private void CmdPushRigidbody(GameObject go, Vector3 moveDirection)
         {
-            Rigidbody rigidbody = go.GetComponent<Rigidbody>(); //.velocity = push;
+            Rigidbody rigidbody = go.GetComponent<Rigidbody>();
 
             if (rigidbody == null || rigidbody.isKinematic)
                 return;
@@ -109,16 +97,6 @@ namespace MageBall
             rigidbody.velocity = pushDirection * speed * 1.5f;
         }
 
-
-        private void OnDrawGizmos()
-        {
-            if (rayColor == null)
-                return;
-
-            Gizmos.color = rayColor;
-            Ray groundCheckRay = new Ray(transform.position, -transform.up);
-            Gizmos.DrawLine(groundCheckRay.origin, (groundCheckRay.direction.normalized * groundCheckDistance) + groundCheckRay.origin);
-        }
 
     }
 }
