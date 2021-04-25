@@ -117,7 +117,7 @@ namespace MageBall
         public void NotifyPlayersOfReadyState()
         {
             foreach (NetworkRoomPlayerMageBall player in NetworkRoomPlayers)
-                player.CheckIfReadyToStart(IsReadyToStartMatch());
+                player.IsLobbyReady(IsReadyToStartMatch());
         }
 
         private bool IsReadyToStartMatch()

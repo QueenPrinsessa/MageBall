@@ -116,7 +116,7 @@ namespace MageBall
             }
         }
 
-        public void CheckIfReadyToStart(bool readyToStart)
+        public void IsLobbyReady(bool readyToStart)
         {
             if (!IsHost)
                 return;
