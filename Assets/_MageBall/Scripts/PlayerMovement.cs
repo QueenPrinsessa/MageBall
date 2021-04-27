@@ -15,6 +15,7 @@ namespace MageBall
         [SerializeField] private float forceMagnitude = 6f; 
         [SerializeField] private float jumpHeight = 0.9f;
         [SerializeField] private float gravity = -10.0f;
+        [SerializeField] private Passive speedPassive;
         private float groundCheckDistance = 0.25f;
         private Vector3 moveDirection;
         private Vector3 velocity;
@@ -39,7 +40,7 @@ namespace MageBall
             
             if(horizontal != 0 || vertical != 0)
             {
-                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, maxSpeed);
+                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, maxSpeed * speedPassive.modifier);
             }
             else
             {
