@@ -136,6 +136,7 @@ MonoBehaviour:
   forceMagnitude: 4
   jumpHeight: 0.9
   gravity: -20
+  speedPassive: {fileID: 11400000, guid: a84f04530396c9d4f9f1447410c5f8ec, type: 2}
 --- !u!114 &5619645232864165116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
-  time: {fileID: 527303208340175645}
+  timeText: {fileID: 527303208340175645}
   blueTeamScoreText: {fileID: 6091325555084865001}
   redTeamScoreText: {fileID: 7644316091271414813}
   goalScoredUI: {fileID: 7290513291582222553}
