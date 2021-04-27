@@ -18,9 +18,9 @@ namespace MageBall
         [SerializeField] private MenuButton startGameButton;
 
         [SyncVar(hook = nameof(OnDisplayNameChanged))]
-        [HideInInspector] private string displayName = "Loading...";
+        private string displayName = "Loading...";
         [SyncVar(hook = nameof(OnReadyStatusChanged))]
-        [HideInInspector] private bool isReady;
+        private bool isReady;
 
         public string DisplayName => displayName;
         public bool IsReady => isReady;
@@ -89,7 +89,7 @@ namespace MageBall
 
         private void UpdateDisplay()
         {
-            if (!hasAuthority)
+            if (!hasAuthority)  // Updates the display text
             {
                 foreach (NetworkRoomPlayerMageBall player in NetworkManager.NetworkRoomPlayers)
                 {
@@ -116,7 +116,7 @@ namespace MageBall
             }
         }
 
-        public void CheckIfReadyToStart(bool readyToStart)
+        public void IsLobbyReady(bool readyToStart)
         {
             if (!IsHost)
                 return;
@@ -159,7 +159,6 @@ namespace MageBall
         [TargetRpc]
         public void TargetDisconnect(NetworkConnection connection)
         {
-            Debug.Log("TargetDisconnect");
             NetworkManager.StopClient();
         }
 

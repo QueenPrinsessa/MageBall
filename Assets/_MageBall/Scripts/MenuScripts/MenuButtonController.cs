@@ -11,8 +11,8 @@ namespace MageBall
         private bool hasKeyBeenPressed;
         private bool isMenuLocked;
         private int maxIndex;
-        private SortedDictionary<int, MenuButton> menuButtons = new SortedDictionary<int, MenuButton>();
-        private float menuLockDuration = 0.1f;
+        private readonly SortedDictionary<int, MenuButton> menuButtons = new SortedDictionary<int, MenuButton>();
+        private readonly float menuLockDuration = 0.1f;
         private float menuLockTimer;
 
         public int Index { get; set; } = 0;
@@ -28,7 +28,7 @@ namespace MageBall
                 if (menuButton.Index > currentMaxIndex)
                     currentMaxIndex = menuButton.Index;
                 this.menuButtons.Add(menuButton.Index, menuButton);
-                menuButton.buttonSelected += OnButtonSelected;
+                menuButton.ButtonSelected += OnButtonSelected;
             }
 
             SetTopButtonAsSelected();
@@ -48,19 +48,13 @@ namespace MageBall
 
         private void SetTopButtonAsSelected()
         {
-            bool topButtonSelectable = false;
-
             foreach (MenuButton menuButton in menuButtons.Values)
             {
-                if (!topButtonSelectable)
-                {
-                    topButtonSelectable = menuButton.Selectable;
-                    if (topButtonSelectable)
+                    if (menuButton.Selectable)
                     {
                         Index = menuButton.Index;
                         break;
                     }
-                }
             }
         }
 

@@ -117,7 +117,7 @@ namespace MageBall
         public void NotifyPlayersOfReadyState()
         {
             foreach (NetworkRoomPlayerMageBall player in NetworkRoomPlayers)
-                player.CheckIfReadyToStart(IsReadyToStartMatch());
+                player.IsLobbyReady(IsReadyToStartMatch());
         }
 
         private bool IsReadyToStartMatch()
@@ -164,31 +164,41 @@ namespace MageBall
         {
             if (SceneManager.GetActiveScene().path == menuScene && newSceneName.StartsWith(arenaPrefix))
             {
-                for (int i = NetworkRoomPlayers.Count; i-- > 0;)
-                {
-                    NetworkConnection connection = NetworkRoomPlayers[i].connectionToClient;
-                    NetworkGamePlayerMageBall gamePlayerInstance = Instantiate(gamePlayerPrefab);
-                    gamePlayerInstance.SetDisplayName(NetworkRoomPlayers[i].DisplayName);
-                    gamePlayerInstance.SetIsHost(NetworkRoomPlayers[i].IsHost);
-
-                    NetworkServer.Destroy(connection.identity.gameObject);
-                    NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
-                }
+                RoomToGame();
             }
             else if (newSceneName == GetSceneName(Scenes.MainMenu))
             {
-                for (int i = NetworkGamePlayers.Count; i-- > 0;)
-                {
-                    NetworkConnection connection = NetworkGamePlayers[i].connectionToClient;
-                    NetworkRoomPlayerMageBall roomPlayerInstance = Instantiate(networkRoomPlayerPrefab);
-                    roomPlayerInstance.SetIsHost(NetworkGamePlayers[i].IsHost);
-
-                    NetworkServer.Destroy(connection.identity.gameObject);
-                    NetworkServer.ReplacePlayerForConnection(connection, roomPlayerInstance.gameObject);
-                }
+                GameToRoom();
             }
 
             base.ServerChangeScene(newSceneName);
+        }
+
+        private void GameToRoom()
+        {
+            for (int i = NetworkGamePlayers.Count; i-- > 0;)
+            {
+                NetworkConnection connection = NetworkGamePlayers[i].connectionToClient;
+                NetworkRoomPlayerMageBall roomPlayerInstance = Instantiate(networkRoomPlayerPrefab);
+                roomPlayerInstance.SetIsHost(NetworkGamePlayers[i].IsHost);
+
+                NetworkServer.Destroy(connection.identity.gameObject);
+                NetworkServer.ReplacePlayerForConnection(connection, roomPlayerInstance.gameObject);
+            }
+        }
+
+        private void RoomToGame()
+        {
+            for (int i = NetworkRoomPlayers.Count; i-- > 0;)
+            {
+                NetworkConnection connection = NetworkRoomPlayers[i].connectionToClient;
+                NetworkGamePlayerMageBall gamePlayerInstance = Instantiate(gamePlayerPrefab);
+                gamePlayerInstance.SetDisplayName(NetworkRoomPlayers[i].DisplayName);
+                gamePlayerInstance.SetIsHost(NetworkRoomPlayers[i].IsHost);
+
+                NetworkServer.Destroy(connection.identity.gameObject);
+                NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
+            }
         }
 
         public override void OnServerSceneChanged(string sceneName)
