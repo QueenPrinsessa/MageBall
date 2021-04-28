@@ -12,6 +12,8 @@ namespace MageBall
         [SerializeField] private float radius = 2f;
         [SerializeField] private float explosionForce = 2000f;
 
+        [SerializeField] private GameObject forcePushHitVFX;
+
         public override  void  OnStartServer()
         {
             Destroy(gameObject, 4f);
@@ -37,8 +39,13 @@ namespace MageBall
                 rigidbody.AddExplosionForce(explosionForce, explosionPoint, radius);
             }
 
-            if(colliders.Length > 0)
+            if (colliders.Length > 0)
+            {
                 Destroy(gameObject);
+                GameObject vfx = Instantiate(forcePushHitVFX,explosionPoint, Quaternion.LookRotation(transform.position));
+                NetworkServer.Spawn(vfx);
+
+            }
         }
     }
 }
