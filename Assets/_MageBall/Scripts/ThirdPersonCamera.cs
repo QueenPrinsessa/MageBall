@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
 namespace MageBall
 {
@@ -14,31 +15,25 @@ namespace MageBall
 
         private CinemachineVirtualCamera thirdPersonVirtualCamera;
 
-        //Camera Movement Multiplier
         private float cameraVerticalRotationMultiplier = 100f;
         private float cameraHorizontalRotationMultiplier = 100f;
+        private float mouseSensitivity = 1;
 
-        //Camera Input Values
-        public float cameraInputHorizontal;
-        public float cameraInputVertical;
-
-        //Inverting vertical and horizontal is usually called invert X and invert Y since they refer to inverting the mouse direction
-        [Header("Invert Camera Controls")]
-        public bool invertMouseY = false;
-        public bool invertMouseX = false;
+        private bool invertMouseY = false;
+        private bool invertMouseX = false;
 
         [Header("X Rotation Clamping")]
         [SerializeField, Range(-90f, 90f)] private float minXRotation = -80f;
         [SerializeField, Range(-90f, 90f)] private float maxXRotation = 80f;
 
         [Header("Toggles which side the camera should start on. 1 = Right, 0 = Left")]
-        public float cameraSide = 1f;
+        [SerializeField] private float cameraSide = 1f;
 
         [Header("Allow toggling left to right shoulder")]
-        public bool allowCameraToggle = true;
+        [SerializeField] private bool allowCameraToggle = true;
 
         [Header("How fast we should transition from left to right")]
-        public float cameraSideToggleSpeed = 1f;
+        [SerializeField] private float cameraSideToggleSpeed = 1f;
 
         private Cinemachine3rdPersonFollow followCam; // so we can manipulate the 'camera side' property dynamically
 
@@ -56,6 +51,8 @@ namespace MageBall
 
         public override void OnStartAuthority()
         {
+            LoadCameraControlSettings();
+
             GameObject thirdPersonCamera = Instantiate(thirdPersonCameraPrefab);
 
             if (thirdPersonVirtualCamera == null)
@@ -73,6 +70,13 @@ namespace MageBall
             Cursor.lockState = CursorLockMode.Locked; 
         }
 
+        private void LoadCameraControlSettings()
+        {
+            mouseSensitivity = PlayerPrefs.GetFloat(OptionsMenu.MouseSensitivityPlayerPrefsKey, 1f);
+            invertMouseY = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false)));
+            invertMouseX = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false)));
+        }
+
         private void FixedUpdate()
         {
             if (!hasAuthority)
@@ -86,16 +90,16 @@ namespace MageBall
                 return;
             }
 
-            cameraInputHorizontal = Input.GetAxis("Mouse X");
-            cameraInputVertical = Input.GetAxis("Mouse Y");
+            float cameraInputHorizontal = Input.GetAxis("Mouse X");
+            float cameraInputVertical = Input.GetAxis("Mouse Y");
 
             if (invertMouseY)
             {
-                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
+                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * mouseSensitivity * Time.fixedDeltaTime;
             }
             else
             {
-                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * Time.fixedDeltaTime;
+                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * mouseSensitivity * Time.fixedDeltaTime;
             }
 
             //Clamp X rotation
@@ -106,7 +110,7 @@ namespace MageBall
 
             //Rotate player for Y, not camera
             int mouseXInvertionFactor = invertMouseX ? -1 : 1;
-            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * cameraHorizontalRotationMultiplier * Time.fixedDeltaTime, Vector3.up);
+            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * mouseSensitivity * cameraHorizontalRotationMultiplier * Time.fixedDeltaTime, Vector3.up);
         }
 
 
