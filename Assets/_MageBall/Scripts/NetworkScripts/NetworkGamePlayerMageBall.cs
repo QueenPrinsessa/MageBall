@@ -33,6 +33,7 @@ namespace MageBall
         public string DisplayName => displayName ?? DefaultPlayerName;
 
         public bool IsHost { get; private set; }
+        public bool IsFrozen { get; private set; }
 
         [Command]
         private void CmdSetDisplayName(string displayName)
@@ -96,7 +97,16 @@ namespace MageBall
             if (playerGameObject == null)
                 yield break;
 
+            IsFrozen = true;
+
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
+
+            IsFrozen = false;
+
+            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            if (pauseMenu != null && pauseMenu.IsOpen)
+                yield break;
+
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
             playerGameObject.GetComponent<Spellcasting>().enabled = true;
         }

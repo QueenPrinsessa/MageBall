@@ -51,8 +51,8 @@ MonoBehaviour:
   serverTickRate: 60
   serverBatching: 1
   serverBatchInterval: 0
-  offlineScene: 
-  onlineScene: Assets/_MageBall/Scenes/MainMenu.unity
+  offlineScene: Assets/_MageBall/Scenes/MainMenu.unity
+  onlineScene: 
   transport: {fileID: 5081799449140713998}
   networkAddress: localhost
   maxConnections: 4

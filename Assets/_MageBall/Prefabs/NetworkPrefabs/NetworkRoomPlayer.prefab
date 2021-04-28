@@ -143,6 +143,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lobby_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 432608775994357016, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3833395484176559980, guid: ef9d46e3f58e44c46bb4f319bee66c20,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
