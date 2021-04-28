@@ -204,6 +204,8 @@ MonoBehaviour:
   syncInterval: 0
   modifier: 15
   hitRadius: 0.2
+  forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
+    type: 3}
 --- !u!114 &8269165977460520832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,10 +239,6 @@ MonoBehaviour:
   cameraFollow: {fileID: 5026404813052954441}
   thirdPersonCameraPrefab: {fileID: 7294957378755441486, guid: 9f63054bbd4740c4287fde40c6f0b6ee,
     type: 3}
-  cameraInputHorizontal: 0
-  cameraInputVertical: 0
-  invertMouseY: 0
-  invertMouseX: 0
   minXRotation: -80
   maxXRotation: 80
   cameraSide: 1
@@ -261,6 +259,8 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   hitRadius: 0.2
+  forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
+    type: 3}
 --- !u!95 &8230434942319434437
 Animator:
   serializedVersion: 3

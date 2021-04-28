@@ -179,6 +179,8 @@ MonoBehaviour:
   flightSpeed: 50
   radius: 8
   explosionForce: 1500
+  forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
+    type: 3}
 --- !u!114 &-8987871216110443510
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ namespace MageBall
     {
 
         [SerializeField] private float hitRadius = 0.2f;
+        [SerializeField] private GameObject forceFlyHitVFX;
 
         [Command]
         public override void CmdCastSpell()
@@ -21,6 +22,10 @@ namespace MageBall
                     {
                         hit.rigidbody.useGravity = false;
                         StartCoroutine(EnableGravity());
+                        GameObject vfx = Instantiate(forceFlyHitVFX, hit.point, Quaternion.LookRotation(hit.normal));
+                        vfx.transform.parent = hit.transform;
+                        NetworkServer.Spawn(vfx);
+                        
                     }
                 }
             }
