@@ -47,7 +47,7 @@ public class IpInput : MonoBehaviour
         if (!IsValidIpAddress(inputField.text))
             return;
 
-        IpAddress = inputField.text;
+        IpAddress = inputField.text.Trim();
         PlayerPrefs.SetString(PlayerPrefsIpAddressKey, IpAddress);
     }
 

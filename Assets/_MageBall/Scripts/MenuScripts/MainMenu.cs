@@ -13,6 +13,7 @@ namespace MageBall
         [Header("UI")]
         [SerializeField] private TMP_InputField ipAddressInputField;
         [SerializeField] private GameObject titleScreenPanel;
+        [SerializeField] private OptionsMenu optionsMenu;
         private MenuButtonController menuButtonController;
 
         private void Start()
@@ -32,6 +33,10 @@ namespace MageBall
                 titleScreenPanel.SetActive(false);
             }
 
+            optionsMenu = GetComponentInChildren<OptionsMenu>();
+            if (optionsMenu == null)
+                Debug.LogError("There is no Options Menu in the Main Menu!");
+
             menuButtonController = titleScreenPanel.GetComponent<MenuButtonController>();
             NetworkManagerMageBall.stopClient += OnStopClient;
         }
@@ -40,18 +45,32 @@ namespace MageBall
         {
             NetworkManagerMageBall.clientConnected += OnClientConnected;
             NetworkManagerMageBall.clientDisconnected += OnClientDisconnected;
+            optionsMenu.OptionsMenuOpened += OnOptionsMenuOpened;
+            optionsMenu.OptionsMenuClosed += OnOptionsMenuClosed;
+
         }
 
         private void OnDisable()
         {
             NetworkManagerMageBall.clientConnected -= OnClientConnected;
             NetworkManagerMageBall.clientDisconnected -= OnClientDisconnected;
+            optionsMenu.OptionsMenuOpened -= OnOptionsMenuOpened;
+            optionsMenu.OptionsMenuClosed -= OnOptionsMenuClosed;
 
         }
 
         private void OnDestroy()
         {
             NetworkManagerMageBall.stopClient -= OnStopClient;
+        }
+        private void OnOptionsMenuOpened()
+        {
+            menuButtonController.DeactivateButtons();
+        }
+
+        private void OnOptionsMenuClosed()
+        {
+            menuButtonController.ActivateButtons();
         }
 
         private void OnStopClient()
@@ -84,8 +103,8 @@ namespace MageBall
 
         public void JoinGame()
         {
-            string ipAddress = ipAddressInputField.text;
-            ipAddress = ipAddress.Trim();
+            string ipAddress = ipAddressInputField.text.Trim();
+            ipAddress = string.IsNullOrEmpty(ipAddress) ? "localhost" : ipAddress;
             networkManager.networkAddress = ipAddress;
             networkManager.StartClient();
 
@@ -95,7 +114,7 @@ namespace MageBall
 
         public void OpenOptionsMenu()
         {
-            Debug.Log("Options pressed");
+            optionsMenu.OpenMenu();
         }
 
         public void QuitGame()
