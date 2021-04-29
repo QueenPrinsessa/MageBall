@@ -14,13 +14,13 @@ namespace MageBall
         [SerializeField] private Spell thirdSpell;
         private Animator animator;
         private float maxMana = 100f;
-        private float manaAmount = 0f;
-        private float spellCost = 30f;
+        private float manaAmount;
         private float rechargeRate = 20f;
 
         public override void OnStartAuthority()
         {
             animator = GetComponent<Animator>();
+            manaAmount = maxMana;
 
         }
 
@@ -32,36 +32,36 @@ namespace MageBall
 
             manaAmount += rechargeRate * Time.deltaTime;
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && UseMana(mainSpell.ManaCost))
             {
                 mainSpell.CmdCastSpell();
                 StartCoroutine(Attack1());
-                useMana(30);
             }
 
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
             {
                 offhandSpell.CmdCastSpell();
                 StartCoroutine(Attack2());
-                useMana(30);
             }
 
-            if (Input.GetButtonDown("Fire3"))
+            if (Input.GetButtonDown("Fire3") && UseMana(thirdSpell.ManaCost))
             {
                 thirdSpell.CmdCastSpell();
                 StartCoroutine(Attack2());
-                useMana(30);
             }
 
         }
 
-        private void useMana(int amount)
+        private bool UseMana(float amount)
         {
-            if (manaAmount >= amount)
-                manaAmount -= amount;
+            if (manaAmount < amount)
+                return false;
+
+            manaAmount -= amount;
+            return true;
         }
 
-        public float GetManaNomralized()
+        public float GetManaNormalized()
         {
             return manaAmount / maxMana;
         }

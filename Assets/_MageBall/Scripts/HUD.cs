@@ -15,13 +15,12 @@ namespace MageBall
         [SerializeField] private TMP_Text redTeamScoreText;
         [SerializeField] private GameObject goalScoredUI;
         [SerializeField] private GameObject matchEndUI;
-        //[SerializeField] private GameObject manaBar;
-        Spellcasting spellcasting;
-        [SerializeField] RawImage barRawImage;
-        [SerializeField] Mask barMask;
+        [SerializeField] private RawImage barRawImage;
+        [SerializeField] private Mask barMask;
+        [SerializeField] private Spellcasting spellcasting;
 
         private float barMaskWidth;
-
+        private Coroutine updateManaBarCoroutine;
 
         private NetworkManagerMageBall networkManager;
 
@@ -41,9 +40,9 @@ namespace MageBall
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
-            //barMask = GetComponentInChildren<Mask>();
-            barRawImage = GetComponentInChildren<RawImage>();
-            //barMaskWidth = barMask.sizeDelta.X;
+
+            updateManaBarCoroutine = StartCoroutine(UpdateManaBar());
+            barMaskWidth = barRawImage.rectTransform.rect.width;
 
             if (barRawImage == null)
                 Debug.LogError("could not find raw image");
@@ -99,7 +98,9 @@ namespace MageBall
             {
                 Debug.LogError("OnDestroy, matchTimer not found");
                 return;
-            }      
+            }
+
+            StopCoroutine(updateManaBarCoroutine);
         }
 
         private void OnMatchEnd()
@@ -142,16 +143,19 @@ namespace MageBall
             }
         }
 
-        public void UpdateManaBar()
+        private IEnumerator UpdateManaBar()
         {
-            Rect uvRect = barRawImage.uvRect;
-            uvRect.x -= 0.5f * Time.deltaTime;
-            uvRect.y -= 0.1f * Time.deltaTime;
-            barRawImage.uvRect = uvRect;
+            while (true)
+            {
+                Rect uvRect = barRawImage.uvRect;
+                uvRect.x -= 0.1f * Time.deltaTime;
+                barRawImage.uvRect = uvRect;
 
-            //Vector2 barMaskSize = barMask.sizeDelta;
-            //barMaskSize.x = spellcasting.GetManaNomralized() * barMaskWidth;
-            //barMask.sizeDelta = barMaskSize;
+                Vector2 barMaskSize = barMask.rectTransform.sizeDelta;
+                barMaskSize.x = spellcasting.GetManaNormalized() * barMaskWidth;
+                barMask.rectTransform.sizeDelta = barMaskSize;
+                yield return null;
+            }
         }
 
         private void OnTimeChanged(int minutes, int seconds)
