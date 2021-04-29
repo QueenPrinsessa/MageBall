@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8269165977460520832}
   - component: {fileID: 2230629447617049366}
   - component: {fileID: 4445340136976529315}
+  - component: {fileID: -2477796659126010163}
   - component: {fileID: 8230434942319434437}
   m_Layer: 3
   m_Name: BasePlayer
@@ -112,12 +113,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2.2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 15
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3798196190867551898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +210,7 @@ MonoBehaviour:
   hitRadius: 0.2
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
+  vfxDuration: 1.5
 --- !u!114 &8269165977460520832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +266,19 @@ MonoBehaviour:
   hitRadius: 0.2
   forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
     type: 3}
+  durationInSeconds: 5
+--- !u!114 &-2477796659126010163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ddc0108bcadb44d9759d03cf61bf3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8230434942319434437
 Animator:
   serializedVersion: 3
@@ -328,12 +343,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: afe546f4a0ca03d4cb701a2d68c80c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: afe546f4a0ca03d4cb701a2d68c80c79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: afe546f4a0ca03d4cb701a2d68c80c79,
         type: 3}

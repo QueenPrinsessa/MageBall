@@ -27,38 +27,21 @@ namespace MageBall
             if (Input.GetButtonDown("Fire1"))
             {
                 mainSpell.CmdCastSpell();
-                StartCoroutine(Attack1());
+                animator.SetTrigger("Attack1");
             }
 
             if (Input.GetButtonDown("Fire2"))
             {
                 offhandSpell.CmdCastSpell();
-                StartCoroutine(Attack2());
+                animator.SetTrigger("Attack2");
             }
 
             if (Input.GetButtonDown("Fire3"))
             {
                 thirdSpell.CmdCastSpell();
-                StartCoroutine(Attack2());
+                animator.SetTrigger("Attack2");
             }
         }
 
-        private IEnumerator Attack1()
-        {
-            animator.SetBool("Attack1", true);
-
-            yield return new WaitForSeconds(1);
-            
-            animator.SetBool("Attack1", false);
-        }
-
-        private IEnumerator Attack2()
-        {
-            animator.SetBool("Attack2", true);
-
-            yield return new WaitForSeconds(1);
-
-            animator.SetBool("Attack2", false);
-        }
     }
 }
