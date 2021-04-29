@@ -16,6 +16,7 @@ namespace MageBall
         [SerializeField] private float jumpHeight = 0.9f;
         [SerializeField] private float gravity = -10.0f;
         [SerializeField] private Passive speedPassive;
+        [SerializeField] private Passive jumpPassive;
         private float groundCheckDistance = 0.25f;
         private Vector3 moveDirection;
         private Vector3 velocity;
@@ -76,7 +77,7 @@ namespace MageBall
 
             if (Input.GetButton("Jump") && isGrounded)
             {
-                velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+                velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity * jumpPassive.modifier);
                 StartCoroutine(Jump());
             }   
 
