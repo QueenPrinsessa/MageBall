@@ -15,6 +15,13 @@ namespace MageBall
         [SerializeField] private TMP_Text redTeamScoreText;
         [SerializeField] private GameObject goalScoredUI;
         [SerializeField] private GameObject matchEndUI;
+        //[SerializeField] private GameObject manaBar;
+        Spellcasting spellcasting;
+        [SerializeField] RawImage barRawImage;
+        [SerializeField] Mask barMask;
+
+        private float barMaskWidth;
+
 
         private NetworkManagerMageBall networkManager;
 
@@ -33,6 +40,17 @@ namespace MageBall
         { 
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
+
+            //barMask = GetComponentInChildren<Mask>();
+            barRawImage = GetComponentInChildren<RawImage>();
+            //barMaskWidth = barMask.sizeDelta.X;
+
+            if (barRawImage == null)
+                Debug.LogError("could not find raw image");
+            
+            if (barMask == null)
+                Debug.LogError("could not find mask");
+            
 
             if (scoreHandler != null)
                 scoreHandler.scoreChanged += OnScoreChanged;
@@ -122,6 +140,18 @@ namespace MageBall
                     matchEndText.text = "IT'S A TIE!";
                     break;
             }
+        }
+
+        public void UpdateManaBar()
+        {
+            Rect uvRect = barRawImage.uvRect;
+            uvRect.x -= 0.5f * Time.deltaTime;
+            uvRect.y -= 0.1f * Time.deltaTime;
+            barRawImage.uvRect = uvRect;
+
+            //Vector2 barMaskSize = barMask.sizeDelta;
+            //barMaskSize.x = spellcasting.GetManaNomralized() * barMaskWidth;
+            //barMask.sizeDelta = barMaskSize;
         }
 
         private void OnTimeChanged(int minutes, int seconds)
