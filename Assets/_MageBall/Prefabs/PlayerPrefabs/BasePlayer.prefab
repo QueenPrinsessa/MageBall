@@ -209,6 +209,7 @@ MonoBehaviour:
   hitRadius: 0.2
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
+  vfxDuration: 1
 --- !u!114 &8269165977460520832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   hitRadius: 0.2
   forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
     type: 3}
+  durationInSeconds: 5
 --- !u!95 &8230434942319434437
 Animator:
   serializedVersion: 3
