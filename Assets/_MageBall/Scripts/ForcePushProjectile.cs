@@ -11,13 +11,8 @@ namespace MageBall
         [SerializeField] private float flightSpeed = 20;
         [SerializeField] private float radius = 2f;
         [SerializeField] private float explosionForce = 2000f;
-
+        [SerializeField] private float vfxDuration = 3f;
         [SerializeField] private GameObject forcePushHitVFX;
-
-        public override  void  OnStartServer()
-        {
-            Destroy(gameObject, 4f);
-        }
 
         [Server]
         void Update()
@@ -25,6 +20,7 @@ namespace MageBall
             transform.Translate(transform.forward * flightSpeed * Time.deltaTime, Space.World);
         }
 
+        [Server]
         private void OnCollisionEnter(Collision collision)
         {
             Vector3 explosionPoint = transform.position;
@@ -41,11 +37,22 @@ namespace MageBall
 
             if (colliders.Length > 0)
             {
-                Destroy(gameObject);
+                gameObject.GetComponent<Collider>().enabled = false;
                 GameObject vfx = Instantiate(forcePushHitVFX,explosionPoint, Quaternion.LookRotation(transform.position));
                 NetworkServer.Spawn(vfx);
-
+                StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
             }
+        }
+
+        [Server]
+        protected IEnumerator DestroyAfterTime(GameObject vfx, float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+
+            if (vfx != null)
+                NetworkServer.Destroy(vfx);
+
+            NetworkServer.Destroy(gameObject);
         }
     }
 }
