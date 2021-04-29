@@ -30,7 +30,8 @@ namespace MageBall
             else if (networkManager == null)
             {
                 networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
-                titleScreenPanel.SetActive(false);
+                if(networkManager.isNetworkActive)
+                    titleScreenPanel.SetActive(false);
             }
 
             optionsMenu = GetComponentInChildren<OptionsMenu>();
@@ -47,7 +48,6 @@ namespace MageBall
             NetworkManagerMageBall.clientDisconnected += OnClientDisconnected;
             optionsMenu.OptionsMenuOpened += OnOptionsMenuOpened;
             optionsMenu.OptionsMenuClosed += OnOptionsMenuClosed;
-
         }
 
         private void OnDisable()

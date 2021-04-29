@@ -26,6 +26,13 @@ namespace MageBall
             animator = GetComponent<Animator>();
         }
 
+        private void OnDisable()
+        {
+            if (!hasAuthority)
+                return;
+            animator.SetFloat("Speed", 0f);
+        }
+
         [Client]
         private void FixedUpdate()
         {

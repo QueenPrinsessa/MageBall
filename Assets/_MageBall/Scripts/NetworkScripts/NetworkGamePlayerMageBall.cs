@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MageBall
 {
@@ -33,12 +34,7 @@ namespace MageBall
         public string DisplayName => displayName ?? DefaultPlayerName;
 
         public bool IsHost { get; private set; }
-
-        [Command]
-        private void CmdSetDisplayName(string displayName)
-        {
-            this.displayName = displayName;
-        }
+        public bool IsFrozen { get; private set; }
 
         public override void OnStartClient()
         {
@@ -96,9 +92,47 @@ namespace MageBall
             if (playerGameObject == null)
                 yield break;
 
+            IsFrozen = true;
+
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
+
+            IsFrozen = false;
+
+            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            if (pauseMenu != null && pauseMenu.IsOpen)
+                yield break;
+
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
             playerGameObject.GetComponent<Spellcasting>().enabled = true;
+        }
+
+        public void Disconnect()
+        {
+            if (IsHost)
+            {
+                for (int i = NetworkManager.NetworkGamePlayers.Count; i-- > 0;)
+                {
+                    if (NetworkManager.NetworkGamePlayers[i] != this)
+                        TargetDisconnect(NetworkManager.NetworkGamePlayers[i].connectionToClient);
+                }
+                StartCoroutine(StopHost());
+                return;
+            }
+
+            NetworkManager.StopClient();
+        }
+
+        [TargetRpc]
+        public void TargetDisconnect(NetworkConnection connection)
+        {
+            NetworkManager.StopClient();
+        }
+
+        private IEnumerator StopHost()
+        {
+            yield return new WaitUntil(() => NetworkManager.NetworkGamePlayers.Count == 1);
+
+            NetworkManager.StopHost();
         }
     }
 }
