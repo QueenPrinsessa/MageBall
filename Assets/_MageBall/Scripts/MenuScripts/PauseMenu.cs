@@ -16,19 +16,7 @@ namespace MageBall
 
         public event Action PauseMenuOpened;
         public event Action PauseMenuClosed;
-
-        private NetworkManagerMageBall networkManager;
-
-        private NetworkManagerMageBall NetworkManager
-        {
-            get
-            {
-                if (networkManager != null)
-                    return networkManager;
-
-                return networkManager = Mirror.NetworkManager.singleton as NetworkManagerMageBall;
-            }
-        }
+        public NetworkGamePlayerMageBall NetworkGamePlayer { get; set; }
 
         public bool IsOpen => pauseCanvas.activeInHierarchy;
 
@@ -48,7 +36,7 @@ namespace MageBall
 
         private void Update()
         {
-            if (pauseCanvas.activeInHierarchy)
+            if (pauseCanvas.activeInHierarchy && !optionsMenu.IsOpen) 
             {
                 if (Input.GetButtonDown("Cancel"))
                     CloseMenu();
@@ -92,7 +80,13 @@ namespace MageBall
 
         public void LeaveGame()
         {
-            NetworkManager.StopHost();
+            if (NetworkGamePlayer == null)
+            {
+                Debug.LogError("NetworkGamePlayer instance hasn't been set in Pause Menu script. Make sure it is set when spawning menu!!");
+                return;
+            }
+
+            NetworkGamePlayer.Disconnect();
         }
 
     }

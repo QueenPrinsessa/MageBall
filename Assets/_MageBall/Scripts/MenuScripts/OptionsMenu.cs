@@ -39,6 +39,8 @@ public class OptionsMenu : MonoBehaviour
     public event Action OptionsMenuClosed;
     public static event Action ControlSettingsChanged;
 
+    public bool IsOpen => optionsCanvas.activeInHierarchy;
+
     private void Start()
     {
         LoadGraphicsSettings();

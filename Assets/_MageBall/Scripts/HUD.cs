@@ -69,6 +69,9 @@ namespace MageBall
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
 
+            if(pauseMenu != null)
+                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
+
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
             pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
         }
@@ -113,8 +116,11 @@ namespace MageBall
         [ClientCallback]
         private void OnDestroy()
         {
-            pauseMenu.PauseMenuOpened -= OnPauseMenuOpened;
-            pauseMenu.PauseMenuClosed -= OnPauseMenuClosed;
+            if (hasAuthority)
+            {
+                pauseMenu.PauseMenuOpened -= OnPauseMenuOpened;
+                pauseMenu.PauseMenuClosed -= OnPauseMenuClosed;
+            }
 
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();

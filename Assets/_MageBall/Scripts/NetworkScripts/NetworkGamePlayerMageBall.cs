@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MageBall
 {
@@ -34,12 +35,6 @@ namespace MageBall
 
         public bool IsHost { get; private set; }
         public bool IsFrozen { get; private set; }
-
-        [Command]
-        private void CmdSetDisplayName(string displayName)
-        {
-            this.displayName = displayName;
-        }
 
         public override void OnStartClient()
         {
@@ -109,6 +104,35 @@ namespace MageBall
 
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
             playerGameObject.GetComponent<Spellcasting>().enabled = true;
+        }
+
+        public void Disconnect()
+        {
+            if (IsHost)
+            {
+                for (int i = NetworkManager.NetworkGamePlayers.Count; i-- > 0;)
+                {
+                    if (NetworkManager.NetworkGamePlayers[i] != this)
+                        TargetDisconnect(NetworkManager.NetworkGamePlayers[i].connectionToClient);
+                }
+                StartCoroutine(StopHost());
+                return;
+            }
+
+            NetworkManager.StopClient();
+        }
+
+        [TargetRpc]
+        public void TargetDisconnect(NetworkConnection connection)
+        {
+            NetworkManager.StopClient();
+        }
+
+        private IEnumerator StopHost()
+        {
+            yield return new WaitUntil(() => NetworkManager.NetworkGamePlayers.Count == 1);
+
+            NetworkManager.StopHost();
         }
     }
 }
