@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using UnityEngine;
 
 namespace MageBall
@@ -8,12 +9,21 @@ namespace MageBall
         [SerializeField] private float manaCost = 30f;
         private Transform cameraPosition;
         private Transform aimPoint;
+        private Animator animator;
 
         [SyncVar] protected Vector3 aimPosition;
         [SyncVar] protected Vector3 aimForward;
         [SyncVar] protected Quaternion aimRotation;
 
         public float ManaCost => manaCost;
+
+        public override void OnStartAuthority()
+        {
+            animator = GetComponent<Animator>();
+
+            if (animator == null)
+                Debug.LogError("Spell script can't find the animator. Is the script attached to the player gameobject?");
+        }
 
         [Client]
         private void Update()
@@ -49,6 +59,12 @@ namespace MageBall
 
         [Command]
         public virtual void CmdCastSpell() { }
+
+        [TargetRpc]
+        protected void TargetTriggerAttackAnimation(string attackTrigger)
+        {
+            animator.SetTrigger(attackTrigger);
+        }
 
         [Server]
         protected IEnumerator DestroyVFX(GameObject vfx, float seconds)

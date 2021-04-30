@@ -13,14 +13,15 @@ namespace MageBall
         [SerializeField] private Spell offhandSpell;
         [SerializeField] private Spell thirdSpell;
         [SerializeField] private Passive increasedMana;
-        private Animator animator;
         private float maxMana = 100f;
         private float manaAmount;
         private float rechargeRate = 20f;
 
+        [SyncVar]
+        private bool canCastSpells = true;
+
         public override void OnStartAuthority()
         {
-            animator = GetComponent<Animator>();
             maxMana *= increasedMana.modifier;
             manaAmount = maxMana;
         }
@@ -34,24 +35,21 @@ namespace MageBall
             manaAmount += rechargeRate * Time.deltaTime;
             manaAmount = Mathf.Clamp(manaAmount, 0f, maxMana);
 
+            if (!canCastSpells)
+                return;
+
             if (Input.GetButtonDown("Fire1") && UseMana(mainSpell.ManaCost))
-            {
                 mainSpell.CmdCastSpell();
-                animator.SetTrigger("Attack1");
-            }
-
-            if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
-            {
+            else if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
                 offhandSpell.CmdCastSpell();
-                animator.SetTrigger("Attack2");
-            }
-
-            if (Input.GetButtonDown("Fire3") && UseMana(thirdSpell.ManaCost))
-            {
+            else if (Input.GetButtonDown("Fire3") && UseMana(thirdSpell.ManaCost))
                 thirdSpell.CmdCastSpell();
-                animator.SetTrigger("Attack2");
-            }
+        }
 
+        [Command]
+        public void CmdSetCanCastSpells(bool canCastSpells)
+        {
+            this.canCastSpells = canCastSpells;
         }
 
         private bool UseMana(float amount)

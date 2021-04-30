@@ -15,6 +15,8 @@ namespace MageBall
         [Command]
         public override void CmdCastSpell()
         {
+            TargetTriggerAttackAnimation("Attack2");
+
             if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
             {
                 if (hit.rigidbody != null)
