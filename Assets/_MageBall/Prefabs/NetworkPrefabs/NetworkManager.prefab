@@ -69,6 +69,9 @@ MonoBehaviour:
   - {fileID: 3939426093137187278, guid: 4ff97b2c20f18a9478bfd420622b5bbe, type: 3}
   - {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4, type: 3}
   - {fileID: 6179090357016361475, guid: 545ba59ee57f4c14bbd584af39f018d2, type: 3}
+  - {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112, type: 3}
+  - {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f, type: 3}
+  - {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35, type: 3}
   minimumNumberOfPlayers: 2
   menuScene: Assets/_MageBall/Scenes/MainMenu.unity
   networkRoomPlayerPrefab: {fileID: 4365084273300691981, guid: f71868b9ba8155d469df12889c4a8d77,
