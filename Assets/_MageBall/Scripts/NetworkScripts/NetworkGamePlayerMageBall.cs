@@ -98,7 +98,10 @@ namespace MageBall
 
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
-            playerGameObject.GetComponent<Spellcasting>().enabled = true;
+            Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
+            spellcasting.ResetMana();
+            spellcasting.enabled = true;
+            
         }
     }
 }

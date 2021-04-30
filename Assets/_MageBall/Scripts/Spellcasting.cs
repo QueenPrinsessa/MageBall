@@ -31,6 +31,7 @@ namespace MageBall
                 return;
 
             manaAmount += rechargeRate * Time.deltaTime;
+            manaAmount = Mathf.Clamp(manaAmount, 0f, maxMana);
 
             if (Input.GetButtonDown("Fire1") && UseMana(mainSpell.ManaCost))
             {
@@ -64,6 +65,11 @@ namespace MageBall
         public float GetManaNormalized()
         {
             return manaAmount / maxMana;
+        }
+
+        public void ResetMana()
+        {
+            manaAmount = maxMana;
         }
 
         private IEnumerator Attack1()
