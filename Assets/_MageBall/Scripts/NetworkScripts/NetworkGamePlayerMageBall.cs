@@ -74,7 +74,18 @@ namespace MageBall
         }
 
         [TargetRpc]
-        public void TargetResetPlayer()
+        public void TargetResetPlayerOwner()
+        {
+            ResetPlayer();
+        }
+
+        [TargetRpc]
+        public void TargetResetPlayer(NetworkConnection connection)
+        {
+            ResetPlayer();
+        }
+
+        private void ResetPlayer()
         {
             if (playerGameObject == null)
                 return;

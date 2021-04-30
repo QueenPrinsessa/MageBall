@@ -13,6 +13,7 @@ namespace MageBall
         [SerializeField] private TMP_Text timeText;
         [SerializeField] private TMP_Text blueTeamScoreText;
         [SerializeField] private TMP_Text redTeamScoreText;
+        [SerializeField] private TMP_Text countdownText;
         [SerializeField] private GameObject goalScoredUI;
         [SerializeField] private GameObject matchEndUI;
         [SerializeField] private RawImage barRawImage;
@@ -38,6 +39,39 @@ namespace MageBall
             }
         }
 
+        private void Update()
+        {
+            if (!hasAuthority)
+                return;
+
+            if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
+                StartCoroutine(CountdownUntilUnfreeze());
+        }
+
+        private bool isCountingDown = false;
+
+        private IEnumerator CountdownUntilUnfreeze()
+        {
+            float countdownLength = networkManager.WaitBeforeControlsEnableInSeconds;
+            isCountingDown = true;
+            int seconds = Mathf.RoundToInt(countdownLength);
+
+            countdownText.gameObject.SetActive(true);
+
+            while (networkGamePlayerMageBall.IsFrozen)
+            {
+                countdownText.text = seconds.ToString();
+                yield return new WaitForSeconds(1);
+                seconds--;
+            }
+            countdownText.text = "GO";
+
+            yield return new WaitForSeconds(1);
+
+            countdownText.gameObject.SetActive(false);
+            isCountingDown = false;
+        }
+
         public override void OnStartAuthority()
         { 
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
@@ -46,20 +80,13 @@ namespace MageBall
             updateManaBarCoroutine = StartCoroutine(UpdateManaBar());
             barMaskWidth = barRawImage.rectTransform.rect.width;
 
-            if (barRawImage == null)
-                Debug.LogError("could not find raw image");
-            
-            if (barMask == null)
-                Debug.LogError("could not find mask");
-            
-
             if (scoreHandler != null)
                 scoreHandler.scoreChanged += OnScoreChanged;
 
             if (matchTimer != null)
             {
-                matchTimer.timeChanged += OnTimeChanged;
-                matchTimer.matchEnd += OnMatchEnd;
+                matchTimer.TimeChanged += OnTimeChanged;
+                matchTimer.MatchEnd += OnMatchEnd;
             }
 
             if (scoreHandler == null)
@@ -147,8 +174,8 @@ namespace MageBall
 
             if (matchTimer != null)
             {
-                matchTimer.timeChanged -= OnTimeChanged;
-                matchTimer.matchEnd -= OnMatchEnd;
+                matchTimer.TimeChanged -= OnTimeChanged;
+                matchTimer.MatchEnd -= OnMatchEnd;
             }
 
             if (scoreHandler == null)
@@ -163,7 +190,8 @@ namespace MageBall
                 return;
             }
 
-            StopCoroutine(updateManaBarCoroutine);
+            if(updateManaBarCoroutine != null)
+                StopCoroutine(updateManaBarCoroutine);
         }
 
         private void OnMatchEnd()

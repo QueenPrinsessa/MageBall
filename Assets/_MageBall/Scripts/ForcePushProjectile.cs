@@ -14,7 +14,7 @@ namespace MageBall
         [SerializeField] private float vfxDuration = 3f;
         [SerializeField] private GameObject forcePushHitVFX;
 
-        [Server]
+        [ServerCallback]
         void Update()
         {
             transform.Translate(transform.forward * flightSpeed * Time.deltaTime, Space.World);

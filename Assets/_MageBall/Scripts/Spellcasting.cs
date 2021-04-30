@@ -26,7 +26,7 @@ namespace MageBall
             manaAmount = maxMana;
         }
 
-        [Client]
+        [ClientCallback]
         void Update()
         {
             if (!hasAuthority)

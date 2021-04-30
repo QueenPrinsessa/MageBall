@@ -25,7 +25,7 @@ namespace MageBall
                 Debug.LogError("Spell script can't find the animator. Is the script attached to the player gameobject?");
         }
 
-        [Client]
+        [ClientCallback]
         private void Update()
         {
             if (!hasAuthority)
