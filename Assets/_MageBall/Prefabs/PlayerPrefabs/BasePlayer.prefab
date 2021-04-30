@@ -157,6 +157,9 @@ MonoBehaviour:
   redTeamScoreText: {fileID: 7644316091271414813}
   goalScoredUI: {fileID: 7290513291582222553}
   matchEndUI: {fileID: 7747601595495523525}
+  barRawImage: {fileID: 4411092891541610083}
+  barMask: {fileID: 5508684950169733874}
+  spellcasting: {fileID: 118924582342655499}
   pauseMenuPrefab: {fileID: 4190847135920946312, guid: c0f0875e2be995b4fbb1ee07607c8bc8,
     type: 3}
 --- !u!114 &1425847055805290944
@@ -205,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
+  manaCost: 30
   modifier: 15
   hitRadius: 0.2
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
@@ -224,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
+  manaCost: 30
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
 --- !u!114 &2230629447617049366
@@ -262,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
+  manaCost: 30
   hitRadius: 0.2
   forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
     type: 3}
@@ -590,6 +596,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5508684950169733874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 669550443844089653, guid: 57ef7327020bea0438fed648453fbf3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4987876579337076167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4411092891541610083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8651176080934626212, guid: 57ef7327020bea0438fed648453fbf3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4987876579337076167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7290513291582222553 stripped

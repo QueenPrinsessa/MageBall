@@ -103,7 +103,10 @@ namespace MageBall
                 yield break;
 
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
-            playerGameObject.GetComponent<Spellcasting>().enabled = true;
+            Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
+            spellcasting.ResetMana();
+            spellcasting.enabled = true;
+            
         }
 
         public void Disconnect()
