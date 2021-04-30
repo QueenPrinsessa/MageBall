@@ -80,7 +80,9 @@ namespace MageBall
                 return;
 
             playerGameObject.GetComponent<PlayerMovement>().enabled = false;
-            playerGameObject.GetComponent<Spellcasting>().enabled = false;
+            Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
+            spellcasting.ResetMana();
+            spellcasting.CmdSetCanCastSpells(false);
             playerGameObject.transform.position = spawnPosition;
             playerGameObject.transform.rotation = spawnRotation;
             StartCoroutine(EnablePlayerControls());
@@ -104,9 +106,7 @@ namespace MageBall
 
             playerGameObject.GetComponent<PlayerMovement>().enabled = true;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
-            spellcasting.ResetMana();
-            spellcasting.enabled = true;
-            
+            spellcasting.CmdSetCanCastSpells(true);
         }
 
         public void Disconnect()

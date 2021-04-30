@@ -195,6 +195,7 @@ MonoBehaviour:
   mainSpell: {fileID: 7575334805803104451}
   offhandSpell: {fileID: 8269165977460520832}
   thirdSpell: {fileID: 4445340136976529315}
+  increasedMana: {fileID: 11400000, guid: a84f04530396c9d4f9f1447410c5f8ec, type: 2}
 --- !u!114 &7575334805803104451
 MonoBehaviour:
   m_ObjectHideFlags: 0
