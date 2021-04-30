@@ -67,7 +67,6 @@ namespace MageBall
             controller.Move(moveDirection);
 
             bool isGrounded = IsGrounded();
-            Debug.Log(isGrounded);
 
             if (isGrounded)
             {
