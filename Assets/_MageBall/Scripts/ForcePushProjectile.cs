@@ -20,7 +20,7 @@ namespace MageBall
             transform.Translate(transform.forward * flightSpeed * Time.deltaTime, Space.World);
         }
 
-        [Server]
+        [ServerCallback]
         private void OnCollisionEnter(Collision collision)
         {
             Vector3 explosionPoint = transform.position;

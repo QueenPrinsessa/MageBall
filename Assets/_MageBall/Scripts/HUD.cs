@@ -108,7 +108,7 @@ namespace MageBall
                 thirdPersonCamera.enabled = false;
 
             if (spellcasting != null)
-                spellcasting.enabled = false;
+                spellcasting.CmdSetCanCastSpells(false);
         }
 
         private void OnPauseMenuClosed()
@@ -126,7 +126,7 @@ namespace MageBall
                 thirdPersonCamera.enabled = true;
 
             if (spellcasting != null && !networkGamePlayerMageBall.IsFrozen)
-                spellcasting.enabled = true;
+                spellcasting.CmdSetCanCastSpells(true);
 
         }
 
