@@ -12,6 +12,7 @@ namespace MageBall
         [SerializeField] private Spell mainSpell;
         [SerializeField] private Spell offhandSpell;
         [SerializeField] private Spell thirdSpell;
+        [SerializeField] private Passive increasedMana;
         private Animator animator;
         private float maxMana = 100f;
         private float manaAmount;
@@ -20,8 +21,8 @@ namespace MageBall
         public override void OnStartAuthority()
         {
             animator = GetComponent<Animator>();
+            maxMana *= increasedMana.modifier;
             manaAmount = maxMana;
-
         }
 
         [Client]
