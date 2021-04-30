@@ -1,18 +1,19 @@
 using Mirror;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MageBall
 {
     public abstract class Spell : NetworkBehaviour
     {
+        [SerializeField] private float manaCost = 30f;
         private Transform cameraPosition;
         private Transform aimPoint;
 
         [SyncVar] protected Vector3 aimPosition;
         [SyncVar] protected Vector3 aimForward;
         [SyncVar] protected Quaternion aimRotation;
+
+        public float ManaCost => manaCost;
 
         [Client]
         private void Update()
