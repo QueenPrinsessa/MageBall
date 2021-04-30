@@ -37,19 +37,19 @@ namespace MageBall
             if (Input.GetButtonDown("Fire1") && UseMana(mainSpell.ManaCost))
             {
                 mainSpell.CmdCastSpell();
-                StartCoroutine(Attack1());
+                animator.SetTrigger("Attack1");
             }
 
             if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
             {
                 offhandSpell.CmdCastSpell();
-                StartCoroutine(Attack2());
+                animator.SetTrigger("Attack2");
             }
 
             if (Input.GetButtonDown("Fire3") && UseMana(thirdSpell.ManaCost))
             {
                 thirdSpell.CmdCastSpell();
-                StartCoroutine(Attack2());
+                animator.SetTrigger("Attack2");
             }
 
         }
@@ -73,22 +73,5 @@ namespace MageBall
             manaAmount = maxMana;
         }
 
-        private IEnumerator Attack1()
-        {
-            animator.SetBool("Attack1", true);
-
-            yield return new WaitForSeconds(1);
-            
-            animator.SetBool("Attack1", false);
-        }
-
-        private IEnumerator Attack2()
-        {
-            animator.SetBool("Attack2", true);
-
-            yield return new WaitForSeconds(1);
-
-            animator.SetBool("Attack2", false);
-        }
     }
 }
