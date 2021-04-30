@@ -37,6 +37,9 @@ public class OptionsMenu : MonoBehaviour
 
     public event Action OptionsMenuOpened;
     public event Action OptionsMenuClosed;
+    public static event Action ControlSettingsChanged;
+
+    public bool IsOpen => optionsCanvas.activeInHierarchy;
 
     private void Start()
     {
@@ -91,6 +94,9 @@ public class OptionsMenu : MonoBehaviour
 
     private void Update()
     {
+        if (!optionsCanvas.activeInHierarchy)
+            return;
+
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Submit"))
             CloseMenu();
     }
@@ -128,16 +134,19 @@ public class OptionsMenu : MonoBehaviour
     public void SetInvertMouseYAxis(bool invert)
     {
         PlayerPrefs.SetInt(InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(invert));
+        ControlSettingsChanged?.Invoke();
     }
 
     public void SetInvertMouseXAxis(bool invert)
     {
         PlayerPrefs.SetInt(InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(invert));
+        ControlSettingsChanged?.Invoke();
     }
 
     public void SetMouseSensitivity(float mouseSensitivity)
     {
         PlayerPrefs.SetFloat(MouseSensitivityPlayerPrefsKey, mouseSensitivity);
+        ControlSettingsChanged?.Invoke();
     }
 
     public void SetMasterVolume(float volume)

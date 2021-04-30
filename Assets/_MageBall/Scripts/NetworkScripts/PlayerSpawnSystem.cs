@@ -49,7 +49,6 @@ namespace MageBall
             NetworkManagerMageBall.serverReadied += OnServerReadied;
         }
 
-        [ServerCallback]
         private void OnDestroy()
         {
             NetworkManagerMageBall.serverReadied -= OnServerReadied;

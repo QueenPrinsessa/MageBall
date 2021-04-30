@@ -53,6 +53,8 @@ namespace MageBall
         {
             LoadCameraControlSettings();
 
+            OptionsMenu.ControlSettingsChanged += OnControlSettingsChanged;
+
             GameObject thirdPersonCamera = Instantiate(thirdPersonCameraPrefab);
 
             if (thirdPersonVirtualCamera == null)
@@ -70,6 +72,18 @@ namespace MageBall
             Cursor.lockState = CursorLockMode.Locked; 
         }
 
+        private void OnDestroy()
+        {
+            OptionsMenu.ControlSettingsChanged -= OnControlSettingsChanged;
+        }
+
+        [Client]
+        private void OnControlSettingsChanged()
+        {
+            LoadCameraControlSettings();
+        }
+
+        [Client]
         private void LoadCameraControlSettings()
         {
             mouseSensitivity = PlayerPrefs.GetFloat(OptionsMenu.MouseSensitivityPlayerPrefsKey, 1f);

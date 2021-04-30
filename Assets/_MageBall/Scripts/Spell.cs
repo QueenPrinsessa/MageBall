@@ -50,5 +50,14 @@ namespace MageBall
         [Command]
         public virtual void CmdCastSpell() { }
 
+        [Server]
+        protected IEnumerator DestroyVFX(GameObject vfx, float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+
+            if (vfx != null)
+                NetworkServer.Destroy(vfx);
+        }
+
     }
 }

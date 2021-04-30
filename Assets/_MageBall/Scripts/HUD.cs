@@ -18,9 +18,12 @@ namespace MageBall
         [SerializeField] private RawImage barRawImage;
         [SerializeField] private Mask barMask;
         [SerializeField] private Spellcasting spellcasting;
-
+        [SerializeField] private GameObject pauseMenuPrefab;
+        
         private float barMaskWidth;
         private Coroutine updateManaBarCoroutine;
+        private PauseMenu pauseMenu;
+        private NetworkGamePlayerMageBall networkGamePlayerMageBall;
 
         private NetworkManagerMageBall networkManager;
 
@@ -39,7 +42,6 @@ namespace MageBall
         { 
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
-
 
             updateManaBarCoroutine = StartCoroutine(UpdateManaBar());
             barMaskWidth = barRawImage.rectTransform.rect.width;
@@ -70,12 +72,73 @@ namespace MageBall
             {
                 Debug.LogError("OnStartAuthority, matchTimer not found");
                 return;
-            }   
+            }
+
+            foreach (NetworkGamePlayerMageBall networkGamePlayer in NetworkManager.NetworkGamePlayers)
+            {
+                if (networkGamePlayer.netIdentity.connectionToClient == netIdentity.connectionToClient)
+                {
+                    networkGamePlayerMageBall = networkGamePlayer;
+                    break;
+                }
+            }
+
+            GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
+            pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
+
+            if(pauseMenu != null)
+                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
+
+            pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
+            pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
+        }
+
+        private void OnPauseMenuOpened()
+        {
+            Cursor.lockState = CursorLockMode.None;
+
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
+            Spellcasting spellcasting = GetComponent<Spellcasting>();
+
+            if (playerMovement != null) 
+                playerMovement.enabled = false;
+
+            if (thirdPersonCamera != null) 
+                thirdPersonCamera.enabled = false;
+
+            if (spellcasting != null)
+                spellcasting.enabled = false;
+        }
+
+        private void OnPauseMenuClosed()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
+            Spellcasting spellcasting = GetComponent<Spellcasting>();
+
+            if (playerMovement != null && !networkGamePlayerMageBall.IsFrozen)
+                playerMovement.enabled = true;
+
+            if (thirdPersonCamera != null)
+                thirdPersonCamera.enabled = true;
+
+            if (spellcasting != null && !networkGamePlayerMageBall.IsFrozen)
+                spellcasting.enabled = true;
+
         }
 
         [ClientCallback]
         private void OnDestroy()
         {
+            if (hasAuthority)
+            {
+                pauseMenu.PauseMenuOpened -= OnPauseMenuOpened;
+                pauseMenu.PauseMenuClosed -= OnPauseMenuClosed;
+            }
+
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
