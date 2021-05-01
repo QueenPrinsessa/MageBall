@@ -26,7 +26,12 @@ namespace MageBall
                         hit.rigidbody.useGravity = false;
                         StartCoroutine(EnableGravity());
                         GameObject vfx = Instantiate(forceFlyHitVFX, hit.point, Quaternion.LookRotation(hit.normal));
-                        vfx.AddComponent<FollowPosition>().FollowTransform = hit.transform;
+                        FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
+                        if (followPosition != null)
+                            followPosition.FollowTransform = hit.transform;
+                        else
+                            Debug.LogError("No FollowPosition script attached to Force Fly vfx");
+
                         NetworkServer.Spawn(vfx);
                         StartCoroutine(DestroyVFX(vfx, durationInSeconds));
                     }

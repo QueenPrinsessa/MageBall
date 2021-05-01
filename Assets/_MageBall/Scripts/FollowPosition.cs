@@ -6,9 +6,11 @@ using UnityEngine;
 public class FollowPosition : NetworkBehaviour
 {
 
-    public Transform FollowTransform { get; set; }
+    [SyncVar]
+    private Transform followTransform;
+
+    public Transform FollowTransform { get => followTransform; set => followTransform = value; }
     
-    [Server]
     void Update()
     {
         if (FollowTransform == null)

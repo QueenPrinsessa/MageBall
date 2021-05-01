@@ -163,7 +163,8 @@ namespace MageBall
                 return;
             }
 
-            StopCoroutine(updateManaBarCoroutine);
+            if(updateManaBarCoroutine != null)
+                StopCoroutine(updateManaBarCoroutine);
         }
 
         private void OnMatchEnd()

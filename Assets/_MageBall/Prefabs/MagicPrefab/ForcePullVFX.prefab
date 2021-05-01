@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4226665468606883825}
   - component: {fileID: -6301643827869631}
   - component: {fileID: -7291558485061589425}
+  - component: {fileID: 868937160794623110}
   m_Layer: 8
   m_Name: ForcePullVFX
   m_TagString: Spell
@@ -152,3 +153,17 @@ MonoBehaviour:
   compressRotation: 0
   interpolateScale: 0
   syncScale: 0
+--- !u!114 &868937160794623110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459023908496999093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea6677bef75c704c8411931c09c04b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
