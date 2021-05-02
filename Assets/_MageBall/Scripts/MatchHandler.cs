@@ -43,7 +43,7 @@ namespace MageBall
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
             if (matchTimer != null)
-                matchTimer.matchEnd += OnMatchEnd;
+                matchTimer.MatchEnd += OnMatchEnd;
         }
 
         [ServerCallback]
@@ -55,7 +55,7 @@ namespace MageBall
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
             if (matchTimer != null)
-                matchTimer.matchEnd -= OnMatchEnd;
+                matchTimer.MatchEnd -= OnMatchEnd;
         }
 
         [Server]
@@ -102,7 +102,7 @@ namespace MageBall
             foreach (NetworkGamePlayerMageBall networkGamePlayer in NetworkManager.NetworkGamePlayers)
             {
                 Debug.Log($"Resetting player {networkGamePlayer.DisplayName}");
-                networkGamePlayer.TargetResetPlayer();
+                networkGamePlayer.TargetResetPlayerOwner();
             }
         }
 

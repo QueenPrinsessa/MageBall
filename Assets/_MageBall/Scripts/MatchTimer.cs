@@ -1,14 +1,12 @@
 using Mirror;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MageBall
 {
     public class MatchTimer : NetworkBehaviour
     {
-        //This should probably be obtained from somewhere else later.
         private Coroutine timerRoutine;
         private bool hasMatchEnded = false;
 
@@ -18,20 +16,20 @@ namespace MageBall
         /// <summary>
         /// Minutes, seconds
         /// </summary>
-        public event Action<int, int> timeChanged;
-        public event Action matchEnd;
+        public event Action<int, int> TimeChanged;
+        public event Action MatchEnd;
 
         public override void OnStartServer()
         {
             NetworkManagerMageBall networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
             minutes = networkManager.MatchLength;
-            timeChanged?.Invoke(minutes, seconds);
+            TimeChanged?.Invoke(minutes, seconds);
             timerRoutine = StartCoroutine(Timer());
         }
 
         private void OnTimeChanged(int oldValue, int newValue)
         {
-            timeChanged?.Invoke(minutes, seconds);
+            TimeChanged?.Invoke(minutes, seconds);
         }
 
         private IEnumerator Timer()
@@ -57,7 +55,7 @@ namespace MageBall
         {
             hasMatchEnded = true;
             StopCoroutine(timerRoutine);
-            matchEnd?.Invoke();
+            MatchEnd?.Invoke();
         }
     }
 }

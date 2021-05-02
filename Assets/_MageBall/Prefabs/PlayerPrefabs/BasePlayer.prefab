@@ -156,6 +156,7 @@ MonoBehaviour:
   timeText: {fileID: 527303208340175645}
   blueTeamScoreText: {fileID: 6091325555084865001}
   redTeamScoreText: {fileID: 7644316091271414813}
+  countdownText: {fileID: 9064577696730816055}
   goalScoredUI: {fileID: 7290513291582222553}
   matchEndUI: {fileID: 7747601595495523525}
   barRawImage: {fileID: 4411092891541610083}
@@ -190,8 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6c7f2cb7c28bc4eb25b5ae0216d32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  syncMode: 1
+  syncInterval: 0
   mainSpell: {fileID: 7575334805803104451}
   offhandSpell: {fileID: 8269165977460520832}
   thirdSpell: {fileID: 4445340136976529315}
@@ -648,3 +649,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4987876579337076167}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9064577696730816055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4103806419050030064, guid: 57ef7327020bea0438fed648453fbf3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4987876579337076167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

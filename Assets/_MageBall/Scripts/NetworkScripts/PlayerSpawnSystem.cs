@@ -46,12 +46,12 @@ namespace MageBall
 
         public override void OnStartServer()
         {
-            NetworkManagerMageBall.serverReadied += OnServerReadied;
+            NetworkManagerMageBall.ServerReadied += OnServerReadied;
         }
 
         private void OnDestroy()
         {
-            NetworkManagerMageBall.serverReadied -= OnServerReadied;
+            NetworkManagerMageBall.ServerReadied -= OnServerReadied;
         }
 
         [Server]
@@ -76,6 +76,11 @@ namespace MageBall
             NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
             networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
             networkGamePlayer.SetTeam(currentTeam);
+            networkGamePlayer.TargetResetPlayerOwner();
+
+            HUD hud = playerInstance.GetComponent<HUD>();
+            if (hud != null)
+                hud.SetNetworkGamePlayer(networkGamePlayer);
 
             if (currentTeam == Team.Blue)
             {
