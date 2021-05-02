@@ -14,6 +14,7 @@ namespace MageBall
 
         [SyncVar] private string displayName = "Loading...";
         [SyncVar] private Team team;
+        private bool isFrozen;
         private NetworkManagerMageBall networkManager;
 
         private NetworkManagerMageBall NetworkManager
@@ -34,7 +35,7 @@ namespace MageBall
         public string DisplayName => displayName ?? DefaultPlayerName;
 
         public bool IsHost { get; private set; }
-        public bool IsFrozen { get; private set; }
+        public bool IsFrozen => isFrozen;
 
         public override void OnStartClient()
         {
@@ -76,19 +77,19 @@ namespace MageBall
         [TargetRpc]
         public void TargetResetPlayerOwner()
         {
-            ResetPlayer();
+            StartCoroutine(ResetPlayer());
         }
 
         [TargetRpc]
         public void TargetResetPlayer(NetworkConnection connection)
         {
-            ResetPlayer();
+            StartCoroutine(ResetPlayer());
         }
 
-        private void ResetPlayer()
+        private IEnumerator ResetPlayer()
         {
             if (playerGameObject == null)
-                return;
+                yield return new WaitUntil(() => playerGameObject != null);
 
             playerGameObject.GetComponent<PlayerMovement>().enabled = false;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
@@ -99,17 +100,11 @@ namespace MageBall
             StartCoroutine(EnablePlayerControls());
         }
 
-        [ClientCallback]
         private IEnumerator EnablePlayerControls()
         {
-            if (playerGameObject == null)
-                yield break;
-
-            IsFrozen = true;
-
+            isFrozen = true;
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
-
-            IsFrozen = false;
+            isFrozen = false;
 
             PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
             if (pauseMenu != null && pauseMenu.IsOpen)

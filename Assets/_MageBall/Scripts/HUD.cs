@@ -24,7 +24,8 @@ namespace MageBall
         private float barMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
-        private NetworkGamePlayerMageBall networkGamePlayerMageBall;
+        [SyncVar] private NetworkGamePlayerMageBall networkGamePlayerMageBall;
+        private bool isCountingDown = false;
 
         private NetworkManagerMageBall networkManager;
 
@@ -37,39 +38,6 @@ namespace MageBall
 
                 return networkManager = Mirror.NetworkManager.singleton as NetworkManagerMageBall;
             }
-        }
-
-        private void Update()
-        {
-            if (!hasAuthority)
-                return;
-
-            if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
-                StartCoroutine(CountdownUntilUnfreeze());
-        }
-
-        private bool isCountingDown = false;
-
-        private IEnumerator CountdownUntilUnfreeze()
-        {
-            float countdownLength = networkManager.WaitBeforeControlsEnableInSeconds;
-            isCountingDown = true;
-            int seconds = Mathf.RoundToInt(countdownLength);
-
-            countdownText.gameObject.SetActive(true);
-
-            while (networkGamePlayerMageBall.IsFrozen)
-            {
-                countdownText.text = seconds.ToString();
-                yield return new WaitForSeconds(1);
-                seconds--;
-            }
-            countdownText.text = "GO";
-
-            yield return new WaitForSeconds(1);
-
-            countdownText.gameObject.SetActive(false);
-            isCountingDown = false;
         }
 
         public override void OnStartAuthority()
@@ -101,15 +69,6 @@ namespace MageBall
                 return;
             }
 
-            foreach (NetworkGamePlayerMageBall networkGamePlayer in NetworkManager.NetworkGamePlayers)
-            {
-                if (networkGamePlayer.netIdentity.connectionToClient == netIdentity.connectionToClient)
-                {
-                    networkGamePlayerMageBall = networkGamePlayer;
-                    break;
-                }
-            }
-
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
 
@@ -118,6 +77,44 @@ namespace MageBall
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
             pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
+        }
+
+        [ClientCallback]
+        private void Update()
+        {
+            if (!hasAuthority || networkGamePlayerMageBall == null)
+                return;
+
+            if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
+                StartCoroutine(CountdownUntilUnfreeze());
+        }
+
+        [Server]
+        public void SetNetworkGamePlayer(NetworkGamePlayerMageBall networkGamePlayer)
+        {
+            networkGamePlayerMageBall = networkGamePlayer;
+        }
+        
+
+        private IEnumerator CountdownUntilUnfreeze()
+        {
+            float countdownLength = NetworkManager.WaitBeforeControlsEnableInSeconds;
+            isCountingDown = true;
+            int seconds = Mathf.RoundToInt(countdownLength);
+
+            countdownText.gameObject.SetActive(true);
+            while (networkGamePlayerMageBall.IsFrozen)
+            {
+                countdownText.text = seconds.ToString();
+                yield return new WaitForSeconds(1);
+                seconds--;
+            }
+            countdownText.text = "GO";
+
+            yield return new WaitForSeconds(1);
+
+            countdownText.gameObject.SetActive(false);
+            isCountingDown = false;
         }
 
         private void OnPauseMenuOpened()

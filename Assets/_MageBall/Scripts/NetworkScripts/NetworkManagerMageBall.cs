@@ -31,10 +31,10 @@ namespace MageBall
 
         private string arenaPrefix = "Arena_";
 
-        public static event Action clientConnected;
-        public static event Action clientDisconnected;
-        public static event Action stopClient;
-        public static event Action<NetworkConnection> serverReadied;
+        public static event Action ClientConnected;
+        public static event Action ClientDisconnected;
+        public static event Action StopClientEvent; //Named like that to avoid conflict with StopClient() method
+        public static event Action<NetworkConnection> ServerReadied;
 
         public List<NetworkRoomPlayerMageBall> NetworkRoomPlayers { get; } = new List<NetworkRoomPlayerMageBall>();
         public List<NetworkGamePlayerMageBall> NetworkGamePlayers { get; } = new List<NetworkGamePlayerMageBall>();
@@ -51,18 +51,18 @@ namespace MageBall
                 NetworkClient.AddPlayer();
             }
 
-            clientConnected?.Invoke();
+            ClientConnected?.Invoke();
         }
 
         public override void OnClientDisconnect(NetworkConnection conn)
         {
             base.OnClientConnect(conn);
-            clientDisconnected?.Invoke();
+            ClientDisconnected?.Invoke();
         }
 
         public override void OnStopClient()
         {
-            stopClient?.Invoke();
+            StopClientEvent?.Invoke();
         }
 
         public override void OnServerConnect(NetworkConnection conn)
@@ -213,7 +213,7 @@ namespace MageBall
         public override void OnServerReady(NetworkConnection conn)
         {
             base.OnServerReady(conn);
-            serverReadied?.Invoke(conn);
+            ServerReadied?.Invoke(conn);
         }
 
     }
