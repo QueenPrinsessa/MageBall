@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum Winner
+namespace MageBall
 {
-    RedTeam,
-    BlueTeam,
-    Tie
+    public enum Winner
+    {
+        RedTeam,
+        BlueTeam,
+        Tie
+    }
 }

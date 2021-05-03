@@ -39,7 +39,7 @@ namespace MageBall
                 Debug.LogError("There is no Options Menu in the Main Menu!");
 
             menuButtonController = titleScreenPanel.GetComponent<MenuButtonController>();
-            NetworkManagerMageBall.StopClientEvent += OnStopClient;
+            NetworkManagerMageBall.ClientStopped += OnStopClient;
         }
 
         private void OnEnable()
@@ -61,7 +61,7 @@ namespace MageBall
 
         private void OnDestroy()
         {
-            NetworkManagerMageBall.StopClientEvent -= OnStopClient;
+            NetworkManagerMageBall.ClientStopped -= OnStopClient;
         }
         private void OnOptionsMenuOpened()
         {

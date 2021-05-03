@@ -1,7 +1,5 @@
-﻿using Cinemachine;
-using Mirror;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Mirror;
+using System;
 using UnityEngine;
 
 namespace MageBall
@@ -41,6 +39,29 @@ namespace MageBall
             if (!hasAuthority)
                 return;
 
+            HandleMovement();
+
+            bool isGrounded = IsGrounded();
+
+            if (isGrounded)
+            {
+                moveDirection.y = 0;
+                velocity.y = 0;
+                animator.SetBool("IsJumping", false);
+            }
+
+            if (Input.GetButton("Jump") && isGrounded)
+            {
+                velocity.y += Mathf.Sqrt((jumpHeight * jumpPassive.modifier) * -3.0f * gravity);
+                animator.SetBool("IsJumping", true);
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }
+
+        private void HandleMovement()
+        {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
@@ -65,26 +86,7 @@ namespace MageBall
 
             moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
             controller.Move(moveDirection);
-
-            bool isGrounded = IsGrounded();
-
-            if (isGrounded)
-            {
-                moveDirection.y = 0;
-                velocity.y = 0;
-                animator.SetBool("IsJumping", false);
-            }
-
-            if (Input.GetButton("Jump") && isGrounded)
-            {
-                velocity.y += Mathf.Sqrt((jumpHeight * jumpPassive.modifier) * -3.0f * gravity);
-                animator.SetBool("IsJumping", true);
-            }
-
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
         }
-
 
         private bool IsGrounded()
         {

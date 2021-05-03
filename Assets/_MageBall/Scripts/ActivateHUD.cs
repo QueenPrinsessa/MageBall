@@ -1,17 +1,18 @@
 using Mirror;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateHUD : NetworkBehaviour
+namespace MageBall
 {
-
-    [SerializeField] private GameObject HUD;
-
-    public override void OnStartAuthority()
+    public class ActivateHUD : NetworkBehaviour
     {
-        HUD.SetActive(true);
+
+        [SerializeField] private GameObject HUD;
+
+        public override void OnStartAuthority()
+        {
+            HUD.SetActive(true);
+        }
+
+
     }
-
-
 }

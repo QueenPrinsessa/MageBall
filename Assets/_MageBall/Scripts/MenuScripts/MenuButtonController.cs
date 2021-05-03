@@ -7,14 +7,12 @@ namespace MageBall
 {
     public class MenuButtonController : MonoBehaviour
     {
-
+        [SerializeField, Tooltip("Default is a vertical menu")] private bool isHorizontalMenu = false;
         private bool hasKeyBeenPressed;
-        private bool isMenuLocked;
         private int maxIndex;
         private readonly SortedDictionary<int, MenuButton> menuButtons = new SortedDictionary<int, MenuButton>();
         private readonly float menuLockDuration = 0.1f;
-        private float menuLockTimer;
-
+        private Coroutine lockMenuRoutine;
         public int Index { get; set; } = 0;
         public bool Interactable { get; private set; } = true;
 
@@ -41,9 +39,10 @@ namespace MageBall
             if (!Interactable)
                 return;
 
-            menuLockTimer = menuLockDuration;
-            DisableInteraction();
-            isMenuLocked = true;
+            if (lockMenuRoutine != null)
+                StopCoroutine(lockMenuRoutine);
+
+            lockMenuRoutine = StartCoroutine(LockMenu());
         }
 
         private void SetTopButtonAsSelected()
@@ -58,30 +57,31 @@ namespace MageBall
             }
         }
 
+        private IEnumerator LockMenu()
+        {
+            DisableInteraction();
+
+            yield return new WaitForSeconds(menuLockDuration);
+
+            EnableInteraction();
+        }
+
         private void Update()
         {
-            if (menuLockTimer > 0)
-                menuLockTimer -= Time.deltaTime;
-            else if (!Interactable && isMenuLocked)
-            {
-                isMenuLocked = false;
-                EnableInteraction();
-            }
-
             if (!Interactable)
                 return;
 
-            float verticalAxis = Input.GetAxisRaw("Vertical");
+            float axis = isHorizontalMenu ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Vertical");
 
-            if(!IsOnAvailableMenuButton(verticalAxis))
+            if(!MoveToNextAvailableMenuButton(axis))
                 return;
 
-            if (verticalAxis != 0)
+            if (axis != 0)
             {
                 if (hasKeyBeenPressed)
                     return;
 
-                if (verticalAxis < 0)
+                if (axis < 0)
                 {
                     if (Index < maxIndex)
                         Index++;
@@ -103,20 +103,25 @@ namespace MageBall
                 hasKeyBeenPressed = false;
         }
 
-        private bool IsOnAvailableMenuButton(float verticalAxis)
+        /// <summary>
+        /// Makes sure that the current index exists and otherwise selects the next available button
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns>Success</returns>
+        private bool MoveToNextAvailableMenuButton(float axis)
         {
             if (menuButtons.ContainsKey(Index))
             {
-                if (!menuButtons[Index].Selectable && verticalAxis == 0)
+                if (!menuButtons[Index].Selectable && axis == 0)
                     SetTopButtonAsSelected();
 
                 return true;
             }
             else
             {
-                if (Index < maxIndex && verticalAxis < 0)
+                if (Index < maxIndex && axis < 0)
                     Index++;
-                else if (Index < maxIndex && verticalAxis > 0)
+                else if (Index < maxIndex && axis > 0)
                     Index--;
                 else
                     Index = 0;
@@ -145,7 +150,6 @@ namespace MageBall
 
         public void DeactivateButtons()
         {
-            isMenuLocked = false;
             foreach (MenuButton menuButton in menuButtons.Values)
             {
                 menuButton.Selectable = false;
@@ -157,7 +161,6 @@ namespace MageBall
 
         public void ActivateButtons()
         {
-            isMenuLocked = false;
             foreach (MenuButton menuButton in menuButtons.Values)
             {
                 menuButton.Selectable = true;

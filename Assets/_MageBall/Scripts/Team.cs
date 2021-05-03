@@ -1,5 +1,8 @@
-public enum Team
+namespace MageBall
 {
-    Red,
-    Blue
+    public enum Team
+    {
+        Red,
+        Blue
+    }
 }
