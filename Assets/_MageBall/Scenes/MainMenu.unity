@@ -406,6 +406,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2273640541086127165, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
+        type: 3}
+      propertyPath: isHorizontalMenu
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2273640541998223003, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
         type: 3}
       propertyPath: m_RootOrder

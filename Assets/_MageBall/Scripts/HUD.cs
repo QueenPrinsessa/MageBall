@@ -49,7 +49,7 @@ namespace MageBall
             barMaskWidth = barRawImage.rectTransform.rect.width;
 
             if (scoreHandler != null)
-                scoreHandler.scoreChanged += OnScoreChanged;
+                scoreHandler.ScoreChanged += OnScoreChanged;
 
             if (matchTimer != null)
             {
@@ -167,7 +167,7 @@ namespace MageBall
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
             if (scoreHandler != null)
-                scoreHandler.scoreChanged -= OnScoreChanged;
+                scoreHandler.ScoreChanged -= OnScoreChanged;
 
             if (matchTimer != null)
             {

@@ -91,10 +91,17 @@ namespace MageBall
             if (playerGameObject == null)
                 yield return new WaitUntil(() => playerGameObject != null);
 
-            playerGameObject.GetComponent<PlayerMovement>().enabled = false;
+            PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
+            playerMovement.enabled = false;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.ResetMana();
             spellcasting.CmdSetCanCastSpells(false);
+            Animator animator = playerGameObject.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0);
+                animator.SetBool("IsJumping", false);
+            }
             playerGameObject.transform.position = spawnPosition;
             playerGameObject.transform.rotation = spawnRotation;
             StartCoroutine(EnablePlayerControls());
@@ -110,7 +117,8 @@ namespace MageBall
             if (pauseMenu != null && pauseMenu.IsOpen)
                 yield break;
 
-            playerGameObject.GetComponent<PlayerMovement>().enabled = true;
+            PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
+            playerMovement.enabled = true;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.CmdSetCanCastSpells(true);
         }

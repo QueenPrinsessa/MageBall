@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class LayerMasks
+namespace MageBall
 {
-
-    public static readonly LayerMask ballLayer;
-    public static readonly LayerMask playerLayer;
-    public static readonly LayerMask groundLayer;
-    public static readonly LayerMask spellsLayer;
-
-    static LayerMasks()
+    public static class LayerMasks
     {
-        ballLayer = LayerMask.GetMask("Ball");
-        playerLayer = LayerMask.GetMask("Player");
-        groundLayer = LayerMask.GetMask("Ground");
-        spellsLayer = LayerMask.GetMask("Spells");
+
+        public static readonly LayerMask ballLayer;
+        public static readonly LayerMask playerLayer;
+        public static readonly LayerMask groundLayer;
+        public static readonly LayerMask spellsLayer;
+
+        static LayerMasks()
+        {
+            ballLayer = LayerMask.GetMask("Ball");
+            playerLayer = LayerMask.GetMask("Player");
+            groundLayer = LayerMask.GetMask("Ground");
+            spellsLayer = LayerMask.GetMask("Spells");
+        }
     }
 }

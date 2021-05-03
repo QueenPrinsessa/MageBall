@@ -9,7 +9,6 @@ namespace MageBall
 {
     public class NetworkManagerMageBall : NetworkManager
     {
-        [SerializeField] private int minimumNumberOfPlayers = 2;
         [SerializeField, Scene] private string menuScene = string.Empty;
 
         [Header("Room")]
@@ -33,7 +32,7 @@ namespace MageBall
 
         public static event Action ClientConnected;
         public static event Action ClientDisconnected;
-        public static event Action StopClientEvent; //Named like that to avoid conflict with StopClient() method
+        public static event Action ClientStopped;
         public static event Action<NetworkConnection> ServerReadied;
 
         public List<NetworkRoomPlayerMageBall> NetworkRoomPlayers { get; } = new List<NetworkRoomPlayerMageBall>();
@@ -62,7 +61,7 @@ namespace MageBall
 
         public override void OnStopClient()
         {
-            StopClientEvent?.Invoke();
+            ClientStopped?.Invoke();
         }
 
         public override void OnServerConnect(NetworkConnection conn)
@@ -122,9 +121,6 @@ namespace MageBall
 
         private bool IsReadyToStartMatch()
         {
-            //if (numPlayers < minimumNumberOfPlayers)
-            //    return false;
-
             foreach (NetworkRoomPlayerMageBall player in NetworkRoomPlayers)
                 if (!player.IsReady)
                     return false;
@@ -164,17 +160,17 @@ namespace MageBall
         {
             if (SceneManager.GetActiveScene().path == menuScene && newSceneName.StartsWith(arenaPrefix))
             {
-                RoomToGame();
+                RoomPlayerToGamePlayer();
             }
             else if (newSceneName == GetSceneName(Scenes.MainMenu))
             {
-                GameToRoom();
+                GamePlayerToRoomPlayer();
             }
 
             base.ServerChangeScene(newSceneName);
         }
 
-        private void GameToRoom()
+        private void GamePlayerToRoomPlayer()
         {
             for (int i = NetworkGamePlayers.Count; i-- > 0;)
             {
@@ -187,7 +183,7 @@ namespace MageBall
             }
         }
 
-        private void RoomToGame()
+        private void RoomPlayerToGamePlayer()
         {
             for (int i = NetworkRoomPlayers.Count; i-- > 0;)
             {

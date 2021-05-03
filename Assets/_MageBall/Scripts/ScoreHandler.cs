@@ -15,7 +15,7 @@ namespace MageBall
         [SyncVar(hook = nameof(OnBlueTeamScoreUpdated))]
         private int blueTeamScore;
 
-        public event Action<Team, int> scoreChanged;
+        public event Action<Team, int> ScoreChanged;
 
         public int RedTeamScore => redTeamScore;
         public int BlueTeamScore => blueTeamScore;
@@ -43,8 +43,8 @@ namespace MageBall
                 goal.score += OnScore;
         }
 
-        private void OnRedTeamScoreUpdated(int oldScore, int newScore) => scoreChanged?.Invoke(Team.Red, newScore);
-        private void OnBlueTeamScoreUpdated(int oldScore, int newScore) => scoreChanged?.Invoke(Team.Blue, newScore);
+        private void OnRedTeamScoreUpdated(int oldScore, int newScore) => ScoreChanged?.Invoke(Team.Red, newScore);
+        private void OnBlueTeamScoreUpdated(int oldScore, int newScore) => ScoreChanged?.Invoke(Team.Blue, newScore);
 
         [ServerCallback]
         private void OnDestroy()
