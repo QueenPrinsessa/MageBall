@@ -306,6 +306,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432608775682740043, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 432608775994356999, guid: ef9d46e3f58e44c46bb4f319bee66c20,
         type: 3}
       propertyPath: m_RootOrder
@@ -365,6 +370,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lobby_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023475462201117357, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef9d46e3f58e44c46bb4f319bee66c20, type: 3}
