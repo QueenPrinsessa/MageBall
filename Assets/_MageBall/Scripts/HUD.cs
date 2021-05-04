@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
-using UnityEngine.UI;
+using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace MageBall
 {
@@ -16,16 +15,16 @@ namespace MageBall
         [SerializeField] private TMP_Text countdownText;
         [SerializeField] private GameObject goalScoredUI;
         [SerializeField] private GameObject matchEndUI;
-        [SerializeField] private RawImage barRawImage;
-        [SerializeField] private Mask barMask;
+        [SerializeField] private RawImage manaBarRawImage;
+        [SerializeField] private Mask manaBarMask;
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
-        
-        private float barMaskWidth;
+
+        private float manaBarMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
         [SyncVar] private NetworkGamePlayerMageBall networkGamePlayerMageBall;
-        private bool isCountingDown = false;
+        private bool isCountingDownUntilUnfreeze = false;
 
         private NetworkManagerMageBall networkManager;
 
@@ -41,12 +40,12 @@ namespace MageBall
         }
 
         public override void OnStartAuthority()
-        { 
+        {
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
             updateManaBarCoroutine = StartCoroutine(UpdateManaBar());
-            barMaskWidth = barRawImage.rectTransform.rect.width;
+            manaBarMaskWidth = manaBarRawImage.rectTransform.rect.width;
 
             if (scoreHandler != null)
                 scoreHandler.ScoreChanged += OnScoreChanged;
@@ -62,7 +61,7 @@ namespace MageBall
                 Debug.LogError("OnStartAuthority, scoreHandler not found");
                 return;
             }
-                
+
             if (matchTimer == null)
             {
                 Debug.LogError("OnStartAuthority, matchTimer not found");
@@ -72,7 +71,7 @@ namespace MageBall
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
 
-            if(pauseMenu != null)
+            if (pauseMenu != null)
                 pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
@@ -85,7 +84,7 @@ namespace MageBall
             if (!hasAuthority || networkGamePlayerMageBall == null)
                 return;
 
-            if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
+            if (networkGamePlayerMageBall.IsFrozen && !isCountingDownUntilUnfreeze)
                 StartCoroutine(CountdownUntilUnfreeze());
         }
 
@@ -94,12 +93,12 @@ namespace MageBall
         {
             networkGamePlayerMageBall = networkGamePlayer;
         }
-        
+
 
         private IEnumerator CountdownUntilUnfreeze()
         {
             float countdownLength = NetworkManager.WaitBeforeControlsEnableInSeconds;
-            isCountingDown = true;
+            isCountingDownUntilUnfreeze = true;
             int seconds = Mathf.RoundToInt(countdownLength);
 
             countdownText.gameObject.SetActive(true);
@@ -114,7 +113,7 @@ namespace MageBall
             yield return new WaitForSeconds(1);
 
             countdownText.gameObject.SetActive(false);
-            isCountingDown = false;
+            isCountingDownUntilUnfreeze = false;
         }
 
         private void OnPauseMenuOpened()
@@ -125,10 +124,10 @@ namespace MageBall
             ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
             Spellcasting spellcasting = GetComponent<Spellcasting>();
 
-            if (playerMovement != null) 
+            if (playerMovement != null)
                 playerMovement.enabled = false;
 
-            if (thirdPersonCamera != null) 
+            if (thirdPersonCamera != null)
                 thirdPersonCamera.enabled = false;
 
             if (spellcasting != null)
@@ -180,14 +179,14 @@ namespace MageBall
                 Debug.LogError("OnDestroy, scoreHandler not found");
                 return;
             }
-            
+
             if (matchTimer == null)
             {
                 Debug.LogError("OnDestroy, matchTimer not found");
                 return;
             }
 
-            if(updateManaBarCoroutine != null)
+            if (updateManaBarCoroutine != null)
                 StopCoroutine(updateManaBarCoroutine);
         }
 
@@ -198,7 +197,7 @@ namespace MageBall
                 Debug.LogError("OnMatchEnd, matchEndUI not found");
                 return;
             }
-               
+
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
 
             if (scoreHandler == null)
@@ -235,13 +234,13 @@ namespace MageBall
         {
             while (true)
             {
-                Rect uvRect = barRawImage.uvRect;
+                Rect uvRect = manaBarRawImage.uvRect;
                 uvRect.x -= 0.1f * Time.deltaTime;
-                barRawImage.uvRect = uvRect;
+                manaBarRawImage.uvRect = uvRect;
 
-                Vector2 barMaskSize = barMask.rectTransform.sizeDelta;
-                barMaskSize.x = spellcasting.GetManaNormalized() * barMaskWidth;
-                barMask.rectTransform.sizeDelta = barMaskSize;
+                Vector2 barMaskSize = manaBarMask.rectTransform.sizeDelta;
+                barMaskSize.x = spellcasting.ManaNormalized * manaBarMaskWidth;
+                manaBarMask.rectTransform.sizeDelta = barMaskSize;
                 yield return null;
             }
         }
