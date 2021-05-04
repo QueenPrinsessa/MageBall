@@ -20,6 +20,7 @@ namespace MageBall
         [SerializeField] private Mask barMask;
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
+        [SerializeField] private float barMovingSpeed = 0.1f;
         
         private float barMaskWidth;
         private Coroutine updateManaBarCoroutine;
@@ -168,24 +169,18 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.ScoreChanged -= OnScoreChanged;
+            else
+                Debug.LogError("OnDestroy, scoreHandler not found");
 
             if (matchTimer != null)
             {
                 matchTimer.TimeChanged -= OnTimeChanged;
                 matchTimer.MatchEnd -= OnMatchEnd;
             }
-
-            if (scoreHandler == null)
-            {
-                Debug.LogError("OnDestroy, scoreHandler not found");
-                return;
-            }
-            
-            if (matchTimer == null)
-            {
+            else
                 Debug.LogError("OnDestroy, matchTimer not found");
-                return;
-            }
+
+           
 
             if(updateManaBarCoroutine != null)
                 StopCoroutine(updateManaBarCoroutine);
@@ -236,12 +231,12 @@ namespace MageBall
             while (true)
             {
                 Rect uvRect = barRawImage.uvRect;
-                uvRect.x -= 0.1f * Time.deltaTime;
+                uvRect.x -= barMovingSpeed * Time.deltaTime;
                 barRawImage.uvRect = uvRect;
 
-                Vector2 barMaskSize = barMask.rectTransform.sizeDelta;
-                barMaskSize.x = spellcasting.GetManaNormalized() * barMaskWidth;
-                barMask.rectTransform.sizeDelta = barMaskSize;
+                Vector2 manaBarMaskSizeDelta = barMask.rectTransform.sizeDelta;
+                manaBarMaskSizeDelta.x = spellcasting.GetManaNormalized() * barMaskWidth;
+                barMask.rectTransform.sizeDelta = manaBarMaskSizeDelta;
                 yield return null;
             }
         }
@@ -259,14 +254,17 @@ namespace MageBall
             goalScoredUI.SetActive(true);
             TMP_Text goalScoredText = goalScoredUI.GetComponentInChildren<TMP_Text>();
             if (goalScoredText != null)
+            {
                 goalScoredText.text = $"<color=\"{team.ToString().ToLower()}\">{team.ToString().ToUpper()}</color> TEAM SCORES";
-            StartCoroutine(DisableGoalScoredUI());
-
-            if (goalScoredText == null)
+            }
+            else
             {
                 Debug.LogError("OnScoreChanged, goalScoreText not found");
                 return;
             }
+            StartCoroutine(DisableGoalScoredUI());
+
+            
 
             switch (team)
             {
