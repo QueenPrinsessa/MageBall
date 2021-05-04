@@ -20,12 +20,11 @@ namespace MageBall
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
         [SerializeField] private float barMovingSpeed = 0.1f;
-        
+
         private float manaBarMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
-        
-        [SyncVar] private NetworkGamePlayerMageBall networkGamePlayerMageBall;
+        private NetworkGamePlayerMageBall networkGamePlayerMageBall;
         private bool isCountingDownUntilUnfreeze = false;
 
         private NetworkManagerMageBall networkManager;
@@ -51,30 +50,34 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.ScoreChanged += OnScoreChanged;
+            else
+                Debug.LogError("OnStartAuthority, scoreHandler not found");
 
             if (matchTimer != null)
             {
                 matchTimer.TimeChanged += OnTimeChanged;
                 matchTimer.MatchEnd += OnMatchEnd;
             }
+            else
+                Debug.LogError("OnStartAuthority, matchTimer not found");
 
-            if (scoreHandler == null)
+            foreach (NetworkGamePlayerMageBall gamePlayer in NetworkManager.NetworkGamePlayers)
             {
-                Debug.LogError("OnStartAuthority, scoreHandler not found");
-                return;
+                if (gamePlayer.connectionToClient == connectionToClient)
+                {
+                    networkGamePlayerMageBall = gamePlayer;
+                    break;
+                }
             }
 
-            if (matchTimer == null)
+            if (networkGamePlayerMageBall == null)
             {
-                Debug.LogError("OnStartAuthority, matchTimer not found");
-                return;
+                Debug.Log("NetworkGamePlayerMageBall couldn't be found in HUD script!");
             }
 
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
-
-            if (pauseMenu != null)
-                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
+            pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
             pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
@@ -89,13 +92,6 @@ namespace MageBall
             if (networkGamePlayerMageBall.IsFrozen && !isCountingDownUntilUnfreeze)
                 StartCoroutine(CountdownUntilUnfreeze());
         }
-
-        [Server]
-        public void SetNetworkGamePlayer(NetworkGamePlayerMageBall networkGamePlayer)
-        {
-            networkGamePlayerMageBall = networkGamePlayer;
-        }
-
 
         private IEnumerator CountdownUntilUnfreeze()
         {
@@ -180,8 +176,6 @@ namespace MageBall
             else
                 Debug.LogError("OnDestroy, matchTimer not found");
 
-           
-
             if (updateManaBarCoroutine != null)
                 StopCoroutine(updateManaBarCoroutine);
         }
@@ -265,7 +259,7 @@ namespace MageBall
             }
             StartCoroutine(DisableGoalScoredUI());
 
-            
+
 
             switch (team)
             {
