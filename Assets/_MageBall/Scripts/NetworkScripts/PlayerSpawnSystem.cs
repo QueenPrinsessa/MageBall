@@ -82,10 +82,6 @@ namespace MageBall
             networkGamePlayer.SetTeam(currentTeam);
             networkGamePlayer.TargetResetPlayerOwner();
 
-            HUD hud = playerInstance.GetComponent<HUD>();
-            if (hud != null)
-                hud.SetNetworkGamePlayer(networkGamePlayer);
-
             if (currentTeam == Team.Blue)
             {
                 currentTeam = Team.Red;
