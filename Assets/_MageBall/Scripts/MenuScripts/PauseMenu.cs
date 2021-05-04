@@ -36,7 +36,7 @@ namespace MageBall
 
         private void Update()
         {
-            if (pauseCanvas.activeInHierarchy && !optionsMenu.IsOpen) 
+            if (IsOpen && !optionsMenu.IsOpen) 
             {
                 if (Input.GetButtonDown("Cancel"))
                     CloseMenu();

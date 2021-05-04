@@ -15,8 +15,8 @@ namespace MageBall
         [SerializeField] private float gravity = -10.0f;
         [SerializeField] private Passive speedPassive;
         [SerializeField] private Passive jumpPassive;
-        private float groundCheckDistance = 0.25f;
-        private float groundCheckRadius = 0.25f;
+        [SerializeField] private float groundCheckDistance = 0.25f;
+        [SerializeField] private float groundCheckRadius = 0.25f;
         private Vector3 moveDirection;
         private Vector3 velocity;
 
@@ -26,12 +26,6 @@ namespace MageBall
             animator = GetComponent<Animator>();
         }
 
-        private void OnDisable()
-        {
-            if (!hasAuthority)
-                return;
-            animator.SetFloat("Speed", 0f);
-        }
 
         [Client]
         private void FixedUpdate()

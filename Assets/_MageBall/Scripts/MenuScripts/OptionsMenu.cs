@@ -95,7 +95,7 @@ namespace MageBall
 
         private void Update()
         {
-            if (!optionsCanvas.activeInHierarchy)
+            if (!IsOpen)
                 return;
 
             if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Submit"))
