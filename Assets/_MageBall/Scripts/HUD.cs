@@ -21,11 +21,11 @@ namespace MageBall
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
         [SerializeField] private float barMovingSpeed = 0.1f;
-        
+
         private float barMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
-        [SyncVar] private NetworkGamePlayerMageBall networkGamePlayerMageBall;
+        private NetworkGamePlayerMageBall networkGamePlayerMageBall;
         private bool isCountingDown = false;
 
         private NetworkManagerMageBall networkManager;
@@ -42,7 +42,7 @@ namespace MageBall
         }
 
         public override void OnStartAuthority()
-        { 
+        {
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
@@ -51,30 +51,35 @@ namespace MageBall
 
             if (scoreHandler != null)
                 scoreHandler.ScoreChanged += OnScoreChanged;
+            else
+                Debug.LogError("OnStartAuthority, scoreHandler not found");
 
             if (matchTimer != null)
             {
                 matchTimer.TimeChanged += OnTimeChanged;
                 matchTimer.MatchEnd += OnMatchEnd;
             }
-
-            if (scoreHandler == null)
-            {
-                Debug.LogError("OnStartAuthority, scoreHandler not found");
-                return;
-            }
-                
-            if (matchTimer == null)
-            {
+            else
                 Debug.LogError("OnStartAuthority, matchTimer not found");
-                return;
+
+            foreach (NetworkGamePlayerMageBall gamePlayer in NetworkManager.NetworkGamePlayers)
+            {
+                if (gamePlayer.connectionToClient == connectionToClient)
+                {
+                    networkGamePlayerMageBall = gamePlayer;
+                    break;
+                }
+            }
+
+            if (networkGamePlayerMageBall == null)
+            {
+                Debug.Log("NetworkGamePlayerMageBall couldn't be found in HUD script!");
             }
 
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
 
-            if(pauseMenu != null)
-                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
+            pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
             pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
@@ -89,13 +94,6 @@ namespace MageBall
             if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
                 StartCoroutine(CountdownUntilUnfreeze());
         }
-
-        [Server]
-        public void SetNetworkGamePlayer(NetworkGamePlayerMageBall networkGamePlayer)
-        {
-            networkGamePlayerMageBall = networkGamePlayer;
-        }
-        
 
         private IEnumerator CountdownUntilUnfreeze()
         {
@@ -126,10 +124,10 @@ namespace MageBall
             ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
             Spellcasting spellcasting = GetComponent<Spellcasting>();
 
-            if (playerMovement != null) 
+            if (playerMovement != null)
                 playerMovement.enabled = false;
 
-            if (thirdPersonCamera != null) 
+            if (thirdPersonCamera != null)
                 thirdPersonCamera.enabled = false;
 
             if (spellcasting != null)
@@ -180,9 +178,9 @@ namespace MageBall
             else
                 Debug.LogError("OnDestroy, matchTimer not found");
 
-           
 
-            if(updateManaBarCoroutine != null)
+
+            if (updateManaBarCoroutine != null)
                 StopCoroutine(updateManaBarCoroutine);
         }
 
@@ -193,7 +191,7 @@ namespace MageBall
                 Debug.LogError("OnMatchEnd, matchEndUI not found");
                 return;
             }
-               
+
             ScoreHandler scoreHandler = FindObjectOfType<ScoreHandler>();
 
             if (scoreHandler == null)
@@ -264,7 +262,7 @@ namespace MageBall
             }
             StartCoroutine(DisableGoalScoredUI());
 
-            
+
 
             switch (team)
             {
