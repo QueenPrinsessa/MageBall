@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
-using UnityEngine.UI;
+using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace MageBall
 {
@@ -16,17 +15,17 @@ namespace MageBall
         [SerializeField] private TMP_Text countdownText;
         [SerializeField] private GameObject goalScoredUI;
         [SerializeField] private GameObject matchEndUI;
-        [SerializeField] private RawImage barRawImage;
-        [SerializeField] private Mask barMask;
+        [SerializeField] private RawImage manaBarRawImage;
+        [SerializeField] private Mask manaBarMask;
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
         [SerializeField] private float barMovingSpeed = 0.1f;
 
-        private float barMaskWidth;
+        private float manaBarMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
         private NetworkGamePlayerMageBall networkGamePlayerMageBall;
-        private bool isCountingDown = false;
+        private bool isCountingDownUntilUnfreeze = false;
 
         private NetworkManagerMageBall networkManager;
 
@@ -47,7 +46,7 @@ namespace MageBall
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
             updateManaBarCoroutine = StartCoroutine(UpdateManaBar());
-            barMaskWidth = barRawImage.rectTransform.rect.width;
+            manaBarMaskWidth = manaBarRawImage.rectTransform.rect.width;
 
             if (scoreHandler != null)
                 scoreHandler.ScoreChanged += OnScoreChanged;
@@ -78,7 +77,6 @@ namespace MageBall
 
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
-
             pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
@@ -91,14 +89,14 @@ namespace MageBall
             if (!hasAuthority || networkGamePlayerMageBall == null)
                 return;
 
-            if (networkGamePlayerMageBall.IsFrozen && !isCountingDown)
+            if (networkGamePlayerMageBall.IsFrozen && !isCountingDownUntilUnfreeze)
                 StartCoroutine(CountdownUntilUnfreeze());
         }
 
         private IEnumerator CountdownUntilUnfreeze()
         {
             float countdownLength = NetworkManager.WaitBeforeControlsEnableInSeconds;
-            isCountingDown = true;
+            isCountingDownUntilUnfreeze = true;
             int seconds = Mathf.RoundToInt(countdownLength);
 
             countdownText.gameObject.SetActive(true);
@@ -113,7 +111,7 @@ namespace MageBall
             yield return new WaitForSeconds(1);
 
             countdownText.gameObject.SetActive(false);
-            isCountingDown = false;
+            isCountingDownUntilUnfreeze = false;
         }
 
         private void OnPauseMenuOpened()
@@ -178,8 +176,6 @@ namespace MageBall
             else
                 Debug.LogError("OnDestroy, matchTimer not found");
 
-
-
             if (updateManaBarCoroutine != null)
                 StopCoroutine(updateManaBarCoroutine);
         }
@@ -228,13 +224,14 @@ namespace MageBall
         {
             while (true)
             {
-                Rect uvRect = barRawImage.uvRect;
+                Rect uvRect = manaBarRawImage.uvRect;
                 uvRect.x -= barMovingSpeed * Time.deltaTime;
-                barRawImage.uvRect = uvRect;
+                manaBarRawImage.uvRect = uvRect;
 
-                Vector2 manaBarMaskSizeDelta = barMask.rectTransform.sizeDelta;
-                manaBarMaskSizeDelta.x = spellcasting.GetManaNormalized() * barMaskWidth;
-                barMask.rectTransform.sizeDelta = manaBarMaskSizeDelta;
+                Vector2 manaBarMaskSizeDelta = manaBarMask.rectTransform.sizeDelta;
+                manaBarMaskSizeDelta.x = spellcasting.ManaNormalized * manaBarMaskWidth;
+                manaBarMask.rectTransform.sizeDelta = manaBarMaskSizeDelta;
+                
                 yield return null;
             }
         }

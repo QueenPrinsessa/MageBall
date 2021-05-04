@@ -13,9 +13,9 @@ namespace MageBall
         [SerializeField] private Spell offhandSpell;
         [SerializeField] private Spell thirdSpell;
         [SerializeField] private Passive increasedMana;
-        private float maxMana = 100f;
-        private float manaAmount;
-        private float rechargeRate = 20f;
+        [SerializeField]private float maxMana = 100f;
+        [SerializeField]private float rechargeRate = 20f;
+        private float currentMana;
 
         [SyncVar]
         private bool canCastSpells = true;
@@ -23,7 +23,7 @@ namespace MageBall
         public override void OnStartAuthority()
         {
             maxMana *= increasedMana.modifier;
-            manaAmount = maxMana;
+            currentMana = maxMana;
         }
 
         [ClientCallback]
@@ -32,8 +32,8 @@ namespace MageBall
             if (!hasAuthority)
                 return;
 
-            manaAmount += rechargeRate * Time.deltaTime;
-            manaAmount = Mathf.Clamp(manaAmount, 0f, maxMana);
+            currentMana += rechargeRate * Time.deltaTime;
+            currentMana = Mathf.Clamp(currentMana, 0f, maxMana);
 
             if (!canCastSpells)
                 return;
@@ -54,21 +54,21 @@ namespace MageBall
 
         private bool UseMana(float amount)
         {
-            if (manaAmount < amount)
+            if (currentMana < amount)
                 return false;
 
-            manaAmount -= amount;
+            currentMana -= amount;
             return true;
         }
 
-        public float GetManaNormalized()
+        public float ManaNormalized
         {
-            return manaAmount / maxMana;
+            get { return currentMana / maxMana; }
         }
 
         public void ResetMana()
         {
-            manaAmount = maxMana;
+            currentMana = maxMana;
         }
 
     }
