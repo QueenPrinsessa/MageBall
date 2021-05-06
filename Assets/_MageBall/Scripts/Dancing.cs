@@ -1,18 +1,22 @@
+using Mirror;
 using UnityEngine;
 
 namespace MageBall
 {
-    public class Dancing : MonoBehaviour
+    public class Dancing : NetworkBehaviour
     {
         private Animator animator;
 
-        void Start()
+        public override void OnStartAuthority()
         {
             animator = GetComponent<Animator>();
         }
 
-        void Update()
+        private void Update()
         {
+            if (!hasAuthority)
+                return;
+
             if (Input.GetKeyDown("j"))
             {
                 animator.SetBool("Dance1", !animator.GetBool("Dance1"));
