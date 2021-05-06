@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MageBall
 {
@@ -13,6 +14,7 @@ namespace MageBall
         public static readonly string MainSpellPlayerPrefsKey = "MainSpell";
         public static readonly string OffhandSpellPlayerPrefsKey = "OffhandSpell";
         public static readonly string ExtraSpellPlayerPrefsKey = "ExtraSpell";
+        public static readonly string PlayerModelPlayerPrefsKey = "PlayerModel";
 
         [Header("Network")]
         [SerializeField] private NetworkRoomPlayerMageBall roomPlayer;
@@ -21,6 +23,8 @@ namespace MageBall
         [SerializeField] private TMP_Dropdown mainSpellDropdown;
         [SerializeField] private TMP_Dropdown offhandSpellDropdown;
         [SerializeField] private TMP_Dropdown extraSpellDropdown;
+        [SerializeField] private Button malePlayerModelButton;
+        [SerializeField] private Button femalePlayerModelButton;
 
         private int oldMainValue;
         private int oldOffhandValue;
@@ -29,7 +33,7 @@ namespace MageBall
         private Spells MainSpell => (Spells)mainSpellDropdown.value;
         private Spells OffhandSpell => (Spells)offhandSpellDropdown.value;
         private Spells ExtraSpell => (Spells)extraSpellDropdown.value;
-        private PlayerModel PlayerModel => PlayerModel.Man;
+        private PlayerModel PlayerModel { get; set; }
         private Team Team => Team.Red;
 
         public override void OnStartAuthority()
@@ -62,14 +66,52 @@ namespace MageBall
             offhandSpellDropdown.onValueChanged.AddListener(OnOffhandSpellDropdownChanged);
             extraSpellDropdown.onValueChanged.AddListener(OnExtraSpellDropdownChanged);
 
+            PlayerModel = (PlayerModel) PlayerPrefs.GetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel.Man);
+            PlayerPrefs.SetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel);
+            switch (PlayerModel)
+            {
+                case PlayerModel.Man:
+                    malePlayerModelButton.interactable = false;
+                    femalePlayerModelButton.interactable = true;
+                    break;
+                case PlayerModel.Woman:
+                    femalePlayerModelButton.interactable = false;
+                    malePlayerModelButton.interactable = true;
+                    break;
+            }
+
+            malePlayerModelButton.onClick.AddListener(OnMalePlayerModelButtonClick);
+            femalePlayerModelButton.onClick.AddListener(OnFemalePlayerModelButtonClick);
+
             UpdatePlayerLoadout();
         }
+
+        private void OnMalePlayerModelButtonClick()
+        {
+            malePlayerModelButton.interactable = false;
+            femalePlayerModelButton.interactable = true;
+            PlayerModel = PlayerModel.Man;
+            PlayerPrefs.SetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel);
+            UpdatePlayerLoadout();
+        }
+
+        private void OnFemalePlayerModelButtonClick()
+        {
+            femalePlayerModelButton.interactable = false;
+            malePlayerModelButton.interactable = true;
+            PlayerModel = PlayerModel.Woman;
+            PlayerPrefs.SetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel);
+            UpdatePlayerLoadout();
+        }
+
 
         private void OnDestroy()
         {
             mainSpellDropdown.onValueChanged.RemoveListener(OnMainSpellDropdownChanged);
             offhandSpellDropdown.onValueChanged.RemoveListener(OnOffhandSpellDropdownChanged);
             extraSpellDropdown.onValueChanged.RemoveListener(OnExtraSpellDropdownChanged);
+            malePlayerModelButton.onClick.RemoveListener(OnMalePlayerModelButtonClick);
+            femalePlayerModelButton.onClick.RemoveListener(OnFemalePlayerModelButtonClick);
         }
 
         private void InitializeSpellDropdown(TMP_Dropdown dropDown, List<string> spellOptions, int selection)
@@ -79,7 +121,7 @@ namespace MageBall
             dropDown.RefreshShownValue();
         }
 
-        public void OnMainSpellDropdownChanged(int mainValue)
+        private void OnMainSpellDropdownChanged(int mainValue)
         {
             int offhandValue = offhandSpellDropdown.value;
             int extraValue = extraSpellDropdown.value;
@@ -94,7 +136,7 @@ namespace MageBall
             UpdatePlayerLoadout();
         }
 
-        public void OnOffhandSpellDropdownChanged(int offHandValue)
+        private void OnOffhandSpellDropdownChanged(int offHandValue)
         {
             int mainValue = mainSpellDropdown.value;
             int extraValue = extraSpellDropdown.value;
@@ -109,7 +151,7 @@ namespace MageBall
             UpdatePlayerLoadout();
         }
 
-        public void OnExtraSpellDropdownChanged(int extraValue)
+        private void OnExtraSpellDropdownChanged(int extraValue)
         {
             int offhandValue = offhandSpellDropdown.value;
             int mainValue = mainSpellDropdown.value;

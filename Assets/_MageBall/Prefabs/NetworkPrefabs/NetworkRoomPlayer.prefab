@@ -95,6 +95,8 @@ MonoBehaviour:
   mainSpellDropdown: {fileID: 432608775367421298}
   offhandSpellDropdown: {fileID: 432608777002661346}
   extraSpellDropdown: {fileID: 432608775355887431}
+  malePlayerModelButton: {fileID: 3404603474126712364}
+  femalePlayerModelButton: {fileID: 413379419732656952}
 --- !u!1001 &432608776779411639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,6 +308,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49473b088f830e340b92b5e76401ccf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3404603474126712364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2972230282293616283, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+    type: 3}
+  m_PrefabInstance: {fileID: 432608776779411639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &413379419732656952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 269214355503477647, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+    type: 3}
+  m_PrefabInstance: {fileID: 432608776779411639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &432608775367421298 stripped
