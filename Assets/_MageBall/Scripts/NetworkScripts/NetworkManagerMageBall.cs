@@ -191,6 +191,7 @@ namespace MageBall
                 NetworkGamePlayerMageBall gamePlayerInstance = Instantiate(gamePlayerPrefab);
                 gamePlayerInstance.SetDisplayName(NetworkRoomPlayers[i].DisplayName);
                 gamePlayerInstance.SetIsHost(NetworkRoomPlayers[i].IsHost);
+                gamePlayerInstance.SetPlayerLoadout(NetworkRoomPlayers[i].PlayerLoadout);
 
                 NetworkServer.Destroy(connection.identity.gameObject);
                 NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);

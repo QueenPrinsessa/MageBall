@@ -9,12 +9,12 @@ namespace MageBall
 { 
     public class Spellcasting : NetworkBehaviour
     {
-        [SerializeField] private Spell mainSpell;
-        [SerializeField] private Spell offhandSpell;
-        [SerializeField] private Spell thirdSpell;
         [SerializeField] private Passive increasedMana;
         [SerializeField]private float maxMana = 100f;
         [SerializeField]private float rechargeRate = 20f;
+        [SyncVar] private Spell mainSpell;
+        [SyncVar] private Spell offhandSpell;
+        [SyncVar] private Spell extraSpell;
         private float currentMana;
 
         [SyncVar]
@@ -42,8 +42,31 @@ namespace MageBall
                 mainSpell.CmdCastSpell();
             else if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
                 offhandSpell.CmdCastSpell();
-            else if (Input.GetButtonDown("Fire3") && UseMana(thirdSpell.ManaCost))
-                thirdSpell.CmdCastSpell();
+            else if (Input.GetButtonDown("Fire3") && UseMana(extraSpell.ManaCost))
+                extraSpell.CmdCastSpell();
+        }
+
+        [Server]
+        public void SetPlayerSpellsFromLoadout(PlayerLoadout playerLoadout)
+        {
+            mainSpell = GetSpell(playerLoadout.MainSpell);
+            offhandSpell = GetSpell(playerLoadout.OffhandSpell);
+            extraSpell = GetSpell(playerLoadout.ExtraSpell);
+        }
+
+        private Spell GetSpell(Spells spell)
+        {
+            switch (spell)
+            {
+                case Spells.ForcePush:
+                    return GetComponent<ForcePush>();
+                case Spells.ForcePull:
+                    return GetComponent<ForcePull>();
+                case Spells.ForceFly:
+                    return GetComponent<ForceFly>();
+                default:
+                    return GetComponent<ForcePush>();
+            }
         }
 
         [Command]

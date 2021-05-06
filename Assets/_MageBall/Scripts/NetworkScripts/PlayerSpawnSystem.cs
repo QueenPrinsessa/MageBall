@@ -79,8 +79,10 @@ namespace MageBall
 
             NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
             networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
-            networkGamePlayer.SetTeam(currentTeam);
             networkGamePlayer.TargetResetPlayerOwner();
+
+            Spellcasting spellcasting = playerInstance.GetComponent<Spellcasting>();
+            spellcasting.SetPlayerSpellsFromLoadout(networkGamePlayer.PlayerLoadout);
 
             if (currentTeam == Team.Blue)
             {

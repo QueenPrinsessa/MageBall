@@ -17,14 +17,15 @@ namespace MageBall
         [SerializeField] private TMP_Text[] playerReadyTexts = new TMP_Text[4];
         [SerializeField] private MenuButton startGameButton;
 
+        [SyncVar] private PlayerLoadout playerLoadout;
         [SyncVar(hook = nameof(OnDisplayNameChanged))]
         private string displayName = "Loading...";
         [SyncVar(hook = nameof(OnReadyStatusChanged))]
         private bool isReady;
-
+        
         public string DisplayName => displayName;
         public bool IsReady => isReady;
-
+        public PlayerLoadout PlayerLoadout => playerLoadout;
         private bool isHost;
 
         public bool IsHost
@@ -167,6 +168,12 @@ namespace MageBall
             yield return new WaitUntil(() => NetworkManager.NetworkRoomPlayers.Count == 1);
 
             NetworkManager.StopHost();
+        }
+
+        [Command]
+        public void CmdSetPlayerLoadout(Spells mainSpell, Spells offhandSpell, Spells extraSpell, PlayerModel playerModel, Team team)
+        {
+            playerLoadout = new PlayerLoadout(mainSpell, offhandSpell, extraSpell, playerModel, team);
         }
     }
 }
