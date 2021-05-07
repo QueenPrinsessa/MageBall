@@ -13,7 +13,7 @@ namespace MageBall
         private static readonly string DefaultPlayerName = "Player";
 
         [SyncVar] private string displayName = "Loading...";
-        [SyncVar] private Team team;
+        [SyncVar] private PlayerLoadout playerLoadout;
         private bool isFrozen;
         private NetworkManagerMageBall networkManager;
 
@@ -33,7 +33,7 @@ namespace MageBall
         [SyncVar] private GameObject playerGameObject;
 
         public string DisplayName => displayName ?? DefaultPlayerName;
-
+        public PlayerLoadout PlayerLoadout => playerLoadout;
         public bool IsHost { get; private set; }
         public bool IsFrozen => isFrozen;
 
@@ -61,9 +61,9 @@ namespace MageBall
         }
 
         [Server]
-        public void SetTeam(Team team)
+        public void SetPlayerLoadout(PlayerLoadout playerLoadout)
         {
-            this.team = team;
+            this.playerLoadout = playerLoadout;
         }
 
         [Server]

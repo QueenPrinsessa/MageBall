@@ -17,15 +17,23 @@ namespace MageBall
         [SerializeField] private Passive jumpPassive;
         [SerializeField] private float groundCheckDistance = 0.25f;
         [SerializeField] private float groundCheckRadius = 0.25f;
+        [SyncVar] private Passives currentPassive;
         private Vector3 moveDirection;
         private Vector3 velocity;
 
+        private float JumpHeight => currentPassive == Passives.JumpBoost ? jumpHeight * jumpPassive.modifier : jumpHeight;
+        private float MaxSpeed => currentPassive == Passives.SpeedBoost ? maxSpeed * speedPassive.modifier : maxSpeed;
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
         }
 
+        [Server]
+        public void SetPassiveFromLoadout(PlayerLoadout playerLoadout)
+        {
+            currentPassive = playerLoadout.Passive;
+        }
 
         [Client]
         private void FixedUpdate()
@@ -46,7 +54,7 @@ namespace MageBall
 
             if (Input.GetButton("Jump") && isGrounded)
             {
-                velocity.y += Mathf.Sqrt((jumpHeight * jumpPassive.modifier) * -3.0f * gravity);
+                velocity.y += Mathf.Sqrt(JumpHeight * -3.0f * gravity);
                 animator.SetBool("IsJumping", true);
             }
 
@@ -64,7 +72,7 @@ namespace MageBall
 
             if (horizontal != 0 || vertical != 0)
             {
-                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, maxSpeed * speedPassive.modifier);
+                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, MaxSpeed);
 
                 if (vertical < 0)
                     animator.SetBool("RunBackward", true);

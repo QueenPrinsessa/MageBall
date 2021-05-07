@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fd548c1bd5c2842b64008e0c4c36ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHorizontalMenu: 0
 --- !u!1 &2273640541414518581
 GameObject:
   m_ObjectHideFlags: 0

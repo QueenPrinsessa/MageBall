@@ -61,6 +61,8 @@ namespace MageBall
         [Server]
         public void OnServerReadied(NetworkConnection connection)
         {
+            NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
+
             Transform spawnPoint;
             spawnPoint = (currentTeam == Team.Red) ? redSpawnPoints.ElementAtOrDefault(nextIndex) : blueSpawnPoints.ElementAtOrDefault(nextIndex);
 
@@ -72,15 +74,19 @@ namespace MageBall
 
             Vector3 position = (currentTeam == Team.Red) ? redSpawnPoints[nextIndex].position : blueSpawnPoints[nextIndex].position;
             Quaternion rotation = (currentTeam == Team.Red) ? redSpawnPoints[nextIndex].rotation : blueSpawnPoints[nextIndex].rotation;
-            GameObject playerPrefab = (currentTeam == Team.Red) ? redTeamMalePlayerPrefab : blueTeamMalePlayerPrefab;
+            GameObject playerPrefab = GetPlayerPrefabFromLoadout(networkGamePlayer.PlayerLoadout);
 
             GameObject playerInstance = Instantiate(playerPrefab, position, rotation);
             NetworkServer.Spawn(playerInstance, connection);
 
-            NetworkGamePlayerMageBall networkGamePlayer = connection.identity.gameObject.GetComponent<NetworkGamePlayerMageBall>();
             networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
-            networkGamePlayer.SetTeam(currentTeam);
             networkGamePlayer.TargetResetPlayerOwner();
+
+            Spellcasting spellcasting = playerInstance.GetComponent<Spellcasting>();
+            spellcasting.SetPlayerLoadout(networkGamePlayer.PlayerLoadout);
+
+            PlayerMovement playerMovement = playerInstance.GetComponent<PlayerMovement>();
+            playerMovement.SetPassiveFromLoadout(networkGamePlayer.PlayerLoadout);
 
             if (currentTeam == Team.Blue)
             {
@@ -89,6 +95,20 @@ namespace MageBall
             }
             else
                 currentTeam = Team.Blue;
+        }
+
+        [Server]
+        private GameObject GetPlayerPrefabFromLoadout(PlayerLoadout playerLoadout)
+        {
+            switch (playerLoadout.PlayerModel)
+            {
+                case PlayerModel.Man:
+                    return (currentTeam == Team.Red) ? redTeamMalePlayerPrefab : blueTeamMalePlayerPrefab;
+                case PlayerModel.Woman:
+                    return (currentTeam == Team.Red) ? redTeamFemalePlayerPrefab : blueTeamFemalePlayerPrefab;
+                default:
+                    return redTeamMalePlayerPrefab;
+            }
         }
     }
 }

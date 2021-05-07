@@ -136,8 +136,8 @@ MonoBehaviour:
   forceMagnitude: 4
   jumpHeight: 0.9
   gravity: -20
-  speedPassive: {fileID: 11400000, guid: a84f04530396c9d4f9f1447410c5f8ec, type: 2}
-  jumpPassive: {fileID: 11400000, guid: a84f04530396c9d4f9f1447410c5f8ec, type: 2}
+  speedPassive: {fileID: 11400000, guid: c51e83ba07e1f9045983ab486e0b8337, type: 2}
+  jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
   groundCheckDistance: 0.25
   groundCheckRadius: 0.25
 --- !u!114 &5619645232864165116
@@ -195,10 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
-  mainSpell: {fileID: 7575334805803104451}
-  offhandSpell: {fileID: 8269165977460520832}
-  thirdSpell: {fileID: 4445340136976529315}
-  increasedMana: {fileID: 11400000, guid: a84f04530396c9d4f9f1447410c5f8ec, type: 2}
+  increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
   rechargeRate: 20
 --- !u!114 &7575334805803104451
