@@ -28,7 +28,7 @@ namespace MageBall
         [SerializeField]
         private int matchLengthInMinutes = 5;
 
-        private string arenaPrefix = "Arena_";
+        private readonly string arenaPrefix = "Arena_";
 
         public static event Action ClientConnected;
         public static event Action ClientDisconnected;
@@ -178,8 +178,8 @@ namespace MageBall
                 NetworkRoomPlayerMageBall roomPlayerInstance = Instantiate(networkRoomPlayerPrefab);
                 roomPlayerInstance.SetIsHost(NetworkGamePlayers[i].IsHost);
 
-                NetworkServer.Destroy(connection.identity.gameObject);
-                NetworkServer.ReplacePlayerForConnection(connection, roomPlayerInstance.gameObject);
+                NetworkServer.DestroyPlayerForConnection(connection);
+                NetworkServer.AddPlayerForConnection(connection, roomPlayerInstance.gameObject);
             }
         }
 
@@ -193,8 +193,8 @@ namespace MageBall
                 gamePlayerInstance.SetIsHost(NetworkRoomPlayers[i].IsHost);
                 gamePlayerInstance.SetPlayerLoadout(NetworkRoomPlayers[i].PlayerLoadout);
 
-                NetworkServer.Destroy(connection.identity.gameObject);
-                NetworkServer.ReplacePlayerForConnection(connection, gamePlayerInstance.gameObject);
+                NetworkServer.DestroyPlayerForConnection(connection);
+                NetworkServer.AddPlayerForConnection(connection, gamePlayerInstance.gameObject);
             }
         }
 

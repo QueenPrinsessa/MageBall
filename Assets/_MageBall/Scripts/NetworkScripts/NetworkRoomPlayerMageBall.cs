@@ -90,7 +90,7 @@ namespace MageBall
 
         private void UpdateDisplay()
         {
-            if (!hasAuthority)  // Updates the display text
+            if (!hasAuthority)
             {
                 foreach (NetworkRoomPlayerMageBall player in NetworkManager.NetworkRoomPlayers)
                 {

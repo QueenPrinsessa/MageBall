@@ -82,6 +82,9 @@ namespace MageBall
             networkGamePlayer.SetPlayerGameObject(playerInstance, position, rotation);
             networkGamePlayer.TargetResetPlayerOwner();
 
+            HUD hud = playerInstance.GetComponent<HUD>();
+            hud.SetNetworkGamePlayerMageBall(networkGamePlayer);
+
             Spellcasting spellcasting = playerInstance.GetComponent<Spellcasting>();
             spellcasting.SetPlayerLoadout(networkGamePlayer.PlayerLoadout);
 
