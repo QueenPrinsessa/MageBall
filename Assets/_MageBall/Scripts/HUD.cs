@@ -76,8 +76,15 @@ namespace MageBall
 
         private void OnNetworkGamePlayerMageBallChanged(NetworkGamePlayerMageBall oldValue, NetworkGamePlayerMageBall newValue)
         {
-            if(pauseMenu != null)
-                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
+            //Pause menu is spawned after NetworkGamePlayer is initially set on Server so we need to wait to set it
+            StartCoroutine(WaitToSetPauseMenuNetworkGamePlayer(newValue));
+        }
+
+        private IEnumerator WaitToSetPauseMenuNetworkGamePlayer(NetworkGamePlayerMageBall networkGamePlayerMageBall)
+        {
+            yield return new WaitUntil(() => pauseMenu != null);
+
+            pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
         }
 
         [ClientCallback]
