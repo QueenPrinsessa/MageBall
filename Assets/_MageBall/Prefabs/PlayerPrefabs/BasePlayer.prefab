@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3380226219699566043}
   - component: {fileID: 4945102062442977178}
   - component: {fileID: 3798196190867551898}
+  - component: {fileID: -2797412249483956625}
   - component: {fileID: 5619645232864165116}
   - component: {fileID: 1425847055805290944}
   - component: {fileID: 118924582342655499}
@@ -135,11 +136,25 @@ MonoBehaviour:
   maxSpeed: 10
   forceMagnitude: 4
   jumpHeight: 0.9
-  gravity: -20
   speedPassive: {fileID: 11400000, guid: c51e83ba07e1f9045983ab486e0b8337, type: 2}
   jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
   groundCheckDistance: 0.25
   groundCheckRadius: 0.25
+--- !u!114 &-2797412249483956625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fe948b81bd1a74695a3da8018613ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  gravity: -10
 --- !u!114 &5619645232864165116
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,12 @@ namespace MageBall
     public class PlayerMovement : NetworkBehaviour
     {
         private CharacterController controller;
+        private CharacterControllerGravity controllerGravity;
         private Animator animator;
         private float speed = 0f;
         [SerializeField] private float maxSpeed = 10f;
         [SerializeField] private float forceMagnitude = 6f;
         [SerializeField] private float jumpHeight = 1.3f;
-        [SerializeField] private float gravity = -10.0f;
         [SerializeField] private Passive speedPassive;
         [SerializeField] private Passive jumpPassive;
         [SerializeField] private float groundCheckDistance = 0.25f;
@@ -26,6 +26,7 @@ namespace MageBall
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
+            controllerGravity = GetComponent<CharacterControllerGravity>();
             animator = GetComponent<Animator>();
         }
 
@@ -54,11 +55,10 @@ namespace MageBall
 
             if (Input.GetButton("Jump") && isGrounded)
             {
-                velocity.y += Mathf.Sqrt(JumpHeight * -3.0f * gravity);
+                velocity.y += Mathf.Sqrt(JumpHeight * -3.0f * controllerGravity.Gravity);
                 animator.SetBool("IsJumping", true);
             }
 
-            velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
         }
 
