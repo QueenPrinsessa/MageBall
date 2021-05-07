@@ -15,6 +15,7 @@ namespace MageBall
         public static readonly string OffhandSpellPlayerPrefsKey = "OffhandSpell";
         public static readonly string ExtraSpellPlayerPrefsKey = "ExtraSpell";
         public static readonly string PlayerModelPlayerPrefsKey = "PlayerModel";
+        public static readonly string PassivePlayerPrefsKey = "Passive";
 
         [Header("Network")]
         [SerializeField] private NetworkRoomPlayerMageBall roomPlayer;
@@ -23,6 +24,7 @@ namespace MageBall
         [SerializeField] private TMP_Dropdown mainSpellDropdown;
         [SerializeField] private TMP_Dropdown offhandSpellDropdown;
         [SerializeField] private TMP_Dropdown extraSpellDropdown;
+        [SerializeField] private TMP_Dropdown passiveDropdown;
         [SerializeField] private Button malePlayerModelButton;
         [SerializeField] private Button femalePlayerModelButton;
 
@@ -34,9 +36,18 @@ namespace MageBall
         private Spells OffhandSpell => (Spells)offhandSpellDropdown.value;
         private Spells ExtraSpell => (Spells)extraSpellDropdown.value;
         private PlayerModel PlayerModel { get; set; }
-        private Team Team => Team.Red;
+        private Passives Passive => (Passives)passiveDropdown.value;
 
         public override void OnStartAuthority()
+        {
+            SetupSpellDropdowns();
+            SetupPassiveDropdown();
+            SetupPlayerModelButtons();
+
+            UpdatePlayerLoadout();
+        }
+
+        private void SetupSpellDropdowns()
         {
             mainSpellDropdown.ClearOptions();
             offhandSpellDropdown.ClearOptions();
@@ -59,14 +70,34 @@ namespace MageBall
             oldOffhandValue = offhandSpellSelection;
             oldExtraValue = extraSpellSelection;
 
-            InitializeSpellDropdown(mainSpellDropdown, spellOptions, mainSpellSelection);
-            InitializeSpellDropdown(offhandSpellDropdown, spellOptions, offhandSpellSelection);
-            InitializeSpellDropdown(extraSpellDropdown, spellOptions, extraSpellSelection);
+            InitializeDropdown(mainSpellDropdown, spellOptions, mainSpellSelection);
+            InitializeDropdown(offhandSpellDropdown, spellOptions, offhandSpellSelection);
+            InitializeDropdown(extraSpellDropdown, spellOptions, extraSpellSelection);
             mainSpellDropdown.onValueChanged.AddListener(OnMainSpellDropdownChanged);
             offhandSpellDropdown.onValueChanged.AddListener(OnOffhandSpellDropdownChanged);
             extraSpellDropdown.onValueChanged.AddListener(OnExtraSpellDropdownChanged);
+        }
 
-            PlayerModel = (PlayerModel) PlayerPrefs.GetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel.Man);
+        private void SetupPassiveDropdown()
+        {
+            passiveDropdown.ClearOptions();
+            var passiveOptions = new List<string>();
+            foreach (string passiveName in Enum.GetNames(typeof(Passives)))
+            {
+                string passiveNameWithSpaces = Regex.Replace(passiveName, "([a-z])_?([A-Z])", "$1 $2");
+                passiveOptions.Add(passiveNameWithSpaces);
+            }
+
+            int passiveSelection = PlayerPrefs.GetInt(PassivePlayerPrefsKey, (int) Passives.SpeedBoost);
+            PlayerPrefs.SetInt(PassivePlayerPrefsKey, passiveSelection);
+            
+            InitializeDropdown(passiveDropdown, passiveOptions, passiveSelection);
+            passiveDropdown.onValueChanged.AddListener(OnPassiveDropdownChanged);
+        }
+
+        private void SetupPlayerModelButtons()
+        {
+            PlayerModel = (PlayerModel)PlayerPrefs.GetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel.Man);
             PlayerPrefs.SetInt(PlayerModelPlayerPrefsKey, (int)PlayerModel);
             switch (PlayerModel)
             {
@@ -82,7 +113,10 @@ namespace MageBall
 
             malePlayerModelButton.onClick.AddListener(OnMalePlayerModelButtonClick);
             femalePlayerModelButton.onClick.AddListener(OnFemalePlayerModelButtonClick);
+        }
 
+        private void OnPassiveDropdownChanged(int newPassive)
+        {
             UpdatePlayerLoadout();
         }
 
@@ -104,7 +138,6 @@ namespace MageBall
             UpdatePlayerLoadout();
         }
 
-
         private void OnDestroy()
         {
             mainSpellDropdown.onValueChanged.RemoveListener(OnMainSpellDropdownChanged);
@@ -112,11 +145,12 @@ namespace MageBall
             extraSpellDropdown.onValueChanged.RemoveListener(OnExtraSpellDropdownChanged);
             malePlayerModelButton.onClick.RemoveListener(OnMalePlayerModelButtonClick);
             femalePlayerModelButton.onClick.RemoveListener(OnFemalePlayerModelButtonClick);
+            passiveDropdown.onValueChanged.RemoveListener(OnPassiveDropdownChanged);
         }
 
-        private void InitializeSpellDropdown(TMP_Dropdown dropDown, List<string> spellOptions, int selection)
+        private void InitializeDropdown(TMP_Dropdown dropDown, List<string> options, int selection)
         {
-            dropDown.AddOptions(spellOptions);
+            dropDown.AddOptions(options);
             dropDown.value = selection;
             dropDown.RefreshShownValue();
         }
@@ -168,7 +202,7 @@ namespace MageBall
 
         private void UpdatePlayerLoadout()
         {
-            roomPlayer.CmdSetPlayerLoadout(MainSpell, OffhandSpell, ExtraSpell, PlayerModel, Team);
+            roomPlayer.CmdSetPlayerLoadout(MainSpell, OffhandSpell, ExtraSpell, PlayerModel, Passive);
         }
 
     }

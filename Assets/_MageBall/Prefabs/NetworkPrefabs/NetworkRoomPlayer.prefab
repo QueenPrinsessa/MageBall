@@ -95,6 +95,7 @@ MonoBehaviour:
   mainSpellDropdown: {fileID: 432608775367421298}
   offhandSpellDropdown: {fileID: 432608777002661346}
   extraSpellDropdown: {fileID: 432608775355887431}
+  passiveDropdown: {fileID: 3995456488182415327}
   malePlayerModelButton: {fileID: 3404603474126712364}
   femalePlayerModelButton: {fileID: 413379419732656952}
 --- !u!1001 &432608776779411639
@@ -361,6 +362,18 @@ MonoBehaviour:
 --- !u!114 &432608775355887431 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1869275120, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+    type: 3}
+  m_PrefabInstance: {fileID: 432608776779411639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3995456488182415327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3563009083055492968, guid: ef9d46e3f58e44c46bb4f319bee66c20,
     type: 3}
   m_PrefabInstance: {fileID: 432608776779411639}
   m_PrefabAsset: {fileID: 0}

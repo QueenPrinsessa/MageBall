@@ -10,20 +10,36 @@ namespace MageBall
     public class Spellcasting : NetworkBehaviour
     {
         [SerializeField] private Passive increasedMana;
-        [SerializeField]private float maxMana = 100f;
-        [SerializeField]private float rechargeRate = 20f;
+        [SerializeField] private float maxMana = 100f;
+        [SerializeField] private float rechargeRate = 20f;
         [SyncVar] private Spell mainSpell;
         [SyncVar] private Spell offhandSpell;
         [SyncVar] private Spell extraSpell;
+        [SyncVar] private Passives currentPassive;
         private float currentMana;
 
         [SyncVar]
         private bool canCastSpells = true;
 
+        public float ManaNormalized
+        {
+            get 
+            { 
+                return currentMana / MaxMana; 
+            }
+        }
+
+        public float MaxMana
+        {
+            get
+            {
+                return currentPassive == Passives.ManaBoost ? maxMana * increasedMana.modifier : maxMana;
+            }
+        }
+
         public override void OnStartAuthority()
         {
-            maxMana *= increasedMana.modifier;
-            currentMana = maxMana;
+            ResetMana();
         }
 
         [ClientCallback]
@@ -33,7 +49,7 @@ namespace MageBall
                 return;
 
             currentMana += rechargeRate * Time.deltaTime;
-            currentMana = Mathf.Clamp(currentMana, 0f, maxMana);
+            currentMana = Mathf.Clamp(currentMana, 0f, MaxMana);
 
             if (!canCastSpells)
                 return;
@@ -47,11 +63,12 @@ namespace MageBall
         }
 
         [Server]
-        public void SetPlayerSpellsFromLoadout(PlayerLoadout playerLoadout)
+        public void SetPlayerLoadout(PlayerLoadout playerLoadout)
         {
             mainSpell = GetSpell(playerLoadout.MainSpell);
             offhandSpell = GetSpell(playerLoadout.OffhandSpell);
             extraSpell = GetSpell(playerLoadout.ExtraSpell);
+            currentPassive = playerLoadout.Passive;
         }
 
         private Spell GetSpell(Spells spell)
@@ -84,14 +101,9 @@ namespace MageBall
             return true;
         }
 
-        public float ManaNormalized
-        {
-            get { return currentMana / maxMana; }
-        }
-
         public void ResetMana()
         {
-            currentMana = maxMana;
+            currentMana = MaxMana;
         }
 
     }

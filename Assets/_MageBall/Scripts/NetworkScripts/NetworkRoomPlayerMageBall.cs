@@ -171,9 +171,9 @@ namespace MageBall
         }
 
         [Command]
-        public void CmdSetPlayerLoadout(Spells mainSpell, Spells offhandSpell, Spells extraSpell, PlayerModel playerModel, Team team)
+        public void CmdSetPlayerLoadout(Spells mainSpell, Spells offhandSpell, Spells extraSpell, PlayerModel playerModel, Passives passive)
         {
-            playerLoadout = new PlayerLoadout(mainSpell, offhandSpell, extraSpell, playerModel, team);
+            playerLoadout = new PlayerLoadout(mainSpell, offhandSpell, extraSpell, playerModel, passive);
         }
     }
 }

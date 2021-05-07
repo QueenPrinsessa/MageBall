@@ -83,7 +83,10 @@ namespace MageBall
             networkGamePlayer.TargetResetPlayerOwner();
 
             Spellcasting spellcasting = playerInstance.GetComponent<Spellcasting>();
-            spellcasting.SetPlayerSpellsFromLoadout(networkGamePlayer.PlayerLoadout);
+            spellcasting.SetPlayerLoadout(networkGamePlayer.PlayerLoadout);
+
+            PlayerMovement playerMovement = playerInstance.GetComponent<PlayerMovement>();
+            playerMovement.SetPassiveFromLoadout(networkGamePlayer.PlayerLoadout);
 
             if (currentTeam == Team.Blue)
             {
