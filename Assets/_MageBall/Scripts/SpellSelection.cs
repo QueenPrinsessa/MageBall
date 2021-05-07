@@ -117,6 +117,7 @@ namespace MageBall
 
         private void OnPassiveDropdownChanged(int newPassive)
         {
+            PlayerPrefs.SetInt(PassivePlayerPrefsKey, newPassive);
             UpdatePlayerLoadout();
         }
 
