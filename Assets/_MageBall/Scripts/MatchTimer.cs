@@ -55,6 +55,12 @@ namespace MageBall
         {
             hasMatchEnded = true;
             StopCoroutine(timerRoutine);
+            RpcInvokeMatchEnd();
+        }
+
+        [ClientRpc]
+        private void RpcInvokeMatchEnd()
+        {
             MatchEnd?.Invoke();
         }
     }

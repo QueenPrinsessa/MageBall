@@ -24,7 +24,7 @@ namespace MageBall
         private float manaBarMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
-        private NetworkGamePlayerMageBall networkGamePlayerMageBall;
+        [SyncVar(hook = nameof(OnNetworkGamePlayerMageBallChanged))] private NetworkGamePlayerMageBall networkGamePlayerMageBall;
         private bool isCountingDownUntilUnfreeze = false;
 
         private NetworkManagerMageBall networkManager;
@@ -61,26 +61,23 @@ namespace MageBall
             else
                 Debug.LogError("OnStartAuthority, matchTimer not found");
 
-            foreach (NetworkGamePlayerMageBall gamePlayer in NetworkManager.NetworkGamePlayers)
-            {
-                if (gamePlayer.connectionToClient == connectionToClient)
-                {
-                    networkGamePlayerMageBall = gamePlayer;
-                    break;
-                }
-            }
-
-            if (networkGamePlayerMageBall == null)
-            {
-                Debug.Log("NetworkGamePlayerMageBall couldn't be found in HUD script!");
-            }
-
             GameObject pauseMenuUI = Instantiate(pauseMenuPrefab);
             pauseMenu = pauseMenuUI.GetComponent<PauseMenu>();
-            pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
 
             pauseMenu.PauseMenuOpened += OnPauseMenuOpened;
             pauseMenu.PauseMenuClosed += OnPauseMenuClosed;
+        }
+
+        [Server]
+        public void SetNetworkGamePlayerMageBall(NetworkGamePlayerMageBall networkGamePlayerMageBall)
+        {
+            this.networkGamePlayerMageBall = networkGamePlayerMageBall;
+        }
+
+        private void OnNetworkGamePlayerMageBallChanged(NetworkGamePlayerMageBall oldValue, NetworkGamePlayerMageBall newValue)
+        {
+            if(pauseMenu != null)
+                pauseMenu.NetworkGamePlayer = networkGamePlayerMageBall;
         }
 
         [ClientCallback]
@@ -205,6 +202,8 @@ namespace MageBall
                 Debug.LogError("There is no match end text in the match end UI!");
                 return;
             }
+
+            Debug.Log("Text activated, Winner: " + scoreHandler.Winner );
 
             switch (scoreHandler.Winner)
             {

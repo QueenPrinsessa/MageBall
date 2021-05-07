@@ -3982,7 +3982,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8295603754278849360}
   - component: {fileID: 1656029852109723758}
-  - component: {fileID: 7845228112167970086}
   - component: {fileID: 6243396789736385718}
   m_Layer: 0
   m_Name: MaleModelCamera
@@ -4048,14 +4047,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7845228112167970086
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252703979521726593}
-  m_Enabled: 1
 --- !u!114 &6243396789736385718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8616,7 +8607,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5675311322566114033}
   - component: {fileID: 5658354314483764933}
-  - component: {fileID: 5191563174864687473}
   - component: {fileID: 9069415748061076417}
   m_Layer: 0
   m_Name: FemaleModelCamera
@@ -8682,14 +8672,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5191563174864687473
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089233597935023766}
-  m_Enabled: 1
 --- !u!114 &9069415748061076417
 MonoBehaviour:
   m_ObjectHideFlags: 0
