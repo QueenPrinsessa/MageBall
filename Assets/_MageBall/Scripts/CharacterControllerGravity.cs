@@ -10,11 +10,13 @@ namespace MageBall
     {
         [Header("Settings")]
         [SerializeField, SyncVar] private float gravity = -10.0f;
+        [SerializeField] private float groundCheckDistance = 0.25f;
 
         private CharacterController controller;
         private Vector3 velocity;
 
         public float Gravity => gravity;
+
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
@@ -33,10 +35,9 @@ namespace MageBall
             controller.Move(velocity * Time.deltaTime);
         }
 
-        private bool IsGrounded()
+        public bool IsGrounded()
         {
-            Vector3 groundCheckPosition = transform.position + transform.up * (0.25f + Physics.defaultContactOffset);
-            Physics.SphereCast(groundCheckPosition, 0.25f, -transform.up, out RaycastHit raycastHit, 0.25f);
+            Physics.Raycast(transform.position, -transform.up, out RaycastHit raycastHit, groundCheckDistance);
             return raycastHit.collider != null;
         }
     }

@@ -15,8 +15,6 @@ namespace MageBall
         [SerializeField] private float jumpHeight = 1.3f;
         [SerializeField] private Passive speedPassive;
         [SerializeField] private Passive jumpPassive;
-        [SerializeField] private float groundCheckDistance = 0.25f;
-        [SerializeField] private float groundCheckRadius = 0.25f;
         [SyncVar] private Passives currentPassive;
         private Vector3 moveDirection;
         private Vector3 velocity;
@@ -44,7 +42,7 @@ namespace MageBall
 
             HandleMovement();
 
-            bool isGrounded = IsGrounded();
+            bool isGrounded = controllerGravity.IsGrounded();
 
             if (isGrounded)
             {
@@ -88,13 +86,6 @@ namespace MageBall
 
             moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
             controller.Move(moveDirection);
-        }
-
-        private bool IsGrounded()
-        {
-            Vector3 groundCheckPosition = transform.position + transform.up * (groundCheckRadius + Physics.defaultContactOffset);
-            Physics.SphereCast(groundCheckPosition, groundCheckRadius, -transform.up, out RaycastHit raycastHit, groundCheckDistance);
-            return raycastHit.collider != null;
         }
 
         [Client]
