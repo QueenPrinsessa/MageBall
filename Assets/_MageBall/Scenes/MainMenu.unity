@@ -406,99 +406,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2273640541086127165, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: isHorizontalMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541414518578, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541414518578, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2539817571571245268, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541514257090, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541514257090, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2539817571571245268, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541547710221, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541547710221, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2539817571571245268, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640541901799488, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 387.2467
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799488, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 236.4225
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799488, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.000016212
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799488, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 181.7838
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_text
-      value: WIZARD EXTREME TOURNAMENT
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: c7a39ab1c24214f4cb63bfdfad5ce85e,
-        type: 2}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -7573522395562637638, guid: c7a39ab1c24214f4cb63bfdfad5ce85e,
-        type: 2}
-    - target: {fileID: 2273640541901799519, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2273640541998223003, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
         type: 3}
       propertyPath: m_RootOrder
@@ -554,27 +461,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2273640541998223004, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: networkManager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2273640541998223005, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
         type: 3}
       propertyPath: m_Name
       value: MainMenu_UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2273640542300532703, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
-    - target: {fileID: 2273640542300532703, guid: cd2b2e9c7b58e61498765ad9f80a3ea9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2539817571571245268, guid: d8584c94a61ac544a83fd268529f5526,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd2b2e9c7b58e61498765ad9f80a3ea9, type: 3}
