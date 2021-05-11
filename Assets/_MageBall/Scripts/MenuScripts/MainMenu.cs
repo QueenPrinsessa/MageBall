@@ -14,6 +14,8 @@ namespace MageBall
         [SerializeField] private TMP_InputField ipAddressInputField;
         [SerializeField] private GameObject titleScreenPanel;
         [SerializeField] private OptionsMenu optionsMenu;
+        [SerializeField] private GameObject attemptingConnectionPanel;
+
         private MenuButtonController menuButtonController;
 
         private void Start()
@@ -75,6 +77,7 @@ namespace MageBall
 
         private void OnStopClient()
         {
+            attemptingConnectionPanel.SetActive(false);
             titleScreenPanel.SetActive(true);
         }
 
@@ -82,10 +85,12 @@ namespace MageBall
         {
             menuButtonController.ActivateButtons();
             titleScreenPanel.SetActive(false);
+            attemptingConnectionPanel.SetActive(false);
         }
 
         private void OnClientDisconnected()
         {
+            attemptingConnectionPanel.SetActive(false);
             menuButtonController.ActivateButtons();
         }
 
@@ -109,7 +114,7 @@ namespace MageBall
             networkManager.StartClient();
 
             menuButtonController.DeactivateButtons();
-
+            attemptingConnectionPanel.SetActive(true);
         }
 
         public void OpenOptionsMenu()
