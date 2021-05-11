@@ -44,53 +44,26 @@ namespace MageBall
 
         private void Start()
         {
-            LoadGraphicsSettings();
-            LoadControlSettings();
-            LoadSoundSettings();
+            InitializeResolutions();
+            RestoreSettingsFromPrefs();
+            ApplySettings();
         }
 
-        private void LoadGraphicsSettings()
+        private void InitializeResolutions()
         {
             resolutions = Screen.resolutions;
             resolutionDropdown.ClearOptions();
 
             List<string> resolutionOptions = new List<string>();
 
-            int resolutionIndex = 0;
             for (int i = 0; i < resolutions.Length; i++)
             {
                 string resolutionOption = $"{resolutions[i].width} x {resolutions[i].height} {resolutions[i].refreshRate}Hz";
                 resolutionOptions.Add(resolutionOption);
-
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-                    resolutionIndex = i;
             }
 
-            resolutionIndex = PlayerPrefs.GetInt(ResolutionPlayerPrefsKey, resolutionIndex);
             resolutionDropdown.AddOptions(resolutionOptions);
-            resolutionDropdown.value = resolutionIndex;
             resolutionDropdown.RefreshShownValue();
-            SetResolution(resolutionIndex);
-
-            int windowMode = PlayerPrefs.GetInt(WindowModePlayerPrefsKey, (int)Screen.fullScreenMode);
-            windowModeDropdown.value = windowMode;
-            SetWindowMode(windowMode);
-
-            int quality = PlayerPrefs.GetInt(QualityPlayerPrefsKey, QualitySettings.GetQualityLevel());
-            graphicsQualityDropdown.value = quality;
-            SetQuality(quality);
-        }
-
-        private void LoadControlSettings()
-        {
-            float mouseSensitivity = PlayerPrefs.GetFloat(MouseSensitivityPlayerPrefsKey, 1f);
-            mouseSensitivitySlider.value = mouseSensitivity;
-
-            int invertMouseX = PlayerPrefs.GetInt(InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false));
-            invertMouseXToggle.isOn = Convert.ToBoolean(invertMouseX);
-
-            int invertMouseY = PlayerPrefs.GetInt(InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false));
-            invertMouseYToggle.isOn = Convert.ToBoolean(invertMouseY);
         }
 
         private void Update()
@@ -98,16 +71,51 @@ namespace MageBall
             if (!IsOpen)
                 return;
 
-            if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Submit"))
-                CloseMenu();
+            if (Input.GetButtonDown("Cancel"))
+                Cancel();
         }
 
-
-        private void LoadSoundSettings()
+        public void ApplySettings()
         {
+            SetResolution(resolutionDropdown.value);
+            SetWindowMode(windowModeDropdown.value);
+            SetQuality(graphicsQualityDropdown.value);
+            SetMouseSensitivity(mouseSensitivitySlider.value);
+            SetMasterVolume(volumeSlider.value);
+            SetInvertMouseXAxis(invertMouseXToggle.isOn);
+            SetInvertMouseYAxis(invertMouseYToggle.isOn);
+        }
+
+        private void RestoreSettingsFromPrefs()
+        {
+            int resolutionIndex = 0;
+            for (int i = 0; i < resolutions.Length; i++)
+            {
+                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height && resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+                    resolutionIndex = i;
+            }
+            resolutionIndex = PlayerPrefs.GetInt(ResolutionPlayerPrefsKey, resolutionIndex);
+            int quality = PlayerPrefs.GetInt(QualityPlayerPrefsKey, QualitySettings.GetQualityLevel());
+            int windowMode = PlayerPrefs.GetInt(WindowModePlayerPrefsKey, (int)Screen.fullScreenMode);
             float masterVolume = PlayerPrefs.GetFloat(MasterVolumePlayerPrefsKey, 0f);
+            float mouseSensitivity = PlayerPrefs.GetFloat(MouseSensitivityPlayerPrefsKey, 1f);
+            int invertMouseX = PlayerPrefs.GetInt(InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false));
+            int invertMouseY = PlayerPrefs.GetInt(InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false));
+
+            resolutionDropdown.value = resolutionIndex;
+            graphicsQualityDropdown.value = quality;
+            windowModeDropdown.value = windowMode;
+            mouseSensitivitySlider.value = mouseSensitivity;
             volumeSlider.value = masterVolume;
-            SetMasterVolume(masterVolume);
+
+            invertMouseXToggle.isOn = Convert.ToBoolean(invertMouseX);
+            invertMouseYToggle.isOn = Convert.ToBoolean(invertMouseY);
+        }
+
+        public void Cancel()
+        {
+            RestoreSettingsFromPrefs();
+            CloseMenu();
         }
 
         public void SetResolution(int resolutionIndex)
