@@ -93,6 +93,8 @@ namespace MageBall
 
             PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
             playerMovement.enabled = false;
+            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
+            gravity.enabled = false;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.ResetMana();
             spellcasting.CmdSetCanCastSpells(false);
@@ -112,6 +114,9 @@ namespace MageBall
             isFrozen = true;
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
             isFrozen = false;
+
+            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
+            gravity.enabled = true;
 
             PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
             if (pauseMenu != null && pauseMenu.IsOpen)
