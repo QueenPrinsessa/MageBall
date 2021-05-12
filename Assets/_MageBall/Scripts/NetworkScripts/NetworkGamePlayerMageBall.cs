@@ -93,6 +93,8 @@ namespace MageBall
 
             PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
             playerMovement.enabled = false;
+            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
+            gravity.enabled = false;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.ResetMana();
             spellcasting.CmdSetCanCastSpells(false);
@@ -119,6 +121,8 @@ namespace MageBall
 
             PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
             playerMovement.enabled = true;
+            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
+            gravity.enabled = true;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.CmdSetCanCastSpells(true);
         }
