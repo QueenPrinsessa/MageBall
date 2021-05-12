@@ -18,7 +18,7 @@ namespace MageBall
         {
             TargetTriggerAttackAnimation("Attack2");
 
-            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer | LayerMasks.propsLayer))
             {
                 Vector3 pullDirection = aimPosition - hit.transform.position;
                 Vector3 pullForce = pullDirection.normalized * modifier;
