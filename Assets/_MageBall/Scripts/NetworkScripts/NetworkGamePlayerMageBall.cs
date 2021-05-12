@@ -115,14 +115,15 @@ namespace MageBall
             yield return new WaitForSeconds(NetworkManager.WaitBeforeControlsEnableInSeconds);
             isFrozen = false;
 
+            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
+            gravity.enabled = true;
+
             PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
             if (pauseMenu != null && pauseMenu.IsOpen)
                 yield break;
 
             PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
             playerMovement.enabled = true;
-            CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
-            gravity.enabled = true;
             Spellcasting spellcasting = playerGameObject.GetComponent<Spellcasting>();
             spellcasting.CmdSetCanCastSpells(true);
         }
