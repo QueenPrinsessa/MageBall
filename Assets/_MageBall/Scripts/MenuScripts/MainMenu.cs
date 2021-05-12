@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -115,6 +116,16 @@ namespace MageBall
 
             menuButtonController.DeactivateButtons();
             attemptingConnectionPanel.SetActive(true);
+            AudioSource waitMusicSource = attemptingConnectionPanel.GetComponent<AudioSource>();
+            StartCoroutine(PlayAudioWithDelay(waitMusicSource, 0.1f));
+        }
+
+        private IEnumerator PlayAudioWithDelay(AudioSource source, float delayInSeconds)
+        {
+            source.Stop();
+            yield return new WaitForSeconds(delayInSeconds);
+            if(source.isActiveAndEnabled)
+                source.Play();
         }
 
         public void OpenOptionsMenu()
