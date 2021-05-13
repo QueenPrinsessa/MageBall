@@ -9,6 +9,7 @@ namespace MageBall
         public static readonly LayerMask playerLayer;
         public static readonly LayerMask groundLayer;
         public static readonly LayerMask spellsLayer;
+        public static readonly LayerMask propsLayer;
 
         static LayerMasks()
         {
@@ -16,6 +17,7 @@ namespace MageBall
             playerLayer = LayerMask.GetMask("Player");
             groundLayer = LayerMask.GetMask("Ground");
             spellsLayer = LayerMask.GetMask("Spells");
+            propsLayer = LayerMask.GetMask("Props");
         }
     }
 }
