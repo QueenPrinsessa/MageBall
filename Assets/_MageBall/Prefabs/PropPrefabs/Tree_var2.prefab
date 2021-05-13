@@ -59,8 +59,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 494135131044fe3459de2885c191d665, type: 3}
-  - {fileID: -3846018093981099296, guid: 494135131044fe3459de2885c191d665, type: 3}
+  - {fileID: 2100000, guid: 1d1113a4e5a15af4ca90dd23bea8a2fc, type: 2}
+  - {fileID: 2100000, guid: ca84e354511fcb945996b4487eb88f8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,8 +141,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 494135131044fe3459de2885c191d665, type: 3}
-  - {fileID: -3846018093981099296, guid: 494135131044fe3459de2885c191d665, type: 3}
+  - {fileID: 2100000, guid: 1d1113a4e5a15af4ca90dd23bea8a2fc, type: 2}
+  - {fileID: 2100000, guid: ca84e354511fcb945996b4487eb88f8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,11 +218,11 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.045656003
+  - screenRelativeHeight: 0.15023457
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2253594978544683834}
-  - screenRelativeHeight: 0.01
+  - screenRelativeHeight: 0.048382718
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7794860601150547176}
