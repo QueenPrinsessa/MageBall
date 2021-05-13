@@ -12,7 +12,7 @@ Material:
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -20,17 +20,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _AmbientStrength: 0.5
+    - _AmbientStrength: 0.662
     - _BladeCurve: 2
     - _BladeForward: 0.38
-    - _GrassHeight: 1
-    - _GrassWidth: 0.06
-    - _MaxDist: 100
+    - _GrassHeight: 0.8
+    - _GrassWidth: 0.12
+    - _MaxDist: 99.92
     - _MinDist: 30
-    - _Rad: 0.6
-    - _Radius: 0.3
-    - _RandomHeight: 0.25
-    - _Strength: 5
+    - _Rad: 0.785
+    - _Radius: 1.29
+    - _RandomHeight: 0.2
+    - _Strength: 10
     - _WindSpeed: 100
     - _WindStrength: 0.05
     m_Colors:

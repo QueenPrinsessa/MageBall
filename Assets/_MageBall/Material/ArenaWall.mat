@@ -108,7 +108,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EdgeHeight: 0.5
+    - _EdgeHeight: 0.7
     - _EnvironmentReflections: 1
     - _Fill: 0.1
     - _GlossMapScale: 0
@@ -127,11 +127,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - Vector2_fee89051b2774df8937535989d2da3ef: {r: 9, g: 3, b: 0, a: 0}
+    - Vector2_fee89051b2774df8937535989d2da3ef: {r: 10, g: 10, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1.0508571, g: 1.59885, b: 1.6439788, a: 1}
+    - _FresnelColor: {r: 0, g: 0.36258698, b: 0.5568628, a: 1}
+    - _MainColor: {r: 0.2028302, g: 0.65905327, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
