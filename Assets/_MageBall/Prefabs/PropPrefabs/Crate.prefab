@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2400847461244022255}
   - component: {fileID: -9106846155333569680}
+  - component: {fileID: -1713633787544179658}
   - component: {fileID: -2880208525395274681}
-  - component: {fileID: 4992777111805518666}
-  - component: {fileID: 7307127979423582025}
+  - component: {fileID: -1775895434437187947}
+  - component: {fileID: -3726519520800026280}
   - component: {fileID: -4024704422966390748}
   m_Layer: 9
   m_Name: Crate
@@ -44,14 +45,29 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2324475297525008850}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &-1713633787544179658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324475297525008850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157a953ea3eb08644a8a4f94aceccfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  rigidbody: {fileID: -9106846155333569680}
 --- !u!114 &-2880208525395274681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +85,7 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &4992777111805518666
+--- !u!114 &-1775895434437187947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +107,7 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!114 &7307127979423582025
+--- !u!114 &-3726519520800026280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +154,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2324475297525008850}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f99ab684e21d5b148b276edb87b27ae1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

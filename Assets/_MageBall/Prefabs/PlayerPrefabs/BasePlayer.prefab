@@ -135,11 +135,9 @@ MonoBehaviour:
   syncInterval: 0
   maxSpeed: 10
   forceMagnitude: 4
-  jumpHeight: 0.9
+  jumpHeight: 1.2
   speedPassive: {fileID: 11400000, guid: c51e83ba07e1f9045983ab486e0b8337, type: 2}
   jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
-  groundCheckDistance: 0.25
-  groundCheckRadius: 0.25
 --- !u!114 &-2797412249483956625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +153,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   gravity: -10
+  groundCheckDistance: 0.25
 --- !u!114 &5619645232864165116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,8 +227,8 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
-  modifier: 15
-  hitRadius: 0.2
+  modifier: 25
+  hitRadius: 0.3
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
   vfxDuration: 1
@@ -287,7 +286,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
-  hitRadius: 0.2
+  hitRadius: 0.3
   forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
     type: 3}
   durationInSeconds: 5
