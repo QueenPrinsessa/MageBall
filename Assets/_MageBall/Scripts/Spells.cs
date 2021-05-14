@@ -8,6 +8,7 @@ namespace MageBall
     { 
         ForcePush,
         ForcePull,
-        ForceFly
+        ForceFly,
+        Boxmancy
     }
 }
