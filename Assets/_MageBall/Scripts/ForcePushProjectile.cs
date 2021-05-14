@@ -38,7 +38,9 @@ namespace MageBall
             if (colliders.Length > 0)
             {
                 gameObject.GetComponent<Collider>().enabled = false;
-                GameObject vfx = Instantiate(forcePushHitVFX,explosionPoint, Quaternion.LookRotation(transform.position));
+                gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                ContactPoint contact = collision.GetContact(0);
+                GameObject vfx = Instantiate(forcePushHitVFX, explosionPoint, Quaternion.LookRotation(contact.normal));
                 NetworkServer.Spawn(vfx);
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
             }
