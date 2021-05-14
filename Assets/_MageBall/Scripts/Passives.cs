@@ -6,8 +6,8 @@ namespace MageBall
 {
     public enum Passives
     { 
-        SpeedBoost,
-        JumpBoost,
-        ManaBoost
+        FasterSpeed,
+        HigherJumping,
+        FasterManaRegen
     }
 }

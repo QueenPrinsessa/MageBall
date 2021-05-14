@@ -11,7 +11,7 @@ namespace MageBall
     {
         [SerializeField] private Passive increasedMana;
         [SerializeField] private float maxMana = 100f;
-        [SerializeField] private float rechargeRate = 20f;
+        [SerializeField] private float baseRechargeRate = 20f;
         [SyncVar] private Spell mainSpell;
         [SyncVar] private Spell offhandSpell;
         [SyncVar] private Spell extraSpell;
@@ -25,16 +25,13 @@ namespace MageBall
         {
             get 
             { 
-                return currentMana / MaxMana; 
+                return currentMana / maxMana; 
             }
         }
 
-        public float MaxMana
+        public float RechargeRate
         {
-            get
-            {
-                return currentPassive == Passives.ManaBoost ? maxMana * increasedMana.modifier : maxMana;
-            }
+            get => currentPassive == Passives.FasterManaRegen ? baseRechargeRate * increasedMana.modifier : baseRechargeRate;
         }
 
         public override void OnStartAuthority()
@@ -48,8 +45,8 @@ namespace MageBall
             if (!hasAuthority)
                 return;
 
-            currentMana += rechargeRate * Time.deltaTime;
-            currentMana = Mathf.Clamp(currentMana, 0f, MaxMana);
+            currentMana += RechargeRate * Time.deltaTime;
+            currentMana = Mathf.Clamp(currentMana, 0f, maxMana);
 
             if (!canCastSpells)
                 return;
@@ -103,7 +100,7 @@ namespace MageBall
 
         public void ResetMana()
         {
-            currentMana = MaxMana;
+            currentMana = maxMana;
         }
 
         [TargetRpc]
@@ -114,10 +111,10 @@ namespace MageBall
 
         private IEnumerator EnableUnlimitedCasting(int powerUpDuration)
         {
-            float defaultRechargeRate = rechargeRate;
-            rechargeRate = MaxMana * 3;
+            float defaultRechargeRate = baseRechargeRate;
+            baseRechargeRate = maxMana * 3;
             yield return new WaitForSeconds(powerUpDuration);
-            rechargeRate = defaultRechargeRate;
+            baseRechargeRate = defaultRechargeRate;
         }
 
     }

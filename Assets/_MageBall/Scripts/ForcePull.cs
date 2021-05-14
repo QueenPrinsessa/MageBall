@@ -5,10 +5,10 @@ using Mirror;
 namespace MageBall
 {
 
-    public class ForcePull : Spell
+    public class ForcePull : LineSpell
     {
-
-        [SerializeField] private float modifier = 15.0f;
+        [Header("Force Pull Settings")]
+        [SerializeField] private float force = 40.0f;
         [SerializeField] private float hitRadius = 0.2f;
         [SerializeField] private GameObject forcePullHitVFX;
         [SerializeField] private float vfxDuration = 1.5f;
@@ -18,10 +18,10 @@ namespace MageBall
         {
             TargetTriggerAttackAnimation("Attack2");
 
-            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer | LayerMasks.propsLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Range, LayerMasks.ballLayer | LayerMasks.propsLayer))
             {
                 Vector3 pullDirection = aimPosition - hit.transform.position;
-                Vector3 pullForce = pullDirection.normalized * modifier;
+                Vector3 pullForce = pullDirection.normalized * force;
                 if (hit.rigidbody != null)
                 {
                     hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);
@@ -35,6 +35,8 @@ namespace MageBall
                     StartCoroutine(DestroyVFX(vfx, vfxDuration));
                 }
             }
+
+            CreateLine(aimPosition, hit.point);
         }
 
     }

@@ -20,8 +20,8 @@ GameObject:
   - component: {fileID: 118924582342655499}
   - component: {fileID: 7575334805803104451}
   - component: {fileID: 8269165977460520832}
-  - component: {fileID: 2230629447617049366}
   - component: {fileID: 4445340136976529315}
+  - component: {fileID: 2230629447617049366}
   - component: {fileID: -2477796659126010163}
   - component: {fileID: 8230434942319434437}
   m_Layer: 3
@@ -211,7 +211,7 @@ MonoBehaviour:
   syncInterval: 0
   increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
-  rechargeRate: 20
+  baseRechargeRate: 20
 --- !u!114 &7575334805803104451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +227,12 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
-  modifier: 25
+  range: 40
+  linePrefab: {fileID: 6706628073047153593, guid: be0b4a7f39235b842857093d8973d6c2,
+    type: 3}
+  lineWidth: 0.1
+  lineDuration: 0.15
+  force: 40
   hitRadius: 0.3
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
@@ -249,6 +254,31 @@ MonoBehaviour:
   manaCost: 30
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
+--- !u!114 &4445340136976529315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef20f976592fc404da5b8ec537652e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 1
+  syncInterval: 0
+  manaCost: 30
+  range: 60
+  linePrefab: {fileID: 6706628073047153593, guid: b9c8ef98fc488254a9f2330baafcffca,
+    type: 3}
+  lineWidth: 0.1
+  lineDuration: 0.15
+  hitRadius: 0.3
+  forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
+    type: 3}
+  durationInSeconds: 3
+  upwardsForce: 10
 --- !u!114 &2230629447617049366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,25 +301,6 @@ MonoBehaviour:
   cameraSide: 1
   allowCameraToggle: 1
   cameraSideToggleSpeed: 1
---- !u!114 &4445340136976529315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef20f976592fc404da5b8ec537652e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 1
-  syncInterval: 0
-  manaCost: 30
-  hitRadius: 0.3
-  forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
-    type: 3}
-  durationInSeconds: 5
 --- !u!114 &-2477796659126010163
 MonoBehaviour:
   m_ObjectHideFlags: 0

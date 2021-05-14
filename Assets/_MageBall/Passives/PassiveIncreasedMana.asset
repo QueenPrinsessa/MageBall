@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a476f1277237d849b5dd22043f8fab8, type: 3}
   m_Name: PassiveIncreasedMana
   m_EditorClassIdentifier: 
-  modifier: 1.3
+  modifier: 3

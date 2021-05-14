@@ -19,8 +19,8 @@ namespace MageBall
         private Vector3 moveDirection;
         private Vector3 velocity;
 
-        private float JumpHeight => currentPassive == Passives.JumpBoost ? jumpHeight * jumpPassive.modifier : jumpHeight;
-        private float MaxSpeed => currentPassive == Passives.SpeedBoost ? maxSpeed * speedPassive.modifier : maxSpeed;
+        private float JumpHeight => currentPassive == Passives.HigherJumping ? jumpHeight * jumpPassive.modifier : jumpHeight;
+        private float MaxSpeed => currentPassive == Passives.FasterSpeed ? maxSpeed * speedPassive.modifier : maxSpeed;
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
