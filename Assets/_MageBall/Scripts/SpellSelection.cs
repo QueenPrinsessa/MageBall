@@ -88,7 +88,7 @@ namespace MageBall
                 passiveOptions.Add(passiveNameWithSpaces);
             }
 
-            int passiveSelection = PlayerPrefs.GetInt(PassivePlayerPrefsKey, (int) Passives.SpeedBoost);
+            int passiveSelection = PlayerPrefs.GetInt(PassivePlayerPrefsKey, (int) Passives.FasterSpeed);
             PlayerPrefs.SetInt(PassivePlayerPrefsKey, passiveSelection);
             
             InitializeDropdown(passiveDropdown, passiveOptions, passiveSelection);

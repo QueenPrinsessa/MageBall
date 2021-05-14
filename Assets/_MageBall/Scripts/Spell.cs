@@ -6,6 +6,7 @@ namespace MageBall
 {
     public abstract class Spell : NetworkBehaviour
     {
+        [Header("Spell settings")]
         [SerializeField] private float manaCost = 30f;
         private Transform cameraPosition;
         private Transform aimPoint;

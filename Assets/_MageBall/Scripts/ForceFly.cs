@@ -5,23 +5,27 @@ using Mirror;
 
 namespace MageBall
 {
-    public class ForceFly : Spell
+    public class ForceFly : LineSpell
     {
 
+        [Header("Force Fly Settings")]
         [SerializeField] private float hitRadius = 0.2f;
         [SerializeField] private GameObject forceFlyHitVFX;
-        [SerializeField] private float durationInSeconds = 5;
+        [SerializeField] private float durationInSeconds = 3;
+        [SerializeField] private float upwardsForce = 10f;
 
         [Command]
         public override void CmdCastSpell()
         {
             TargetTriggerAttackAnimation("Attack2");
 
-            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer | LayerMasks.propsLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Range, LayerMasks.ballLayer | LayerMasks.propsLayer))
             {
                 if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
                 {
-                    if(hit.rigidbody.useGravity == true)
+                    hit.rigidbody.AddForce(Vector3.up * upwardsForce, ForceMode.Impulse);
+
+                    if (hit.rigidbody.useGravity == true)
                     {
                         hit.rigidbody.useGravity = false;
                         StartCoroutine(EnableGravity(hit.rigidbody));
@@ -37,6 +41,8 @@ namespace MageBall
                     }
                 }
             }
+
+            CreateLine(aimPosition, hit.point);
         }
         private IEnumerator EnableGravity(Rigidbody rigidbody)
         {
