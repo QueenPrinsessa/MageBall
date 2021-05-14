@@ -17,14 +17,14 @@ namespace MageBall
         {
             TargetTriggerAttackAnimation("Attack2");
 
-            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer))
+            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Mathf.Infinity, LayerMasks.ballLayer | LayerMasks.propsLayer))
             {
-                if (hit.rigidbody != null)
+                if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
                 {
                     if(hit.rigidbody.useGravity == true)
                     {
                         hit.rigidbody.useGravity = false;
-                        StartCoroutine(EnableGravity());
+                        StartCoroutine(EnableGravity(hit.rigidbody));
                         GameObject vfx = Instantiate(forceFlyHitVFX, hit.point, Quaternion.LookRotation(hit.normal));
                         FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
                         if (followPosition != null)
@@ -38,12 +38,12 @@ namespace MageBall
                 }
             }
         }
-        private IEnumerator EnableGravity()
+        private IEnumerator EnableGravity(Rigidbody rigidbody)
         {
             yield return new WaitForSeconds(durationInSeconds);
-            GameObject ball = GameObject.FindGameObjectWithTag(Tags.BallTag);
-            Rigidbody rigidbody = ball.GetComponent<Rigidbody>();
-            rigidbody.useGravity = true;
+            
+            if(rigidbody != null)
+                rigidbody.useGravity = true;
         }
     }
 }

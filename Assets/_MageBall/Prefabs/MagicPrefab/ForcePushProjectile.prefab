@@ -177,9 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  flightSpeed: 50
+  flightSpeed: 60
   radius: 8
-  explosionForce: 1500
+  explosionForce: 2000
   vfxDuration: 3
   forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
     type: 3}

@@ -85,6 +85,7 @@ MonoBehaviour:
   waitBeforeResetAfterGoalInSeconds: 1.5
   waitBeforeReturnToLobbyInSeconds: 3
   matchLengthInMinutes: 5
+  selectedArena: 2
 --- !u!114 &5081799449140713998
 MonoBehaviour:
   m_ObjectHideFlags: 0

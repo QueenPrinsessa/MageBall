@@ -28,7 +28,7 @@ QualitySettings:
     billboardsFaceCameraPosition: 0
     vSyncCount: 0
     lodBias: 0.4
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -123,7 +123,7 @@ QualitySettings:
     Nintendo Switch: 2
     PS4: 2
     Stadia: 2
-    Standalone: 2
+    Standalone: 1
     WebGL: 1
     Windows Store Apps: 2
     XboxOne: 2

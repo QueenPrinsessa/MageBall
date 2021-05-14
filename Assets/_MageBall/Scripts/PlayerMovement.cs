@@ -88,19 +88,18 @@ namespace MageBall
             controller.Move(moveDirection);
         }
 
-        [Client]
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            if (hit.rigidbody == null || hit.rigidbody.isKinematic)
+            if (!hasAuthority || hit.rigidbody == null)
                 return;
 
-            CmdPushRigidbody(hit.gameObject, hit.moveDirection);
+            CmdPushRigidbody(hit.gameObject, hit.moveDirection, speed);
         }
 
         [Command]
-        private void CmdPushRigidbody(GameObject go, Vector3 moveDirection)
+        private void CmdPushRigidbody(GameObject gameObject, Vector3 moveDirection, float speed)
         {
-            Rigidbody rigidbody = go.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 
             if (rigidbody == null || rigidbody.isKinematic)
                 return;

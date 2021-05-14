@@ -25,8 +25,8 @@ namespace MageBall
         private float waitBeforeResetAfterGoalInSeconds = 1.5f;
         [SerializeField, Tooltip("The time in seconds before players are returned to lobby.")]
         private float waitBeforeReturnToLobbyInSeconds = 3f;
-        [SerializeField]
-        private int matchLengthInMinutes = 5;
+        [SerializeField] private int matchLengthInMinutes = 5;
+        [SerializeField] private Scenes selectedArena = Scenes.Arena01;
 
         private readonly string arenaPrefix = "Arena_";
 
@@ -135,7 +135,7 @@ namespace MageBall
                 if (!IsReadyToStartMatch())
                     return;
 
-                ServerChangeScene(Scenes.Arena01);
+                ServerChangeScene(selectedArena);
             }
         }
 
