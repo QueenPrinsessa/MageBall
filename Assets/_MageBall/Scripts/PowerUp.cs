@@ -24,7 +24,7 @@ namespace MageBall
                 return;
 
             NetworkServer.Destroy(gameObject);
-            StartCoroutine(spellcasting.PowerUpMana(powerUpDuration));
+            spellcasting.PowerUpRechargeRate(powerUpDuration);
         }
     }
 }
