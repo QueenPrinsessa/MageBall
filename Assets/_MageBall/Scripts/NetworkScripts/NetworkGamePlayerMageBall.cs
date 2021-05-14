@@ -92,6 +92,7 @@ namespace MageBall
                 yield return new WaitUntil(() => playerGameObject != null);
 
             PlayerMovement playerMovement = playerGameObject.GetComponent<PlayerMovement>();
+            playerMovement.ResetSpeed();
             playerMovement.enabled = false;
             CharacterControllerGravity gravity = playerGameObject.GetComponent<CharacterControllerGravity>();
             gravity.enabled = false;

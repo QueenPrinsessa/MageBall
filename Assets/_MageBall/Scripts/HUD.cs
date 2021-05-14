@@ -125,9 +125,17 @@ namespace MageBall
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
             Spellcasting spellcasting = GetComponent<Spellcasting>();
-
+            Animator animator = GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0);
+                animator.SetBool("IsJumping", false);
+            }
             if (playerMovement != null)
+            {
+                playerMovement.ResetSpeed();
                 playerMovement.enabled = false;
+            }
 
             if (thirdPersonCamera != null)
                 thirdPersonCamera.enabled = false;
