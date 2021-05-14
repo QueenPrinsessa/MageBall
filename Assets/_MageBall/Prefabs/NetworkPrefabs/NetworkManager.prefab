@@ -74,6 +74,7 @@ MonoBehaviour:
   - {fileID: 3396705049381777647, guid: b84ccef7d193f364d99d6ba540628b68, type: 3}
   - {fileID: 7578523240381679482, guid: 70813254ee99dfd4f9ce90df8318d4b6, type: 3}
   - {fileID: 4410061950695092489, guid: 612fd254c62b6d748b693dcbc240fd4b, type: 3}
+  - {fileID: 6936871327302920534, guid: 22810dfd20961cd4c98780c7428cbfcb, type: 3}
   menuScene: Assets/_MageBall/Scenes/MainMenu.unity
   networkRoomPlayerPrefab: {fileID: 4365084273300691981, guid: f71868b9ba8155d469df12889c4a8d77,
     type: 3}

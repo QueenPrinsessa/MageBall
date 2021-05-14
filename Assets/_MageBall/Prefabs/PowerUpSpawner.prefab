@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  respawnRate: 60
+  respawnRate: 50
   powerUpPrefab: {fileID: 6936871327302920534, guid: 22810dfd20961cd4c98780c7428cbfcb,
     type: 3}
   spawnPosition: {fileID: 3946901834348619613}
