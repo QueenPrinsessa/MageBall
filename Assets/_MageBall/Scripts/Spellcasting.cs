@@ -106,5 +106,19 @@ namespace MageBall
             currentMana = MaxMana;
         }
 
+        [Server]
+        public void PowerUpRechargeRate(int powerUpDuration)
+        {
+            StartCoroutine(EnableUnlimitedCasting(powerUpDuration));
+        }
+
+        public IEnumerator EnableUnlimitedCasting(int powerUpDuration)
+        {
+            float defaultRechargeRate = rechargeRate;
+            rechargeRate = MaxMana * 3;
+            yield return new WaitForSeconds(powerUpDuration);
+            rechargeRate = defaultRechargeRate;
+        }
+
     }
 }
