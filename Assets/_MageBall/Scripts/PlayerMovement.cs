@@ -9,7 +9,7 @@ namespace MageBall
         private CharacterController controller;
         private CharacterControllerGravity controllerGravity;
         private Animator animator;
-        private float speed = 0f;
+        [SyncVar] private float speed = 0f;
         [SerializeField] private float maxSpeed = 10f;
         [SerializeField] private float forceMagnitude = 6f;
         [SerializeField] private float jumpHeight = 1.3f;
@@ -70,7 +70,7 @@ namespace MageBall
 
             if (horizontal != 0 || vertical != 0)
             {
-                speed = Mathf.Min(speed + forceMagnitude * Time.deltaTime, MaxSpeed);
+                CmdSetSpeed(Mathf.Min(speed + forceMagnitude * Time.deltaTime, MaxSpeed));
 
                 if (vertical < 0)
                     animator.SetBool("RunBackward", true);
@@ -78,7 +78,7 @@ namespace MageBall
                     animator.SetBool("RunBackward", false);
             }
             else
-                speed = 0f;
+                CmdSetSpeed(0);
 
             animator.SetFloat("Speed", speed);
 
@@ -87,6 +87,24 @@ namespace MageBall
             moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
             controller.Move(moveDirection);
         }
+
+        [Client]
+        public void ResetSpeed()
+        {
+            speed = 0;
+        }
+
+        [Command]
+        private void CmdSetSpeed(float speed)
+        {
+            if (speed > MaxSpeed)
+                this.speed = MaxSpeed;
+            else if (speed < 0)
+                this.speed = 0;
+
+            this.speed = speed;
+        }
+
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
