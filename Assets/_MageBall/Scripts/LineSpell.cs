@@ -8,6 +8,7 @@ namespace MageBall
     public class LineSpell : Spell
     {
         [SerializeField] private float range = 40f;
+        [SerializeField] private float hitRadius = 0.3f;
 
         [Header("Line Settings")]
         [SerializeField] private GameObject linePrefab;
@@ -15,6 +16,7 @@ namespace MageBall
         [SerializeField] private float lineDuration = 0.15f;
 
         protected float Range => range;
+        protected float HitRadius => hitRadius;
 
         [Server]
         protected void CreateLine(Vector3 lineOrigin, Vector3 hitPoint)
