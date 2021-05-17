@@ -9,22 +9,22 @@ namespace MageBall
     public class Resizable : NetworkBehaviour
     {
 
-        [SerializeField] private uint maxMagnifyStacks = 5;
-        [SerializeField] private uint maxMinimizeStacks = 5;
+        private readonly uint maxMagnifyStacks = 5;
+        private readonly uint maxMinimizeStacks = 5;
+        private uint magnifyStacks = 0;
+        private uint minimizeStacks = 0;
 
         [SyncVar] private Vector3 defaultScale;
-        [SyncVar] private Vector3 currentScale;
 
-        private readonly SyncList<SpellStackInfo> stacks = new SyncList<SpellStackInfo>();
+        private readonly List<SpellStackInfo> stacks = new List<SpellStackInfo>();
 
         public override void OnStartServer()
         {
             defaultScale = transform.localScale;
-            currentScale = defaultScale;
-            stacks.Callback += UpdateScale;
         }
 
-        private void UpdateScale(SyncList<SpellStackInfo>.Operation op, int itemIndex, SpellStackInfo oldItem, SpellStackInfo newItem)
+        [Server]
+        private void RecalculateScale()
         {
             float combinedModifier = 1f;
 
@@ -33,27 +33,66 @@ namespace MageBall
                 combinedModifier *= stack.Modifier;
             }
 
-            currentScale = defaultScale * combinedModifier;
+            transform.localScale = defaultScale * combinedModifier;
         }
 
         [Server]
-        public void Magnify(SpellStackInfo info)
+        public void ApplySpell(SpellStackInfo info)
         {
+            switch (info.Spell)
+            {
+                case Spells.Magnify:
+                    magnifyStacks++;
+
+                    if (magnifyStacks > maxMagnifyStacks)
+                    {
+                        magnifyStacks = maxMinimizeStacks;
+                        return;
+                    }
+
+                    break;
+                case Spells.Minimize:
+                    minimizeStacks++;
+
+                    if (minimizeStacks > maxMinimizeStacks)
+                    {
+                        minimizeStacks = maxMinimizeStacks;
+                        return;
+                    }
+
+                    break;
+                default:
+                    Debug.LogWarning($"Attempted to pass non-resize spell {info.Spell} to Resizable script.");
+                    return;
+            }
+
             stacks.Add(info);
             StartCoroutine(RemoveStack(info));
+            RecalculateScale();
         }
 
+        [Server]
         private IEnumerator RemoveStack(SpellStackInfo info)
         {
             yield return new WaitForSeconds(info.Duration);
             stacks.Remove(info);
-            
+            DecreaseStackCount(info);
+            RecalculateScale();
         }
 
         [Server]
-        public void Minimize(float modifier)
+        private void DecreaseStackCount(SpellStackInfo stack)
         {
-
+            switch (stack.Spell)
+            {
+                case Spells.Magnify:
+                    magnifyStacks--;
+                    break;
+                case Spells.Minimize:
+                    minimizeStacks--;
+                    break;
+            }
         }
+
     }
 }

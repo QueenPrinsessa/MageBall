@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ namespace MageBall
 {
     public class SpellStackInfo
     {
+
+        public SpellStackInfo() {}
 
         public SpellStackInfo(Spells spell, float modifier, float duration)
         {

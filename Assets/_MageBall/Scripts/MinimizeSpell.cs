@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace MageBall
 {
-    public class MagnifySpell : LineSpell
+    public class MinimizeSpell : LineSpell
     {
-        [Header("Magnify Settings")]
-        [SerializeField] private float modifier = 1.2f;
-        [SerializeField] private GameObject magnifyHitVFX;
-        [SerializeField] private float vfxDuration = 5f;
+        [Header("Minimize Settings")]
+        [SerializeField] private float modifier = 0.8f;
+        [SerializeField] private GameObject minimizeHitVFX;
+        [SerializeField] private float vfxDuration = 10f;
 
         [Command]
         public override void CmdCastSpell()
@@ -22,7 +22,7 @@ namespace MageBall
                 Resizable resizable = hit.transform.GetComponent<Resizable>();
                 if (resizable != null)
                 {
-                    resizable.ApplySpell(new SpellStackInfo(Spells.Magnify, modifier, vfxDuration));
+                    resizable.ApplySpell(new SpellStackInfo(Spells.Minimize, modifier, vfxDuration));
                     //Spawn VFX:
                     //GameObject vfx = Instantiate(forcePullHitVFX, hit.transform.position, Quaternion.identity);
                     //FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
