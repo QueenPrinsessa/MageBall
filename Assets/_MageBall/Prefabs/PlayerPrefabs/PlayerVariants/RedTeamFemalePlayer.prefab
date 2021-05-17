@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3e614b49d4661c24a98b8d1d828170e5, type: 2}
+    - target: {fileID: 1047914153533434709, guid: 70902117bae512643af361a007449354,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e614b49d4661c24a98b8d1d828170e5, type: 2}
     - target: {fileID: 1161548040227501738, guid: 70902117bae512643af361a007449354,
         type: 3}
       propertyPath: m_RootOrder
@@ -67,11 +72,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2383111116812788271, guid: 70902117bae512643af361a007449354,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dc09f00ed742ea4fa6a32262d90fc7d, type: 2}
+    - target: {fileID: 3119067853853171879, guid: 70902117bae512643af361a007449354,
+        type: 3}
+      propertyPath: m_Name
+      value: WomanClothes
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395929594821770536, guid: 70902117bae512643af361a007449354,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e614b49d4661c24a98b8d1d828170e5, type: 2}
     - target: {fileID: 5890550453198497940, guid: 70902117bae512643af361a007449354,
         type: 3}
       propertyPath: m_Name
       value: RedTeamFemalePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 6513121146257479719, guid: 70902117bae512643af361a007449354,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e614b49d4661c24a98b8d1d828170e5, type: 2}
     - target: {fileID: 7011194015911669715, guid: 70902117bae512643af361a007449354,
         type: 3}
       propertyPath: sceneId
