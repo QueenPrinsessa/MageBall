@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace MageBall
 {
-    public class MagnifySpell : LineSpell
+    public class Minimize : LineSpell
     {
-        [Header("Magnify Settings")]
-        [SerializeField] private float modifier = 1.2f;
-        [SerializeField] private GameObject magnifyHitVFX;
-        [SerializeField] private float vfxDuration = 5f;
+        [Header("Minimize Settings")]
+        [SerializeField] private float modifier = 0.8f;
+        [SerializeField] private GameObject minimizeHitVFX;
+        [SerializeField] private float duration = 10f;
+        [SerializeField] private float vfxDuration = 10f;
 
         [Command]
         public override void CmdCastSpell()
@@ -22,14 +23,14 @@ namespace MageBall
                 Resizable resizable = hit.transform.GetComponent<Resizable>();
                 if (resizable != null)
                 {
-                    resizable.ApplySpell(new SpellStackInfo(Spells.Magnify, modifier, vfxDuration));
+                    resizable.ApplySpell(new SpellStackInfo(Spells.Minimize, modifier, duration));
                     //Spawn VFX:
-                    //GameObject vfx = Instantiate(forcePullHitVFX, hit.transform.position, Quaternion.identity);
+                    //GameObject vfx = Instantiate(minimizeHitVFX, hit.transform.position, Quaternion.identity);
                     //FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
                     //if (followPosition != null)
                     //    followPosition.FollowTransform = hit.transform;
                     //else
-                    //    Debug.LogError("No FollowPosition script attached to ForcePull vfx");
+                    //    Debug.LogError("No FollowPosition script attached to Minimize vfx");
                     //NetworkServer.Spawn(vfx);
                     //StartCoroutine(DestroyVFX(vfx, vfxDuration));
                 }

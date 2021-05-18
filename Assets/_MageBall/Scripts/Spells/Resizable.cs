@@ -41,7 +41,7 @@ namespace MageBall
         {
             switch (info.Spell)
             {
-                case Spells.Magnify:
+                case Spells.Maximize:
                     magnifyStacks++;
 
                     if (magnifyStacks > maxMagnifyStacks)
@@ -85,7 +85,7 @@ namespace MageBall
         {
             switch (stack.Spell)
             {
-                case Spells.Magnify:
+                case Spells.Maximize:
                     magnifyStacks--;
                     break;
                 case Spells.Minimize:

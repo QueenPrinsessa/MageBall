@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace MageBall
 {
-    public class MinimizeSpell : LineSpell
+    public class Maximize : LineSpell
     {
-        [Header("Minimize Settings")]
-        [SerializeField] private float modifier = 0.8f;
-        [SerializeField] private GameObject minimizeHitVFX;
+        [Header("Maximize Settings")]
+        [SerializeField] private float modifier = 1.2f;
+        [SerializeField] private GameObject maximizeHitVFX;
+        [SerializeField] private float duration = 10f;
         [SerializeField] private float vfxDuration = 10f;
 
         [Command]
@@ -22,14 +23,14 @@ namespace MageBall
                 Resizable resizable = hit.transform.GetComponent<Resizable>();
                 if (resizable != null)
                 {
-                    resizable.ApplySpell(new SpellStackInfo(Spells.Minimize, modifier, vfxDuration));
+                    resizable.ApplySpell(new SpellStackInfo(Spells.Maximize, modifier, vfxDuration));
                     //Spawn VFX:
-                    //GameObject vfx = Instantiate(forcePullHitVFX, hit.transform.position, Quaternion.identity);
+                    //GameObject vfx = Instantiate(maximizeHitVFX, hit.transform.position, Quaternion.identity);
                     //FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
                     //if (followPosition != null)
                     //    followPosition.FollowTransform = hit.transform;
                     //else
-                    //    Debug.LogError("No FollowPosition script attached to ForcePull vfx");
+                    //    Debug.LogError("No FollowPosition script attached to Maximize vfx");
                     //NetworkServer.Spawn(vfx);
                     //StartCoroutine(DestroyVFX(vfx, vfxDuration));
                 }
