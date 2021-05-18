@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 5619645232864165116}
   - component: {fileID: 1425847055805290944}
   - component: {fileID: 118924582342655499}
+  - component: {fileID: -6746422148729648931}
+  - component: {fileID: -8197081607477754250}
   - component: {fileID: 7575334805803104451}
   - component: {fileID: 8269165977460520832}
   - component: {fileID: 4445340136976529315}
@@ -213,6 +215,54 @@ MonoBehaviour:
   increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
   baseRechargeRate: 20
+--- !u!114 &-6746422148729648931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a568168d32fb1dc469bb941199f6ef2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 1
+  syncInterval: 0
+  manaCost: 20
+  range: 40
+  hitRadius: 0.3
+  linePrefab: {fileID: 6706628073047153593, guid: adeff937aaa354b4f915e37847582b33,
+    type: 3}
+  lineWidth: 0.1
+  lineDuration: 0.15
+  modifier: 1.3
+  magnifyHitVFX: {fileID: 0}
+  vfxDuration: 10
+--- !u!114 &-8197081607477754250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5116a3904e002454991c1ba7001b07da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 1
+  syncInterval: 0
+  manaCost: 20
+  range: 40
+  hitRadius: 0.3
+  linePrefab: {fileID: 6706628073047153593, guid: 6510b39928515b649ab98e15f4d0ffad,
+    type: 3}
+  lineWidth: 0.1
+  lineDuration: 0.15
+  modifier: 0.9
+  minimizeHitVFX: {fileID: 0}
+  vfxDuration: 10
 --- !u!114 &7575334805803104451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,12 +279,12 @@ MonoBehaviour:
   syncInterval: 0
   manaCost: 30
   range: 40
+  hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: be0b4a7f39235b842857093d8973d6c2,
     type: 3}
   lineWidth: 0.1
   lineDuration: 0.15
   force: 40
-  hitRadius: 0.3
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
   vfxDuration: 1
@@ -271,11 +321,11 @@ MonoBehaviour:
   syncInterval: 0
   manaCost: 30
   range: 60
+  hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: b9c8ef98fc488254a9f2330baafcffca,
     type: 3}
   lineWidth: 0.1
   lineDuration: 0.15
-  hitRadius: 0.3
   forceFlyHitVFX: {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35,
     type: 3}
   durationInSeconds: 3

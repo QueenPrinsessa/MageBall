@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8402276572749556863}
   - component: {fileID: 7386123596916984094}
   - component: {fileID: 6536697035736527112}
+  - component: {fileID: 6301811661379423393}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
@@ -123,7 +124,7 @@ MonoBehaviour:
   excludeOwnerUpdate: 1
   syncPosition: 1
   syncRotation: 1
-  syncScale: 0
+  syncScale: 1
   interpolatePosition: 0
   interpolateRotation: 0
   interpolateScale: 0
@@ -160,6 +161,20 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   rigidbody: {fileID: 3085337723083032213}
+--- !u!114 &6301811661379423393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085337723083032233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b299b11325fe546942194e05fda4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1001 &791207834667505774
 PrefabInstance:
   m_ObjectHideFlags: 0

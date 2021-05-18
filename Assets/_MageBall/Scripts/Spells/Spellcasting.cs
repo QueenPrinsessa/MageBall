@@ -80,6 +80,10 @@ namespace MageBall
                     return GetComponent<ForceFly>();
                 case Spells.Boxmancy:
                     return GetComponent<Boxmancy>();
+                case Spells.Maximize:
+                    return GetComponent<Maximize>();
+                case Spells.Minimize:
+                    return GetComponent<Minimize>();
                 default:
                     return GetComponent<ForcePush>();
             }

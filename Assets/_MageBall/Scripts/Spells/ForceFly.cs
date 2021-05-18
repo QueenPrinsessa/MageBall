@@ -9,7 +9,6 @@ namespace MageBall
     {
 
         [Header("Force Fly Settings")]
-        [SerializeField] private float hitRadius = 0.2f;
         [SerializeField] private GameObject forceFlyHitVFX;
         [SerializeField] private float durationInSeconds = 3;
         [SerializeField] private float upwardsForce = 10f;
@@ -19,7 +18,7 @@ namespace MageBall
         {
             TargetTriggerAttackAnimation("Attack2");
 
-            if (Physics.SphereCast(aimPosition, hitRadius, aimForward, out RaycastHit hit, Range, LayerMasks.ballLayer | LayerMasks.propsLayer))
+            if (Physics.SphereCast(aimPosition, HitRadius, aimForward, out RaycastHit hit, Range, LayerMasks.ballLayer | LayerMasks.propsLayer))
             {
                 if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
                 {

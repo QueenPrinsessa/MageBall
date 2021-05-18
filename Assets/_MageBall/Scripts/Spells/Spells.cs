@@ -9,6 +9,8 @@ namespace MageBall
         ForcePush,
         ForcePull,
         ForceFly,
-        Boxmancy
+        Boxmancy,
+        Maximize,
+        Minimize
     }
 }
