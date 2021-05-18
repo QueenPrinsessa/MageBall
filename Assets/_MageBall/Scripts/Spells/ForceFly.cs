@@ -29,7 +29,7 @@ namespace MageBall
                         hit.rigidbody.useGravity = false;
                         StartCoroutine(EnableGravity(hit.rigidbody));
                         GameObject vfx = Instantiate(forceFlyHitVFX, hit.point, Quaternion.LookRotation(hit.normal));
-                        FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
+                        VFXFollowObject followPosition = vfx.GetComponent<VFXFollowObject>();
                         if (followPosition != null)
                             followPosition.FollowTransform = hit.transform;
                         else

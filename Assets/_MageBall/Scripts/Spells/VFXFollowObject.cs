@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace MageBall
 {
-    public class FollowPosition : NetworkBehaviour
+    public class VFXFollowObject : NetworkBehaviour
     {
+
+        [SerializeField] private bool followPosition = true;
+        [SerializeField] private bool matchRotation = false;
+        [SerializeField] private bool matchScale = false;
 
         [SyncVar]
         private Transform followTransform;
@@ -20,6 +24,7 @@ namespace MageBall
             }
 
             transform.position = FollowTransform.position;
+            transform.localScale = followTransform.localScale;
         }
     }
 }
