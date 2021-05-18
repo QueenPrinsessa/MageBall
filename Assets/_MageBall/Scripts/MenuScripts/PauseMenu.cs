@@ -43,7 +43,7 @@ namespace MageBall
             }
             else
             {
-                if (Input.GetButtonDown("Cancel"))
+                if (Input.GetButtonDown("Pause"))
                     OpenMenu();
             }
         }

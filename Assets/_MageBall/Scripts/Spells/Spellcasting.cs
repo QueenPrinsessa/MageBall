@@ -51,9 +51,10 @@ namespace MageBall
             if (!canCastSpells)
                 return;
 
-            if (Input.GetButtonDown("Fire1") && UseMana(mainSpell.ManaCost))
+
+            if ((Input.GetButtonDown("Fire1") || Input.GetAxis("Fire1") == 1f) && UseMana(mainSpell.ManaCost))
                 mainSpell.CmdCastSpell();
-            else if (Input.GetButtonDown("Fire2") && UseMana(offhandSpell.ManaCost))
+            else if ((Input.GetButtonDown("Fire2") || Input.GetAxis("Fire2") == 1f) && UseMana(offhandSpell.ManaCost))
                 offhandSpell.CmdCastSpell();
             else if (Input.GetButtonDown("Fire3") && UseMana(extraSpell.ManaCost))
                 extraSpell.CmdCastSpell();
