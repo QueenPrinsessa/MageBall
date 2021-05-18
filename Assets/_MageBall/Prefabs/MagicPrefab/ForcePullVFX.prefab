@@ -168,6 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  followPosition: 1
+  matchRotation: 0
+  matchScale: 1
 --- !u!82 &-8334916116262517035
 AudioSource:
   m_ObjectHideFlags: 0

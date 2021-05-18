@@ -24,15 +24,18 @@ namespace MageBall
                 if (resizable != null)
                 {
                     resizable.ApplySpell(new SpellStackInfo(Spells.Minimize, modifier, duration));
-                    //Spawn VFX:
-                    //GameObject vfx = Instantiate(minimizeHitVFX, hit.transform.position, Quaternion.identity);
-                    //FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
-                    //if (followPosition != null)
-                    //    followPosition.FollowTransform = hit.transform;
-                    //else
-                    //    Debug.LogError("No FollowPosition script attached to Minimize vfx");
-                    //NetworkServer.Spawn(vfx);
-                    //StartCoroutine(DestroyVFX(vfx, vfxDuration));
+
+                    if (minimizeHitVFX != null)
+                    {
+                        GameObject vfx = Instantiate(minimizeHitVFX, hit.transform.position, Quaternion.identity);
+                        VFXFollowObject followPosition = vfx.GetComponent<VFXFollowObject>();
+                        if (followPosition != null)
+                            followPosition.FollowTransform = hit.transform;
+                        else
+                            Debug.LogError("No FollowPosition script attached to Minimize vfx");
+                        NetworkServer.Spawn(vfx);
+                        StartCoroutine(DestroyVFX(vfx, vfxDuration));
+                    }
                 }
             }
 

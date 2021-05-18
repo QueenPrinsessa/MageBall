@@ -25,7 +25,7 @@ namespace MageBall
                 {
                     hit.rigidbody.AddForce(pullForce, ForceMode.Impulse);
                     GameObject vfx= Instantiate(forcePullHitVFX, hit.point, Quaternion.LookRotation(hit.normal));
-                    FollowPosition followPosition = vfx.GetComponent<FollowPosition>();
+                    VFXFollowObject followPosition = vfx.GetComponent<VFXFollowObject>();
                     if (followPosition != null)
                         followPosition.FollowTransform = hit.transform;
                     else
