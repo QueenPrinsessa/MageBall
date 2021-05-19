@@ -126,6 +126,8 @@ namespace MageBall
             ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
             Spellcasting spellcasting = GetComponent<Spellcasting>();
             Animator animator = GetComponent<Animator>();
+            Dancing dancing = GetComponent<Dancing>();
+
             if (animator != null)
             {
                 animator.SetFloat("Speed", 0);
@@ -135,6 +137,12 @@ namespace MageBall
             {
                 playerMovement.ResetSpeed();
                 playerMovement.enabled = false;
+            }
+
+            if (dancing != null)
+            {
+                dancing.enabled = false;
+                dancing.StopDancing();
             }
 
             if (thirdPersonCamera != null)
@@ -151,9 +159,13 @@ namespace MageBall
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             ThirdPersonCamera thirdPersonCamera = GetComponent<ThirdPersonCamera>();
             Spellcasting spellcasting = GetComponent<Spellcasting>();
+            Dancing dancing = GetComponent<Dancing>();
 
             if (playerMovement != null && !networkGamePlayerMageBall.IsFrozen)
                 playerMovement.enabled = true;
+
+            if (dancing != null)
+                dancing.enabled = true;
 
             if (thirdPersonCamera != null)
                 thirdPersonCamera.enabled = true;
