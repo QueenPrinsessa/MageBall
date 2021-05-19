@@ -1,15 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MageBall
 {
+
     [RequireComponent(typeof(Button), typeof(Animator))]
     public class MenuButton : MonoBehaviour
     {
 
         [SerializeField, Min(0), Tooltip("Button index. Starts from 0.")] private int index;
+        [SerializeField] private UnityEvent buttonDeselected;
+        [SerializeField] private UnityEvent buttonSelected;
         private Button button;
         private MenuButtonController menuButtonController;
         private Animator animator;
@@ -34,6 +38,9 @@ namespace MageBall
             if (menuButtonController == null)
                 return;
 
+            if (menuButtonController.Index != index)
+                buttonDeselected.Invoke();
+
             if (menuButtonController.Index != index || !Selectable)
             {
                 animator.SetBool("Selected", false);
@@ -41,6 +48,7 @@ namespace MageBall
             }
 
             animator.SetBool("Selected", true);
+            buttonSelected.Invoke();
 
             if (!Interactable)
                 return;
@@ -68,8 +76,9 @@ namespace MageBall
                 return;
 
             ButtonSelected?.Invoke();
-            menuButtonController.Index = index;
+            buttonSelected.Invoke();
             button.Select();
+            menuButtonController.Index = index;
         }
     }
 }

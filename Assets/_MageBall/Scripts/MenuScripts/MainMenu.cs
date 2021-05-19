@@ -95,6 +95,16 @@ namespace MageBall
             menuButtonController.ActivateButtons();
         }
 
+        public void HideIpAddressField()
+        {
+            ipAddressInputField.gameObject.SetActive(false);
+        }
+
+        public void ShowIpAddressField()
+        {
+            ipAddressInputField.gameObject.SetActive(true);
+        }
+
         public void CreateGame()
         {
             if (networkManager == null)
@@ -110,7 +120,10 @@ namespace MageBall
         public void JoinGame()
         {
             string ipAddress = ipAddressInputField.text.Trim();
-            ipAddress = string.IsNullOrEmpty(ipAddress) ? "localhost" : ipAddress;
+
+            if (string.IsNullOrEmpty(ipAddress))
+                return;
+
             networkManager.networkAddress = ipAddress;
             networkManager.StartClient();
 

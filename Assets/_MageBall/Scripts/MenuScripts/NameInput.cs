@@ -11,11 +11,12 @@ namespace MageBall
         public const string PlayerPrefsDisplayNameKey = "DisplayName";
 
         private TMP_InputField inputField;
-        [SerializeField, Tooltip("Buttons that aren't pressable unless a name has been set")] private MenuButton[] lockedButtons;
+        [SerializeField] private MenuButtonController menuButtonController;
+        //[SerializeField, Tooltip("Buttons that aren't pressable unless a name has been set")] private MenuButton[] lockedButtons;
 
         public string DisplayName { get; private set; }
 
-        private void Awake()
+        private void Start()
         {
             inputField = gameObject.GetComponent<TMP_InputField>();
 
@@ -30,10 +31,7 @@ namespace MageBall
 
         private void SetupInputField()
         {
-            if (!PlayerPrefs.HasKey(PlayerPrefsDisplayNameKey))
-                return;
-
-            string savedDisplayName = PlayerPrefs.GetString(PlayerPrefsDisplayNameKey);
+            string savedDisplayName = PlayerPrefs.GetString(PlayerPrefsDisplayNameKey, "");
             inputField.text = savedDisplayName;
 
             if (CheckValidName(savedDisplayName))
@@ -43,8 +41,11 @@ namespace MageBall
         private bool CheckValidName(string name)
         {
             bool validName = !string.IsNullOrEmpty(name);
-            foreach (MenuButton menuButton in lockedButtons)
-                menuButton.Selectable = validName;
+
+            if (validName)
+                menuButtonController.ShowAllButtons();
+            else
+                menuButtonController.HideAllButtons();
 
             return validName;
         }
