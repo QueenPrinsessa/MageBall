@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7001276020504437819}
   - component: {fileID: 7391772474540796690}
   m_Layer: 8
-  m_Name: NoGravityVFX
+  m_Name: ForceFlyVFX
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,9 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,6 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  followPosition: 1
+  matchRotation: 0
+  matchScale: 0
 --- !u!82 &7391772474540796690
 AudioSource:
   m_ObjectHideFlags: 0
@@ -221,7 +226,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

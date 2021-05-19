@@ -13,6 +13,7 @@ namespace MageBall
         [SerializeField] private float explosionForce = 2000f;
         [SerializeField] private float vfxDuration = 3f;
         [SerializeField] private GameObject forcePushHitVFX;
+        [SerializeField] private AudioSource audioSource;
 
         [ServerCallback]
         void Update()
@@ -37,6 +38,7 @@ namespace MageBall
 
             if (colliders.Length > 0)
             {
+                audioSource.Stop();
                 gameObject.GetComponent<Collider>().enabled = false;
                 RpcDisableProjectileVFX();
                 ContactPoint contact = collision.GetContact(0);
