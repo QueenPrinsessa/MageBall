@@ -57,7 +57,7 @@ namespace MageBall
                 animator.SetBool("IsJumping", true);
             }
 
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.fixedDeltaTime);
         }
 
         private void HandleMovement()
@@ -70,7 +70,7 @@ namespace MageBall
 
             if (horizontal != 0 || vertical != 0)
             {
-                CmdSetSpeed(Mathf.Min(speed + forceMagnitude * Time.deltaTime, MaxSpeed));
+                CmdSetSpeed(Mathf.Min(speed + forceMagnitude * Time.fixedDeltaTime, MaxSpeed));
 
                 if (vertical < 0)
                     animator.SetBool("RunBackward", true);
@@ -82,7 +82,7 @@ namespace MageBall
 
             animator.SetFloat("Speed", speed);
 
-            Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
+            Vector3 flatMovement = speed * Time.fixedDeltaTime * transformDirection;
 
             moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
             controller.Move(moveDirection);
