@@ -23,8 +23,14 @@ namespace MageBall
                 return;
             }
 
-            transform.position = FollowTransform.position;
-            transform.localScale = followTransform.localScale;
+            if(followPosition)
+                transform.position = FollowTransform.position;
+
+            if (matchRotation)
+                transform.rotation = FollowTransform.rotation;
+
+            if(matchScale)
+                transform.localScale = followTransform.localScale;
         }
     }
 }
