@@ -71,7 +71,7 @@ namespace MageBall
             if (!Interactable)
                 return;
 
-            float axis = isHorizontalMenu ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Vertical");
+            float axis = isHorizontalMenu ? -Input.GetAxisRaw("Horizontal") + -Input.GetAxisRaw("MenuHorizontal") : Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("MenuVertical");
 
             if(!MoveToNextAvailableMenuButton(axis))
                 return;
