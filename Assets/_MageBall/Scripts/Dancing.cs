@@ -37,37 +37,52 @@ namespace MageBall
 
             if (dance1 && !isDance1Locked)
             {
-                StopDancing();
+                StopDancing(1);
                 animator.SetBool("Dance1", !animator.GetBool("Dance1"));
                 isDance1Locked = true;
             }
             else if (dance2 && !isDance2Locked)
             {
-                StopDancing();
+                StopDancing(2);
                 animator.SetBool("Dance2", !animator.GetBool("Dance2"));
                 isDance2Locked = true;
             }
             else if (dance3 && !isDance3Locked)
             {
-                StopDancing();
+                StopDancing(3);
                 animator.SetBool("Dance3", !animator.GetBool("Dance3"));
                 isDance3Locked = true;
             }
             else if (dance4 && !isDance4Locked)
             {
-                StopDancing();
+                StopDancing(4);
                 animator.SetBool("Dance4", !animator.GetBool("Dance4"));
                 isDance4Locked = true;
             }
 
         }
 
-        private void StopDancing()
+        public void StopDancing()
         {
-            animator.SetBool("Dance1", false);
-            animator.SetBool("Dance2", false);
-            animator.SetBool("Dance3", false);
-            animator.SetBool("Dance4", false);
+            StopDancing(-1);
+        }
+
+        public void StopDancing(int currentDance)
+        {
+            if (!hasAuthority)
+                return;
+
+            if(currentDance != 1)
+                animator.SetBool("Dance1", false);
+            
+            if(currentDance != 2)
+                animator.SetBool("Dance2", false);
+
+            if(currentDance != 3)
+                animator.SetBool("Dance3", false);
+
+            if(currentDance != 4)
+                animator.SetBool("Dance4", false);
         }
 
     }
