@@ -128,8 +128,8 @@ GameObject:
   - component: {fileID: 2366797548967315910}
   - component: {fileID: -8987871216110443510}
   - component: {fileID: 7760453650874036706}
-  - component: {fileID: 4403369487306535221}
   - component: {fileID: 2827828663644644281}
+  - component: {fileID: 6540593512317734005}
   m_Layer: 8
   m_Name: ForcePushProjectile
   m_TagString: Spell
@@ -184,8 +184,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   flightSpeed: 60
-  radius: 8
-  explosionForce: 2000
+  radius: 4
+  explosionForce: 1000
   vfxDuration: 3
   forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
     type: 3}
@@ -226,20 +226,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
---- !u!135 &4403369487306535221
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3606733632085325176}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_CollisionDetection: 2
 --- !u!82 &2827828663644644281
 AudioSource:
   m_ObjectHideFlags: 0
@@ -337,3 +324,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &6540593512317734005
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3606733632085325176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
