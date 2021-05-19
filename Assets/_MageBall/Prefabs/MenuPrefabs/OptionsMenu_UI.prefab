@@ -1010,7 +1010,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 20.000015, y: 0}
-  m_SizeDelta: {x: 162.9932, y: 20}
+  m_SizeDelta: {x: 203.01, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5419564969512843435
 CanvasRenderer:
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Invert Mouse Y Axis
+  m_text: 'Invert Camera Y Axis
 
 '
   m_isRightToLeft: 0
@@ -1223,7 +1223,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 20.000015, y: 0}
-  m_SizeDelta: {x: 162.9932, y: 20}
+  m_SizeDelta: {x: 203.01, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6562963263139076606
 CanvasRenderer:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Invert Mouse X Axis
+  m_text: Invert Camera X Axis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8584c94a61ac544a83fd268529f5526, type: 2}
   m_sharedMaterial: {fileID: 2539817571571245268, guid: d8584c94a61ac544a83fd268529f5526,
@@ -6559,7 +6559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mouse sensitivity
+  m_text: 'Look sensitivity
 
 '
   m_isRightToLeft: 0

@@ -16,9 +16,9 @@ namespace MageBall
         public int Index { get; set; } = 0;
         public bool Interactable { get; private set; } = true;
 
-        private void Start()
+        private void Awake()
         {
-            MenuButton[] menuButtons = GetComponentsInChildren<MenuButton>();
+            MenuButton[] menuButtons = GetComponentsInChildren<MenuButton>(true);
 
             int currentMaxIndex = 0;
             foreach (MenuButton menuButton in menuButtons)
@@ -168,6 +168,22 @@ namespace MageBall
             }
 
             Interactable = true;
+        }
+
+        public void HideAllButtons()
+        {
+            foreach (var button in menuButtons)
+            {
+                button.Value.gameObject.SetActive(false);
+            }
+        }
+
+        public void ShowAllButtons()
+        {
+            foreach (var button in menuButtons)
+            {
+                button.Value.gameObject.SetActive(true);
+            }
         }
     }
 }
