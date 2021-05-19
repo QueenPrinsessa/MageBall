@@ -1,26 +1,32 @@
 ﻿using Mirror;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace MageBall
 {
     public class PlayerMovement : NetworkBehaviour
     {
+
+        [Header("Movement Settings")]
+        [SerializeField] private float maxSpeed = 10f;
+        [SerializeField] private float jumpHeight = 1.3f;
+        [SerializeField] private float acceleration = 3.5f;
+        [SerializeField] private float deacceleration = 30f;
+        [SerializeField] private Passive speedPassive;
+        [SerializeField] private Passive jumpPassive;
+
         private CharacterController controller;
         private CharacterControllerGravity controllerGravity;
         private Animator animator;
-        [SyncVar] private float speed = 0f;
-        [SerializeField] private float maxSpeed = 10f;
-        [SerializeField] private float forceMagnitude = 6f;
-        [SerializeField] private float jumpHeight = 1.3f;
-        [SerializeField] private Passive speedPassive;
-        [SerializeField] private Passive jumpPassive;
-        [SyncVar] private Passives currentPassive;
-        private Vector3 moveDirection;
         private Vector3 velocity;
+        private float currentSpeed = 0f;
+        private bool canJump = true;
+        [SyncVar] private Passives currentPassive;
 
         private float JumpHeight => currentPassive == Passives.HigherJumping ? jumpHeight * jumpPassive.modifier : jumpHeight;
         private float MaxSpeed => currentPassive == Passives.FasterSpeed ? maxSpeed * speedPassive.modifier : maxSpeed;
+
         public override void OnStartAuthority()
         {
             controller = GetComponent<CharacterController>();
@@ -44,65 +50,56 @@ namespace MageBall
 
             bool isGrounded = controllerGravity.IsGrounded();
 
-            if (isGrounded)
-            {
-                moveDirection.y = 0;
-                velocity.y = 0;
-                animator.SetBool("IsJumping", false);
-            }
-
-            if (Input.GetButton("Jump") && isGrounded)
+            if (Input.GetButton("Jump") && canJump)
             {
                 velocity.y += Mathf.Sqrt(JumpHeight * -3.0f * controllerGravity.Gravity);
                 animator.SetBool("IsJumping", true);
+                canJump = false;
+            }
+            else if (isGrounded)
+            {
+                velocity.y = 0;
+                animator.SetBool("IsJumping", false);
+                canJump = true;
             }
 
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.fixedDeltaTime);
         }
+
 
         private void HandleMovement()
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
 
-            Vector3 inputDirection = new Vector3(horizontal, 0, vertical);
-            Vector3 transformDirection = transform.TransformDirection(inputDirection);
+            Vector3 direction = (transform.right * horizontal + transform.forward * vertical).normalized;
+            float dot = Vector3.Dot(transform.forward, direction);
 
-            if (horizontal != 0 || vertical != 0)
-            {
-                CmdSetSpeed(Mathf.Min(speed + forceMagnitude * Time.deltaTime, MaxSpeed));
-
-                if (vertical < 0)
-                    animator.SetBool("RunBackward", true);
-                else
-                    animator.SetBool("RunBackward", false);
-            }
+            if ((horizontal != 0f || vertical != 0f))
+                currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.fixedDeltaTime, dot < 0.5f ? MaxSpeed/2 : MaxSpeed);
             else
-                CmdSetSpeed(0);
+                currentSpeed = Mathf.Max(currentSpeed - deacceleration * Time.fixedDeltaTime, 0f);
 
-            animator.SetFloat("Speed", speed);
+            CmdUpdateSpeedOnServer(currentSpeed);
 
-            Vector3 flatMovement = speed * Time.deltaTime * transformDirection;
+            animator.SetFloat("Speed", currentSpeed);
 
-            moveDirection = new Vector3(flatMovement.x, moveDirection.y, flatMovement.z);
-            controller.Move(moveDirection);
+            float distance = currentSpeed * Time.fixedDeltaTime;
+            controller.Move(distance * direction);
         }
 
         [Client]
         public void ResetSpeed()
         {
-            speed = 0;
+            currentSpeed = 0;
         }
 
         [Command]
-        private void CmdSetSpeed(float speed)
+        private void CmdUpdateSpeedOnServer(float speed)
         {
-            if (speed > MaxSpeed)
-                this.speed = MaxSpeed;
-            else if (speed < 0)
-                this.speed = 0;
-
-            this.speed = speed;
+            currentSpeed = speed;
         }
 
 
@@ -111,7 +108,7 @@ namespace MageBall
             if (!hasAuthority || hit.rigidbody == null)
                 return;
 
-            CmdPushRigidbody(hit.gameObject, hit.moveDirection, speed);
+            CmdPushRigidbody(hit.gameObject, hit.moveDirection, currentSpeed);
         }
 
         [Command]

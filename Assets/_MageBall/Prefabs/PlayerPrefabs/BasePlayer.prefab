@@ -138,8 +138,9 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   maxSpeed: 10
-  forceMagnitude: 4
-  jumpHeight: 1.2
+  jumpHeight: 1.8
+  acceleration: 4
+  deacceleration: 30
   speedPassive: {fileID: 11400000, guid: c51e83ba07e1f9045983ab486e0b8337, type: 2}
   jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
 --- !u!114 &-2797412249483956625
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  gravity: -10
+  gravity: -30
   groundCheckDistance: 0.25
 --- !u!114 &5619645232864165116
 MonoBehaviour:
