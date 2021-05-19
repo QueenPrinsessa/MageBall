@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 410541546363074372, guid: 75255c3af7d659845a5729edb3676b09,
         type: 3}
       propertyPath: m_Name
-      value: BasePlayer
+      value: BlueTeamFemalePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 3837413222293008387, guid: 75255c3af7d659845a5729edb3676b09,
         type: 3}
@@ -79,3 +79,84 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75255c3af7d659845a5729edb3676b09, type: 3}
+--- !u!4 &2524598479090042433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4905366642942585210, guid: 75255c3af7d659845a5729edb3676b09,
+    type: 3}
+  m_PrefabInstance: {fileID: 7429373715215019835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7628031633898815724
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2524598479090042433}
+    m_Modifications:
+    - target: {fileID: -8747454412220907559, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dc09f00ed742ea4fa6a32262d90fc7d, type: 2}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6588a1e028875c9479ef0c8d5a67d814,
+        type: 3}
+      propertyPath: m_Name
+      value: FemalePlayerClothesBlue
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 6588a1e028875c9479ef0c8d5a67d814, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 6588a1e028875c9479ef0c8d5a67d814, type: 3}

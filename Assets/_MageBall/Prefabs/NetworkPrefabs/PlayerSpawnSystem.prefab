@@ -63,11 +63,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  redTeamMalePlayerPrefab: {fileID: 7578523240381679482, guid: 70813254ee99dfd4f9ce90df8318d4b6,
+  redTeamMalePlayerPrefab: {fileID: 9181742627265919628, guid: 2f19e703378caed429889aa166e1b041,
     type: 3}
-  blueTeamMalePlayerPrefab: {fileID: 4410061950695092489, guid: 612fd254c62b6d748b693dcbc240fd4b,
+  blueTeamMalePlayerPrefab: {fileID: 6314229391345190451, guid: c1322d63dabc64241870a8313add7953,
     type: 3}
-  redTeamFemalePlayerPrefab: {fileID: 614285792039356309, guid: bab8bd7e0024acc4ca364083a6a71bbe,
+  redTeamFemalePlayerPrefab: {fileID: 117802318632818859, guid: dd6866f305a459344b7d15cd56b184e0,
     type: 3}
-  blueTeamFemalePlayerPrefab: {fileID: 3396705049381777647, guid: b84ccef7d193f364d99d6ba540628b68,
+  blueTeamFemalePlayerPrefab: {fileID: 7109206152914753663, guid: 54fb85bf8d2256440acdfa6f6889f1db,
     type: 3}
