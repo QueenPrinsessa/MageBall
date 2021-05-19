@@ -189,6 +189,7 @@ MonoBehaviour:
   vfxDuration: 3
   forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
     type: 3}
+  audioSource: {fileID: 2827828663644644281}
 --- !u!114 &-8987871216110443510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,11 +251,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1039e283587ba71499aa5d44e3d2e1c2,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8bd076d342f0ead44a35f91e50b36ae6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1fe328fa5b1a3b49aa5c8515334b216, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.362
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -296,7 +297,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
