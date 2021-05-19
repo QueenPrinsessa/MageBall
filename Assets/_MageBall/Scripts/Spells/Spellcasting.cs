@@ -17,6 +17,9 @@ namespace MageBall
         [SyncVar] private Spell extraSpell;
         [SyncVar] private Passives currentPassive;
         private float currentMana;
+        private bool isMainSpellLocked;
+        private bool isOffhandSpellLocked;
+        private bool isExtraSpellLocked;
 
         [SyncVar]
         private bool canCastSpells = true;
@@ -51,13 +54,35 @@ namespace MageBall
             if (!canCastSpells)
                 return;
 
+            bool mainSpellCast = (Input.GetButton("Fire1") || Input.GetAxisRaw("Fire1Trigger") == 1);
+            bool offhandSpellCast = (Input.GetButton("Fire2") || Input.GetAxisRaw("Fire2Trigger") == 1);
+            bool extraSpellCast = Input.GetButton("Fire3");
 
-            if ((Input.GetButtonDown("Fire1") || Input.GetAxis("Fire1") == 1f) && UseMana(mainSpell.ManaCost))
+            if (!mainSpellCast)
+                isMainSpellLocked = false;
+
+            if (!offhandSpellCast)
+                isOffhandSpellLocked = false;
+
+            if (!extraSpellCast)
+                isExtraSpellLocked = false;
+
+            if (mainSpellCast && !isMainSpellLocked && UseMana(mainSpell.ManaCost))
+            {
                 mainSpell.CmdCastSpell();
-            else if ((Input.GetButtonDown("Fire2") || Input.GetAxis("Fire2") == 1f) && UseMana(offhandSpell.ManaCost))
+                isMainSpellLocked = true;
+            }
+            else if (offhandSpellCast && !isOffhandSpellLocked && UseMana(offhandSpell.ManaCost))
+            {
                 offhandSpell.CmdCastSpell();
-            else if (Input.GetButtonDown("Fire3") && UseMana(extraSpell.ManaCost))
+                isOffhandSpellLocked = true;
+            }
+            else if (extraSpellCast && !isExtraSpellLocked && UseMana(extraSpell.ManaCost))
+            {
                 extraSpell.CmdCastSpell();
+                isExtraSpellLocked = true;
+            }
+            
         }
 
         [Server]
