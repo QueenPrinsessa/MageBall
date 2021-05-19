@@ -33,6 +33,11 @@ namespace MageBall
                 Debug.LogError("There is no MenuButtonController in the parent object. MenuButton won't work!");
         }
 
+        private void OnDisable()
+        {
+            buttonDeselected.Invoke();
+        }
+
         private void Update()
         {
             if (menuButtonController == null)
