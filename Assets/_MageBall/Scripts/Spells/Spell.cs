@@ -8,6 +8,8 @@ namespace MageBall
     {
         [Header("Spell settings")]
         [SerializeField] private float manaCost = 30f;
+        [SerializeField, Tooltip("Positive numbers moves aim closer to camera. Negative numbers moves aim further away from the camera")]
+        private float aimOffset = 0f;
         private Transform cameraPosition;
         private Transform aimPoint;
         private Animator animator;
@@ -45,7 +47,7 @@ namespace MageBall
             if (!hasAuthority || cameraPosition == null)
                 return;
 
-            CmdSetAim(cameraPosition.position + aimPoint.forward.normalized * (transform.position - cameraPosition.position).magnitude, aimPoint.forward, aimPoint.rotation);
+            CmdSetAim(cameraPosition.position + aimPoint.forward.normalized * ((transform.position - cameraPosition.position).magnitude - aimOffset), aimPoint.forward, aimPoint.rotation);
         }
 
         [Command]

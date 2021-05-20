@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 7760453650874036706}
   - component: {fileID: 2827828663644644281}
   - component: {fileID: 6540593512317734005}
-  - component: {fileID: 384538269378223482}
   m_Layer: 8
   m_Name: ForcePushProjectile
   m_TagString: Spell
@@ -184,8 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  flightSpeed: 60
-  radius: 4
+  rigidbody: {fileID: 7760453650874036706}
+  collider: {fileID: 6540593512317734005}
+  flightSpeed: 50
+  explosionRadius: 4
   explosionForce: 1000
   vfxDuration: 3
   forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
@@ -224,10 +225,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 2
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!82 &2827828663644644281
 AudioSource:
   m_ObjectHideFlags: 0
@@ -338,18 +339,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &384538269378223482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3606733632085325176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 157a953ea3eb08644a8a4f94aceccfc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  rigidbody: {fileID: 7760453650874036706}

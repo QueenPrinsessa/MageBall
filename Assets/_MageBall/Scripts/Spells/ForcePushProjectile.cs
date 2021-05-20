@@ -8,24 +8,28 @@ namespace MageBall
     public class ForcePushProjectile : NetworkBehaviour
     {
 
+        [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private new Collider collider;
         [SerializeField] private float flightSpeed = 20;
-        [SerializeField] private float radius = 2f;
+        [SerializeField] private float explosionRadius = 4f;
         [SerializeField] private float explosionForce = 2000f;
         [SerializeField] private float vfxDuration = 3f;
         [SerializeField] private GameObject forcePushHitVFX;
         [SerializeField] private AudioSource audioSource;
 
         [ServerCallback]
-        void Update()
+        private void FixedUpdate()
         {
-            transform.Translate(transform.forward * flightSpeed * Time.deltaTime, Space.World);
+            Vector3 moveDelta = transform.forward * flightSpeed * Time.fixedDeltaTime;
+            rigidbody.MovePosition(transform.position + moveDelta);
         }
 
         [ServerCallback]
         private void OnCollisionEnter(Collision collision)
         {
-            Vector3 explosionPoint = transform.position;
-            Collider[] colliders = Physics.OverlapSphere(explosionPoint, radius, LayerMasks.propsLayer | LayerMasks.ballLayer | LayerMasks.groundLayer);
+            ContactPoint contact = collision.GetContact(0);
+
+            Collider[] colliders = Physics.OverlapSphere(contact.point, explosionRadius, LayerMasks.propsLayer | LayerMasks.ballLayer | LayerMasks.groundLayer);
 
             foreach (Collider collider in colliders)
             {
@@ -33,16 +37,16 @@ namespace MageBall
                 if (rigidbody == null)
                     continue;
 
-                rigidbody.AddExplosionForce(explosionForce, explosionPoint, radius);
+                rigidbody.AddExplosionForce(explosionForce, contact.point, explosionRadius);
             }
 
             if (colliders.Length > 0)
             {
                 audioSource.Stop();
-                gameObject.GetComponent<Collider>().enabled = false;
+                collider.enabled = false;
                 RpcDisableProjectileVFX();
-                ContactPoint contact = collision.GetContact(0);
-                GameObject vfx = Instantiate(forcePushHitVFX, explosionPoint, Quaternion.LookRotation(contact.normal));
+                float dot = Vector3.Dot(Vector3.up, contact.normal);
+                GameObject vfx = Instantiate(forcePushHitVFX, contact.point, Quaternion.LookRotation(contact.normal));
                 NetworkServer.Spawn(vfx);
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
             }
