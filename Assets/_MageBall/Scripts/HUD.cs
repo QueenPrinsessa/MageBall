@@ -55,6 +55,7 @@ namespace MageBall
 
             if (matchTimer != null)
             {
+                OnTimeChanged(matchTimer.Minutes, matchTimer.Seconds);
                 matchTimer.TimeChanged += OnTimeChanged;
                 matchTimer.MatchEnd += OnMatchEnd;
             }

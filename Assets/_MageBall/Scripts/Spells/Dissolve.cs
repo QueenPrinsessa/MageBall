@@ -57,6 +57,8 @@ namespace QueenPrinsessa
                 yield return null;
             }
 
+            yield return new WaitForSeconds(1);
+
             NetworkServer.Destroy(gameObject);
         }
 

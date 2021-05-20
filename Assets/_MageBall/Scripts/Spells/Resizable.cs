@@ -14,7 +14,7 @@ namespace MageBall
         private uint magnifyStacks = 0;
         private uint minimizeStacks = 0;
 
-        [SyncVar] private Vector3 defaultScale;
+        private Vector3 defaultScale;
 
         private readonly List<SpellStackInfo> stacks = new List<SpellStackInfo>();
 

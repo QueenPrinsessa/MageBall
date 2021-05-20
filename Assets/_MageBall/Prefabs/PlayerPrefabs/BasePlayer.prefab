@@ -89,8 +89,8 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   compressRotation: 0
-  interpolateScale: 1
-  syncScale: 1
+  interpolateScale: 0
+  syncScale: 0
 --- !u!114 &3380226219699566043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 1
-  syncInterval: 0
+  syncInterval: 0.1
   increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
   baseRechargeRate: 20
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a568168d32fb1dc469bb941199f6ef2f, type: 3}
   m_Name: 
@@ -234,6 +234,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 20
+  aimOffset: 0
   range: 40
   hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: adeff937aaa354b4f915e37847582b33,
@@ -252,7 +253,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5116a3904e002454991c1ba7001b07da, type: 3}
   m_Name: 
@@ -260,6 +261,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 20
+  aimOffset: 0
   range: 40
   hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: 6510b39928515b649ab98e15f4d0ffad,
@@ -278,7 +280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02f38d1bf10d3384ab9dca3d09987f8d, type: 3}
   m_Name: 
@@ -286,13 +288,14 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
+  aimOffset: 0
   range: 40
   hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: be0b4a7f39235b842857093d8973d6c2,
     type: 3}
   lineWidth: 0.1
   lineDuration: 0.15
-  force: 40
+  force: 25
   forcePullHitVFX: {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f,
     type: 3}
   vfxDuration: 1
@@ -303,7 +306,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a17372e030a479842992b174ec7e2551, type: 3}
   m_Name: 
@@ -311,6 +314,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
+  aimOffset: 2
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
 --- !u!114 &4445340136976529315
@@ -320,7 +324,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef20f976592fc404da5b8ec537652e35, type: 3}
   m_Name: 
@@ -328,6 +332,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
+  aimOffset: 0
   range: 60
   hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: b9c8ef98fc488254a9f2330baafcffca,
@@ -345,7 +350,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410541546363074372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 339ae71ba5b8cf8479e86c2f1d7a3119, type: 3}
   m_Name: 
@@ -353,6 +358,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
+  aimOffset: -1.5
   boxPrefab: {fileID: 6232933236469191458, guid: b82994e47cea50644bce0b16a6c9c2e2,
     type: 3}
   force: 60
