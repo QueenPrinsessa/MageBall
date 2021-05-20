@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 1
-  syncInterval: 0
+  syncInterval: 0.1
   maxSpeed: 10
   jumpHeight: 1.8
   acceleration: 4
@@ -373,11 +373,10 @@ MonoBehaviour:
   cameraFollow: {fileID: 5026404813052954441}
   thirdPersonCameraPrefab: {fileID: 7294957378755441486, guid: 9f63054bbd4740c4287fde40c6f0b6ee,
     type: 3}
+  cameraVerticalRotationMultiplier: 100
+  cameraHorizontalRotationMultiplier: 100
   minXRotation: -80
   maxXRotation: 80
-  cameraSide: 1
-  allowCameraToggle: 1
-  cameraSideToggleSpeed: 1
 --- !u!114 &-2477796659126010163
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,28 +24,26 @@ namespace MageBall
 
             if (animator == null)
                 Debug.LogError("Spell script can't find the animator. Is the script attached to the player gameobject?");
+            
+            StartCoroutine(FindThirdPersonCamera());
+        }
+
+        [Client]
+        private IEnumerator FindThirdPersonCamera()
+        {
+            ThirdPersonCamera camera = GetComponent<ThirdPersonCamera>();
+
+            yield return new WaitUntil(() => camera.ThirdPersonVirtualCamera != null);
+
+            cameraPosition = camera.ThirdPersonVirtualCamera.transform;
+            aimPoint = camera.ThirdPersonVirtualCamera.Follow;
         }
 
         [ClientCallback]
         private void Update()
         {
-            if (!hasAuthority)
+            if (!hasAuthority || cameraPosition == null)
                 return;
-
-            if (cameraPosition == null)
-            {
-                ThirdPersonCamera camera = GetComponent<ThirdPersonCamera>();
-                if (camera != null)
-                {
-                    cameraPosition = camera.ThirdPersonVirtualCamera.transform;
-                    aimPoint = camera.ThirdPersonVirtualCamera.Follow;
-                }
-                else
-                {
-                    Debug.LogError("No third person camera script on player!");
-                    return;
-                }
-            }
 
             CmdSetAim(cameraPosition.position + aimPoint.forward.normalized * (transform.position - cameraPosition.position).magnitude, aimPoint.forward, aimPoint.rotation);
         }
