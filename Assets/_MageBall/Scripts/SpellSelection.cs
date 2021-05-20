@@ -27,6 +27,8 @@ namespace MageBall
         [SerializeField] private TMP_Dropdown passiveDropdown;
         [SerializeField] private Button malePlayerModelButton;
         [SerializeField] private Button femalePlayerModelButton;
+        [SerializeField] private PopUp spellInfoPopUp;
+        [SerializeField] private MenuButtonController menuButtonController;
 
         private int oldMainValue;
         private int oldOffhandValue;
@@ -45,7 +47,21 @@ namespace MageBall
             SetupPlayerModelButtons();
 
             UpdatePlayerLoadout();
+
+            spellInfoPopUp.PopUpOpened += OnPopUpOpened;
+            spellInfoPopUp.PopUpClosed += OnPopUpClosed;
         }
+
+        private void OnPopUpOpened()
+        {
+            menuButtonController.DeactivateButtons();
+        }
+
+        private void OnPopUpClosed()
+        {
+            menuButtonController.ActivateButtons();
+        }
+
 
         private void SetupSpellDropdowns()
         {

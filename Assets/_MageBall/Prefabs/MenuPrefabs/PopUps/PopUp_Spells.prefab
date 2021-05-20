@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8498151191064624206
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<size=24><align=center>Force Push</align></size>
+
+        Shoots a
+        projectile of pure magic that explodes upon contact.
+
+
+        <size=24><align=center>Force
+        Pull</align></size>
+
+        Pulls an object towards you using the magical
+        forces around the object.
+
+
+        <size=24><align=center>Force Fly</align></size>
+
+        Causes
+        magical forces to pull up on the object removing the effects of gravity for
+        a short time.
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613389476942191467, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: 'Spells
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589543910437446468, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUp_Spells
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 362.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 409.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 181.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030518
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<size=24><align=center>Boxmancy</align></size>
+
+        Curves the
+        magical forces around you into a perfectly fine box for a short time.
+
+
+        <size=24><align=center>Minimize</align></size>
+
+        Forces
+        the magical energies around an object to compress it for a short time.
+
+
+        <size=24><align=center>Maximize</align></size>
+
+        Forces
+        the magical energies around an object to expand it for a short time.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 743.9839
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 466.7242
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 362.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 409.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -181.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00093269
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c89c57cfb866bb4a9fa9a83324efafd, type: 3}

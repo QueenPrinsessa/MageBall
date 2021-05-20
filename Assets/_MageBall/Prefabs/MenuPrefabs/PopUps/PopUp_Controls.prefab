@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8026461894512197022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<align=center><size=24>Keyboard & Mouse</size></align>
+
+
+        Move
+        - WASD
+
+        Camera - Mouse
+
+        Main spell - Left Mouse or E
+
+        Offhand
+        spell - Right Mouse or Q
+
+        Extra spell - Middle Mouse or F
+
+        Jump
+        - Space
+
+        Dodge - Shift
+
+        Submit - enter
+
+        Cancel -
+        ESC
+
+        H, J, K, L - Toggle dances'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613389476942191467, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589543910437446468, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUp_Controls
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771648386003025580, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 581.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771648386003025580, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<align=center><size=24>Xbox Controller</size></align>
+
+
+        Move
+        - left joystick
+
+        Camera - right joystick
+
+        Main spell - right
+        trigger or right bumper
+
+        Offhand spell - left trigger or left bumper
+
+        Extra
+        spell - X or Y
+
+        Jump - A
+
+        Dodge - B
+
+        Submit - A
+
+        Cancel
+        - B
+
+        D-pad - Toggle dances '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c89c57cfb866bb4a9fa9a83324efafd, type: 3}

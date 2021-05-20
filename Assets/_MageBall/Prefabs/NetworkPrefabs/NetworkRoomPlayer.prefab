@@ -98,6 +98,8 @@ MonoBehaviour:
   passiveDropdown: {fileID: 8478811201725298976}
   malePlayerModelButton: {fileID: 3404603474126712364}
   femalePlayerModelButton: {fileID: 413379419732656952}
+  spellInfoPopUp: {fileID: 6746123439637921053}
+  menuButtonController: {fileID: 1139703806}
 --- !u!1001 &432608776779411639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,6 +205,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 432608776779411639}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1139703806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 432608775682740041, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+    type: 3}
+  m_PrefabInstance: {fileID: 432608776779411639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fd548c1bd5c2842b64008e0c4c36ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &397493290 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 432608776551822493, guid: ef9d46e3f58e44c46bb4f319bee66c20,
@@ -381,5 +395,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6746123439637921053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6602247252761824682, guid: ef9d46e3f58e44c46bb4f319bee66c20,
+    type: 3}
+  m_PrefabInstance: {fileID: 432608776779411639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef274985c18818f4ebd023e05f83fb36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

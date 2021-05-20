@@ -12,6 +12,9 @@ namespace MageBall
         [Header("UI")]
         [SerializeField] private GameObject pauseCanvas;
         [SerializeField] private MenuButtonController menuButtonController;
+        [SerializeField] private PopUp howToPlayPopUp;
+        [SerializeField] private PopUp controlsPopUp;
+
         private OptionsMenu optionsMenu;
 
         public event Action PauseMenuOpened;
@@ -32,11 +35,25 @@ namespace MageBall
 
             optionsMenu.OptionsMenuOpened += OnOptionsMenuOpened;
             optionsMenu.OptionsMenuClosed += OnOptionsMenuClosed;
+            howToPlayPopUp.PopUpOpened += OnPopUpOpened;
+            howToPlayPopUp.PopUpClosed += OnPopUpClosed;
+            controlsPopUp.PopUpOpened += OnPopUpOpened;
+            controlsPopUp.PopUpClosed += OnPopUpClosed;
+        }
+
+        private void OnDestroy()
+        {
+            optionsMenu.OptionsMenuOpened -= OnOptionsMenuOpened;
+            optionsMenu.OptionsMenuClosed -= OnOptionsMenuClosed;
+            howToPlayPopUp.PopUpOpened -= OnPopUpOpened;
+            howToPlayPopUp.PopUpClosed -= OnPopUpClosed;
+            controlsPopUp.PopUpOpened -= OnPopUpOpened;
+            controlsPopUp.PopUpClosed -= OnPopUpClosed;
         }
 
         private void Update()
         {
-            if (IsOpen && !optionsMenu.IsOpen) 
+            if (IsOpen && !optionsMenu.IsOpen)
             {
                 if (Input.GetButtonDown("Cancel"))
                     CloseMenu();
@@ -48,6 +65,16 @@ namespace MageBall
             }
         }
 
+        private void OnPopUpOpened()
+        {
+            menuButtonController.DeactivateButtons();
+        }
+
+
+        private void OnPopUpClosed()
+        {
+            menuButtonController.ActivateButtons();
+        }
 
         private void OnOptionsMenuOpened()
         {
