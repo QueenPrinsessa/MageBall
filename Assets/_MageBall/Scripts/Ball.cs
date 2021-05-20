@@ -12,6 +12,7 @@ namespace MageBall
         [SerializeField] private int collisionThreshold = 5;
         [SerializeField] private float vfxDuration = 1;
 
+        [ServerCallback]
         private void OnCollisionEnter(Collision collision)
         {
             ContactPoint contact = collision.contacts[0];
