@@ -19,13 +19,19 @@ namespace MageBall
             Quaternion rotation = Quaternion.LookRotation(contact.normal);
             Vector3 position = contact.point;
 
-            if(collision.relativeVelocity.magnitude > collisionThreshold)
+            if (collision.relativeVelocity.magnitude > collisionThreshold)
             {
                 GameObject vfx = Instantiate(collisionVfx, position, rotation);
                 NetworkServer.Spawn(vfx);
-                collisionSound.Play();
+                RpcPlaySound();
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
             }
+        }
+
+        [ClientRpc]
+        private void RpcPlaySound()
+        {
+            collisionSound.Play();
         }
 
         [Server]

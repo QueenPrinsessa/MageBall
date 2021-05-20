@@ -485,16 +485,16 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1039e283587ba71499aa5d44e3d2e1c2,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
-  MinDistance: 5
+  MinDistance: 10
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
