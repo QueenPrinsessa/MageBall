@@ -11,7 +11,10 @@ namespace MageBall
         private bool hasMatchEnded = false;
 
         [SyncVar] private int minutes;
-        [SyncVar(hook = nameof(OnTimeChanged))] private int seconds;
+        [SyncVar] private int seconds;
+
+        public int Minutes => minutes;
+        public int Seconds => seconds;
 
         /// <summary>
         /// Minutes, seconds
@@ -24,15 +27,16 @@ namespace MageBall
             NetworkManagerMageBall networkManager = (NetworkManagerMageBall)NetworkManager.singleton;
             minutes = networkManager.MatchLength;
             TimeChanged?.Invoke(minutes, seconds);
-            timerRoutine = StartCoroutine(Timer());
+            timerRoutine = StartCoroutine(Timer(networkManager));
         }
 
-        private void OnTimeChanged(int oldValue, int newValue)
+        [ClientRpc]
+        private void RpcInvokeTimeChanged(int minutes, int seconds)
         {
             TimeChanged?.Invoke(minutes, seconds);
         }
 
-        private IEnumerator Timer()
+        private IEnumerator Timer(NetworkManagerMageBall networkManager)
         {
             while (!hasMatchEnded)
             {
@@ -43,6 +47,8 @@ namespace MageBall
                 }
                 else
                     seconds--;
+
+                RpcInvokeTimeChanged(minutes, seconds);
 
                 if (minutes <= 0 && seconds <= 0)
                     EndGame();
