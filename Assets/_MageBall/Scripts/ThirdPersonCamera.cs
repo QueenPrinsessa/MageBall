@@ -10,42 +10,21 @@ namespace MageBall
     public class ThirdPersonCamera : NetworkBehaviour
     {
 
+        [Header("Camera Settings")]
         [SerializeField] private Transform cameraFollow;
         [SerializeField] private GameObject thirdPersonCameraPrefab;
-
-        private CinemachineVirtualCamera thirdPersonVirtualCamera;
-
-        private float cameraVerticalRotationMultiplier = 100f;
-        private float cameraHorizontalRotationMultiplier = 100f;
-        private float mouseSensitivity = 1;
-
-        private bool invertMouseY = false;
-        private bool invertMouseX = false;
+        [SerializeField] private float cameraVerticalRotationMultiplier = 100f;
+        [SerializeField] private float cameraHorizontalRotationMultiplier = 100f;
 
         [Header("X Rotation Clamping")]
         [SerializeField, Range(-90f, 90f)] private float minXRotation = -80f;
         [SerializeField, Range(-90f, 90f)] private float maxXRotation = 80f;
 
-        [Header("Toggles which side the camera should start on. 1 = Right, 0 = Left")]
-        [SerializeField] private float cameraSide = 1f;
-
-        [Header("Allow toggling left to right shoulder")]
-        [SerializeField] private bool allowCameraToggle = true;
-
-        [Header("How fast we should transition from left to right")]
-        [SerializeField] private float cameraSideToggleSpeed = 1f;
-
-        private Cinemachine3rdPersonFollow followCam; // so we can manipulate the 'camera side' property dynamically
-
-        // current camera rotation values
-        private float cameraX = 0f;
-
-        // if we are switching sides
-        private bool doCameraSideToggle = false;
-        private float sideToggleTime = 0f;
-
-        // where we are in the transition from side to side
-        private float desiredCameraSide = 1f;
+        private CinemachineVirtualCamera thirdPersonVirtualCamera;
+        private float lookSensitivity = 1;
+        private float cameraXRotation = 0f;
+        private bool invertY = false;
+        private bool invertX = false;
 
         public CinemachineVirtualCamera ThirdPersonVirtualCamera => thirdPersonVirtualCamera;
 
@@ -53,23 +32,14 @@ namespace MageBall
         {
             LoadCameraControlSettings();
 
-            OptionsMenu.ControlSettingsChanged += OnControlSettingsChanged;
-
             GameObject thirdPersonCamera = Instantiate(thirdPersonCameraPrefab);
+            thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
+            thirdPersonVirtualCamera.Follow = cameraFollow;
+            thirdPersonVirtualCamera.enabled = true;
 
-            if (thirdPersonVirtualCamera == null)
-            {
-                thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
-                thirdPersonVirtualCamera.Follow = cameraFollow;
-                thirdPersonVirtualCamera.enabled = true;
-                followCam = thirdPersonVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-            }
-            else
-            {
-                Debug.LogError("Need to connect your 3rd person camera to the CameraController!");
-            }
+            Cursor.lockState = CursorLockMode.Locked;
 
-            Cursor.lockState = CursorLockMode.Locked; 
+            OptionsMenu.ControlSettingsChanged += OnControlSettingsChanged;
         }
 
         private void OnDestroy()
@@ -86,45 +56,30 @@ namespace MageBall
         [Client]
         private void LoadCameraControlSettings()
         {
-            mouseSensitivity = PlayerPrefs.GetFloat(OptionsMenu.MouseSensitivityPlayerPrefsKey, 1f);
-            invertMouseY = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false)));
-            invertMouseX = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false)));
+            lookSensitivity = PlayerPrefs.GetFloat(OptionsMenu.MouseSensitivityPlayerPrefsKey, 1f);
+            invertY = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false)));
+            invertX = Convert.ToBoolean(PlayerPrefs.GetInt(OptionsMenu.InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false)));
         }
 
+        [ClientCallback]
         private void FixedUpdate()
         {
             if (!hasAuthority)
                 return;
 
-            //Since everything that follows depends on the Camera Follow existing
-            //A guard statement is more appropriate than wrapping everything in an if statement
-            if (cameraFollow == null)
-            {
-                Debug.LogError("Camera follow not assigned in script.");
-                return;
-            }
-
             float cameraInputHorizontal = Input.GetAxis("Mouse X");
             float cameraInputVertical = Input.GetAxis("Mouse Y");
 
-            if (invertMouseY)
-            {
-                cameraX += cameraVerticalRotationMultiplier * cameraInputVertical * mouseSensitivity * Time.fixedDeltaTime;
-            }
+            if (invertY)
+                cameraXRotation += cameraVerticalRotationMultiplier * cameraInputVertical * lookSensitivity * Time.fixedDeltaTime;
             else
-            {
-                cameraX -= cameraVerticalRotationMultiplier * cameraInputVertical * mouseSensitivity * Time.fixedDeltaTime;
-            }
+                cameraXRotation -= cameraVerticalRotationMultiplier * cameraInputVertical * lookSensitivity * Time.fixedDeltaTime;
 
-            //Clamp X rotation
-            cameraX = Mathf.Clamp(cameraX, minXRotation, maxXRotation);
+            cameraXRotation = Mathf.Clamp(cameraXRotation, minXRotation, maxXRotation);
+            cameraFollow.localEulerAngles = new Vector3(cameraXRotation, 0.0f, 0.0f);
 
-            //Use local angles
-            cameraFollow.localEulerAngles = new Vector3(cameraX, 0.0f, 0.0f);
-
-            //Rotate player for Y, not camera
-            int mouseXInvertionFactor = invertMouseX ? -1 : 1;
-            transform.rotation *= Quaternion.AngleAxis(mouseXInvertionFactor * cameraInputHorizontal * mouseSensitivity * cameraHorizontalRotationMultiplier * Time.fixedDeltaTime, Vector3.up);
+            int xInvertionFactor = invertX ? -1 : 1;
+            transform.rotation *= Quaternion.AngleAxis(xInvertionFactor * cameraInputHorizontal * lookSensitivity * cameraHorizontalRotationMultiplier * Time.fixedDeltaTime, Vector3.up);
         }
 
 
