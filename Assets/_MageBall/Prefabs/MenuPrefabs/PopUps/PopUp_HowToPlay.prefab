@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6825684924614755280
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: "<align=center><size=24>Rules</size></align>\n\n<i>Wizard <color=red>Extreme</color>
+        Tournament</i> is soccer\u2014for wizards. The rules are simple. There is
+        a ball. Get it into the other team's goal <i>by any means possible</i>. Nothing
+        is disallowed in the <i>Wizard <color=red>Extreme</color> Tournament</i>.
+        \n\nAt your disposal you have three spells and an innate passive ability
+        that is active at all times. Do you want to make the ball fly? You can. Do
+        you want to make the ball huge? Go ahead. This is your <i>Wizard <color=red>Extreme</color>
+        Tournament</i>. Make it yours."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613389476942191467, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: How TO PLAY
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589543910437446468, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUp_HowToPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 340.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 435.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 170.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00055504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870115505592318020, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -57.499
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870115505592318020, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21.250717
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<align=center><size=24>Events</size></align>
+
+
+        In the middle
+        of the arena where the ball starts there is a pentagon. This pentagon harnesses
+        the magical forces in the fabric of reality just like you wizards do. After
+        some time it concentrates these energies into a mana orb that empowers your
+        innate mana regeneration abilities to the <color=red><i>Extreme</i></color>.
+        Pick it up and go ham.
+
+
+        <align=center><size=24>Lore</size></align>
+
+        In
+        the lands of Gallifrey founded by wizards there had to be a method of dealing
+        with conflicts without resorting to violence. The two major factions known
+        as <color=blue>The Templar Sages</color>, and <color=red>The Defiant</color>
+        are in a constant state of conflict. On the edge of Gallifrey there exists
+        an arena where these battles take place in the <i>Wizard <color=red>Extreme</color>.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128222027017113888, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 700.1938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 492.9728
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000011444
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 340.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 435.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -170.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00055504
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c89c57cfb866bb4a9fa9a83324efafd, type: 3}

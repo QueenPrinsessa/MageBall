@@ -273,6 +273,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  buttonDeselected:
+    m_PersistentCalls:
+      m_Calls: []
+  buttonSelected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3790518459017107023
 MonoBehaviour:
   m_ObjectHideFlags: 0

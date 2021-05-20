@@ -16,6 +16,9 @@ namespace MageBall
         [SerializeField] private GameObject titleScreenPanel;
         [SerializeField] private OptionsMenu optionsMenu;
         [SerializeField] private GameObject attemptingConnectionPanel;
+        [SerializeField] private PopUp howToPlayPopUp;
+        [SerializeField] private PopUp controlsPopUp;
+
 
         private MenuButtonController menuButtonController;
 
@@ -51,6 +54,10 @@ namespace MageBall
             NetworkManagerMageBall.ClientDisconnected += OnClientDisconnected;
             optionsMenu.OptionsMenuOpened += OnOptionsMenuOpened;
             optionsMenu.OptionsMenuClosed += OnOptionsMenuClosed;
+            howToPlayPopUp.PopUpOpened += OnPopUpOpened;
+            howToPlayPopUp.PopUpClosed += OnPopUpClosed;
+            controlsPopUp.PopUpOpened += OnPopUpOpened;
+            controlsPopUp.PopUpClosed += OnPopUpClosed;
         }
 
         private void OnDisable()
@@ -59,7 +66,21 @@ namespace MageBall
             NetworkManagerMageBall.ClientDisconnected -= OnClientDisconnected;
             optionsMenu.OptionsMenuOpened -= OnOptionsMenuOpened;
             optionsMenu.OptionsMenuClosed -= OnOptionsMenuClosed;
+            howToPlayPopUp.PopUpOpened -= OnPopUpOpened;
+            howToPlayPopUp.PopUpClosed -= OnPopUpClosed;
+            controlsPopUp.PopUpOpened -= OnPopUpOpened;
+            controlsPopUp.PopUpClosed -= OnPopUpClosed;
+        }
 
+        private void OnPopUpOpened()
+        {
+            menuButtonController.DeactivateButtons();
+        }
+
+
+        private void OnPopUpClosed()
+        {
+            menuButtonController.ActivateButtons();
         }
 
         private void OnDestroy()
