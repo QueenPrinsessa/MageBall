@@ -15,14 +15,7 @@ namespace MageBall
         void OnNameChange(string oldPlayerName, string newPlayerName)
         {
             nameTag.text = newPlayerName;
-            //RpcSetPlayerName(playerName);
         }
-
-        //[ClientRpc]
-        //void RpcSetPlayerName(string name)
-        //{
-        //    nameTag.text = name;
-        //}
 
         [Server]
         public void SetPlayerName(string name)
