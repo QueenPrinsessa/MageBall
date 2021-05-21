@@ -17,7 +17,7 @@ public class PlayerNameTag : NetworkBehaviour
     [ClientRpc]
     void RpcSetPlayerName(string name)
     {
-        nameTag.text = playerName;
+        nameTag.text = name;
     }
 
     [Server]
