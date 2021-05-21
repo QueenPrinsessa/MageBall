@@ -18,7 +18,8 @@ namespace MageBall
         private static List<Transform> blueSpawnPoints = new List<Transform>();
 
         private int nextIndex = 0;
-        private Team currentTeam = Team.Red;
+        private Team currentTeam;
+        private Team firstTeam;
 
         public static void AddSpawnPoint(Team team, Transform transform)
         {
@@ -50,6 +51,10 @@ namespace MageBall
 
         public override void OnStartServer()
         {
+            //0 = Team.Red
+            //1 = Team.Blue
+            currentTeam = (Team) Random.Range(0, 2);
+            firstTeam = currentTeam;
             NetworkManagerMageBall.ServerReadied += OnServerReadied;
         }
 
@@ -91,11 +96,12 @@ namespace MageBall
             PlayerMovement playerMovement = playerInstance.GetComponent<PlayerMovement>();
             playerMovement.SetPassiveFromLoadout(networkGamePlayer.PlayerLoadout);
 
-            if (currentTeam == Team.Blue)
-            {
-                currentTeam = Team.Red;
+
+            if (currentTeam != firstTeam)
                 nextIndex++;
-            }
+
+            if (currentTeam == Team.Blue)
+                currentTeam = Team.Red;
             else
                 currentTeam = Team.Blue;
         }
