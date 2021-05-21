@@ -246,9 +246,9 @@ MonoBehaviour:
     type: 3}
   lineWidth: 0.1
   lineDuration: 0.15
-  blackHoleVfx: {fileID: 0}
-  spellDuration: 3
-  mass: 100000
+  blackHolePrefab: {fileID: 1706199113788827005, guid: dc7d7fca9a490d8458d97639bafb3e35,
+    type: 3}
+  blackHoleOffset: {x: 0, y: 2, z: 0}
 --- !u!114 &-6746422148729648931
 MonoBehaviour:
   m_ObjectHideFlags: 0

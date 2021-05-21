@@ -5,43 +5,34 @@ using Mirror;
 
 namespace MageBall
 {
-    public class BlackHole : LineSpell
+    public class BlackHole : NetworkBehaviour
     {
-        [Header("Black Hole Settings")]
-        [SerializeField] private GameObject blackHoleVfx;
-        [SerializeField] private float spellDuration = 3f;
-        [SerializeField] private float mass = 100000;
+        private const float GravitationalConstant = 6.672e-11f;
 
-        [Command]
-        public override void CmdCastSpell()
+        [SerializeField] private float radius = 10f;
+        [SerializeField] private float mass = 1.5e12f;
+        [SerializeField] private float duration = 5f;
+        [SerializeField] private float explosionForce = 2000f;
+
+        public override void OnStartServer()
         {
-            TargetTriggerAttackAnimation("Attack1");
-            if (Physics.Raycast(aimPosition, aimForward, out RaycastHit hit, Range, LayerMasks.ballLayer | LayerMasks.propsLayer | LayerMasks.groundLayer))
+            StartCoroutine(DestroyAfterTime(duration));
+        }
+
+        [ServerCallback]
+        private void FixedUpdate()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, LayerMasks.ballLayer | LayerMasks.propsLayer);
+
+            foreach (Collider collider in colliders)
             {
-                Collider[] colliders = Physics.OverlapSphere(hit.point, HitRadius, LayerMasks.ballLayer | LayerMasks.propsLayer);
+                Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
+                if (rigidbody == null)
+                    continue;
 
-                StartCoroutine(UpdateGravity(colliders, hit.point));
-
-                //GameObject vfx = Instantiate(blackHoleVfx, hit.point, Quaternion.LookRotation(hit.normal));
-                //NetworkServer.Spawn(vfx);
+                rigidbody.velocity += GAcceleration(transform.position, mass, rigidbody);
             }
-
-            CreateLine(aimPosition, hit.point);
-            
         }
-
-        [Server]
-        protected IEnumerator DestroyAfterTime(GameObject vfx, float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-
-            if (vfx != null)
-                NetworkServer.Destroy(vfx);
-
-            NetworkServer.Destroy(gameObject);
-        }
-
-        private const float gravitationalConstant = 6.672e-11f;
 
         /// <summary>
         /// Calculates gravitational acceleration for a Rigidbody under the influence of a large "mass" point at a "position".
@@ -55,28 +46,30 @@ namespace MageBall
         {
             Vector3 direction = position - r.position;
 
-            float gravityForce = gravitationalConstant * ((mass * r.mass) / direction.sqrMagnitude);
+            float gravityForce = GravitationalConstant * ((mass * r.mass) / direction.sqrMagnitude);
             gravityForce /= r.mass;
 
             return direction.normalized * gravityForce * Time.fixedDeltaTime;
         }
 
-        private IEnumerator UpdateGravity(Collider[] colliders, Vector3 blackHolePos)
+        [Server]
+        protected IEnumerator DestroyAfterTime(float seconds)
         {
-            bool isActive = true;
-            while (isActive)
+            yield return new WaitForSeconds(seconds);
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius, LayerMasks.ballLayer | LayerMasks.propsLayer);
+
+            foreach (Collider collider in colliders)
             {
-                yield return new WaitForFixedUpdate();
+                Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
+                if (rigidbody == null)
+                    continue;
 
-                foreach (Collider collider in colliders)
-                {
-                    Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
-                    if (rigidbody == null)
-                        continue;
-
-                    rigidbody.velocity += GAcceleration(blackHolePos, mass, rigidbody);
-                }
+                rigidbody.AddExplosionForce(explosionForce, transform.position, radius);
             }
+
+            NetworkServer.Destroy(gameObject);
         }
+
     }
 }

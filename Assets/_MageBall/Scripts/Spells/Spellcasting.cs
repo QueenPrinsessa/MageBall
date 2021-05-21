@@ -113,7 +113,7 @@ namespace MageBall
                 case Spells.Minimize:
                     return GetComponent<Minimize>();
                 case Spells.BlackHole:
-                    return GetComponent<BlackHole>();
+                    return GetComponent<BlackHoleSpell>();
                 default:
                     return GetComponent<ForcePush>();
             }
@@ -143,7 +143,7 @@ namespace MageBall
                     GetComponent<Minimize>().enabled = true;
                     return;
                 case Spells.BlackHole:
-                    GetComponent<BlackHole>().enabled = true;
+                    GetComponent<BlackHoleSpell>().enabled = true;
                     return;
                 default:
                     GetComponent<ForcePush>().enabled = true;
