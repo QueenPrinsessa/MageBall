@@ -18,6 +18,7 @@ namespace MageBall
         [SerializeField] private GameObject attemptingConnectionPanel;
         [SerializeField] private PopUp howToPlayPopUp;
         [SerializeField] private PopUp controlsPopUp;
+        [SerializeField] private PopUp creditsPopUp;
 
 
         private MenuButtonController menuButtonController;
@@ -58,6 +59,8 @@ namespace MageBall
             howToPlayPopUp.PopUpClosed += OnPopUpClosed;
             controlsPopUp.PopUpOpened += OnPopUpOpened;
             controlsPopUp.PopUpClosed += OnPopUpClosed;
+            creditsPopUp.PopUpOpened += OnPopUpOpened;
+            creditsPopUp.PopUpClosed += OnPopUpClosed;
         }
 
         private void OnDisable()
@@ -70,6 +73,8 @@ namespace MageBall
             howToPlayPopUp.PopUpClosed -= OnPopUpClosed;
             controlsPopUp.PopUpOpened -= OnPopUpOpened;
             controlsPopUp.PopUpClosed -= OnPopUpClosed;
+            creditsPopUp.PopUpOpened -= OnPopUpOpened;
+            creditsPopUp.PopUpClosed -= OnPopUpClosed;
         }
 
         private void OnPopUpOpened()
