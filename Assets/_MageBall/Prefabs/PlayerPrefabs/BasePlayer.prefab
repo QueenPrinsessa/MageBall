@@ -591,7 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  nameTag: {fileID: 0}
+  nameTag: {fileID: 1318905126209679299}
 --- !u!1 &420925364281443945
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 7454235637118113931}
   - component: {fileID: 357137540528229550}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PlayerName_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
