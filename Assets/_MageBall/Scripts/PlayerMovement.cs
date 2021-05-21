@@ -13,15 +13,23 @@ namespace MageBall
         [SerializeField] private float jumpHeight = 1.3f;
         [SerializeField] private float acceleration = 3.5f;
         [SerializeField] private float deacceleration = 30f;
+        [SerializeField] private float dashDistance = 5f;
+        [SerializeField] private int dashCooldown = 5;
         [SerializeField] private Passive speedPassive;
         [SerializeField] private Passive jumpPassive;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip dashSound;
+        //[SerializeField] private GameObject dashVfx;
 
         private CharacterController controller;
         private CharacterControllerGravity controllerGravity;
         private Animator animator;
         private Vector3 velocity;
         private float currentSpeed = 0f;
+        private float horizontal;
+        private float vertical;
         private bool canJump = true;
+        private bool canDash = true;
         [SyncVar] private Passives currentPassive;
 
         private float JumpHeight => currentPassive == Passives.HigherJumping ? jumpHeight * jumpPassive.modifier : jumpHeight;
@@ -69,8 +77,8 @@ namespace MageBall
 
         private void HandleMovement()
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
             animator.SetFloat("Horizontal", horizontal);
             animator.SetFloat("Vertical", vertical);
 
@@ -83,6 +91,9 @@ namespace MageBall
                 currentSpeed = Mathf.Max(currentSpeed - deacceleration * Time.fixedDeltaTime, 0f);
 
             CmdUpdateSpeedOnServer(currentSpeed);
+
+            if (Input.GetButton("Dodge") && canDash)
+                StartCoroutine(Dashing(direction));
 
             animator.SetFloat("Speed", currentSpeed);
 
@@ -101,7 +112,6 @@ namespace MageBall
         {
             currentSpeed = speed;
         }
-
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
@@ -127,5 +137,27 @@ namespace MageBall
             rigidbody.velocity = pushDirection * speed * 1.5f;
         }
 
+        private IEnumerator Dashing(Vector3 direction)
+        {
+            canDash = false;
+            controller.Move(direction * dashDistance);
+            CmdPlayDashSound();
+
+            yield return new WaitForSeconds(dashCooldown);
+
+            canDash = true;
+        }
+
+        [Command]
+        private void CmdPlayDashSound()
+        {
+            RpcPlayDashSound();
+        }
+
+        [ClientRpc]
+        private void RpcPlayDashSound()
+        {
+            audioSource.PlayOneShot(dashSound);
+        }
     }
 }
