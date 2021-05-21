@@ -10,14 +10,19 @@ public class PlayerNameTag : NetworkBehaviour
     public TMP_Text nameTag;
 
     void OnNameChange(string oldPlayerName, string playerName)
-    {       
-        nameTag.text = playerName;
+    {              
+       RpcSetPlayerName(playerName);
     }
 
     [ClientRpc]
-    void SetPlayerName(string oldName, string name)
+    void RpcSetPlayerName(string name)
     {
-        transform.name = name;
-        gameObject.transform.Find("PlayerName_canvas").transform.Find("nameTag").GetComponent<TextMeshProUGUI>().text = name;
+        nameTag.text = playerName;
+    }
+
+    [Server]
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
     }
 }
