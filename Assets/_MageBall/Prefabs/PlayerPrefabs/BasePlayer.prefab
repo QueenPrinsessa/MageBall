@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5619645232864165116}
   - component: {fileID: 1425847055805290944}
   - component: {fileID: 118924582342655499}
+  - component: {fileID: 1050448175644189258}
   - component: {fileID: -6746422148729648931}
   - component: {fileID: -8197081607477754250}
   - component: {fileID: 7575334805803104451}
@@ -223,6 +224,31 @@ MonoBehaviour:
   increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
   baseRechargeRate: 20
+--- !u!114 &1050448175644189258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410541546363074372}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b4bde2ecad88747abbcd8d9738dc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 1
+  syncInterval: 0
+  manaCost: 30
+  aimOffset: 0
+  range: 40
+  hitRadius: 10
+  linePrefab: {fileID: 6706628073047153593, guid: 36fe604fb2f493a46b89ec17d4eeafbd,
+    type: 3}
+  lineWidth: 0.1
+  lineDuration: 0.15
+  blackHoleVfx: {fileID: 0}
+  spellDuration: 3
+  mass: 100000
 --- !u!114 &-6746422148729648931
 MonoBehaviour:
   m_ObjectHideFlags: 0

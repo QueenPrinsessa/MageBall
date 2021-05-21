@@ -11,6 +11,7 @@ namespace MageBall
         ForceFly,
         Boxmancy,
         Maximize,
-        Minimize
+        Minimize,
+        BlackHole
     }
 }
