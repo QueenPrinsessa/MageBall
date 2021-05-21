@@ -4,25 +4,30 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
-public class PlayerNameTag : NetworkBehaviour
+namespace MageBall
 {
-    [SyncVar(hook = nameof(OnNameChange))] string playerName;
-    public TMP_Text nameTag;
-
-    void OnNameChange(string oldPlayerName, string playerName)
-    {              
-       RpcSetPlayerName(playerName);
-    }
-
-    [ClientRpc]
-    void RpcSetPlayerName(string name)
+    public class PlayerNameTag : NetworkBehaviour
     {
-        nameTag.text = name;
-    }
+        [SyncVar(hook = nameof(OnNameChange))]
+        private string playerName;
+        [SerializeField] private TMP_Text nameTag;
 
-    [Server]
-    public void SetPlayerName(string name)
-    {
-        playerName = name;
+        void OnNameChange(string oldPlayerName, string newPlayerName)
+        {
+            nameTag.text = newPlayerName;
+            //RpcSetPlayerName(playerName);
+        }
+
+        //[ClientRpc]
+        //void RpcSetPlayerName(string name)
+        //{
+        //    nameTag.text = name;
+        //}
+
+        [Server]
+        public void SetPlayerName(string name)
+        {
+            playerName = name;
+        }
     }
 }
