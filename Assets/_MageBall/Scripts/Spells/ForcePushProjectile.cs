@@ -33,11 +33,10 @@ namespace MageBall
 
             foreach (Collider collider in colliders)
             {
-                Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
-                if (rigidbody == null)
+                if (collider.attachedRigidbody == null)
                     continue;
 
-                rigidbody.AddExplosionForce(explosionForce, contact.point, explosionRadius);
+                collider.attachedRigidbody.AddExplosionForce(explosionForce, contact.point, explosionRadius);
             }
 
             if (colliders.Length > 0)
@@ -45,7 +44,6 @@ namespace MageBall
                 audioSource.Stop();
                 collider.enabled = false;
                 RpcDisableProjectileVFX();
-                float dot = Vector3.Dot(Vector3.up, contact.normal);
                 GameObject vfx = Instantiate(forcePushHitVFX, contact.point, Quaternion.LookRotation(contact.normal));
                 NetworkServer.Spawn(vfx);
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));

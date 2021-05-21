@@ -15,13 +15,11 @@ namespace MageBall
         [ServerCallback]
         private void OnCollisionEnter(Collision collision)
         {
-            ContactPoint contact = collision.contacts[0];
-            Quaternion rotation = Quaternion.LookRotation(contact.normal);
-            Vector3 position = contact.point;
+            ContactPoint contact = collision.GetContact(0);
 
             if (collision.relativeVelocity.magnitude > collisionThreshold)
             {
-                GameObject vfx = Instantiate(collisionVfx, position, rotation);
+                GameObject vfx = Instantiate(collisionVfx, contact.point, Quaternion.LookRotation(contact.normal));
                 NetworkServer.Spawn(vfx);
                 RpcPlaySound();
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
