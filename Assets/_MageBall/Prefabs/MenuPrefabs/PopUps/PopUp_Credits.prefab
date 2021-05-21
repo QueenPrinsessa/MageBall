@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &842332168751143019
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1078251293288346233, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: '<size=30><align=center>Programming</align></size>
+
+        Zoe Thysell
+
+        Gustaf
+        Larsson
+
+        Tonny Dang Nguyen
+
+        Hammi Hussein
+
+
+        <size=30><align=center>3D
+        Models</align></size>
+
+        Gustaf Larsson
+
+
+        <size=30><align=center>Visual
+        Effects</align></size>
+
+        Tonny Dang Nguyen
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613389476942191467, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589543910437446468, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUp_Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 364.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 440.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 182.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136016038519702756, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0021305
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_text
+      value: "<size=30><align=center>Attribution</align></size>\nGeometry Shader
+        w/Tool by MinionsArt\r \nLicensed under Creative Commons BY Attribution 4.0
+        License\r \nhttp://creativecommons.org/licenses/by/4.0/\r\n\nMenu Music:
+        Drifting Minds by Alexander Nakarada (www.serpentsoundstudios.com)\r\nLicensed
+        under Creative Commons BY Attribution 4.0 License\r\nhttp://creativecommons.org/licenses/by/4.0/\n\nIn-game
+        Music: Dungeons and Dragons by Alexander Nakarada (www.serpentsoundstudios.com)\r\nLicensed
+        under Creative Commons BY Attribution 4.0 License\r\nhttp://creativecommons.org/licenses/by/4.0/\n\nMinimize
+        & Maximize sound effect: Retro_Pew_Shot.wav by MATRIXXX https://creativecommons.org/licenses/by/3.0/"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543295634860701206, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 747.1007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 498.0671
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349958889842018795, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 364.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 440.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -182.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159632259233974509, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0011673
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c89c57cfb866bb4a9fa9a83324efafd, type: 3}
