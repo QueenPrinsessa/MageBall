@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  collisionVfx: {fileID: 3372314684515853893, guid: 9f1be1d632c59054dad83776b568465f,
+  collisionVfx: {fileID: 1575739040324818152, guid: 31d4cf07815a5ca498a3ac7773d19c54,
     type: 3}
   collisionSound: {fileID: 4238000931710278110}
   collisionThreshold: 15
