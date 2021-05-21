@@ -96,6 +96,8 @@ namespace MageBall
             PlayerMovement playerMovement = playerInstance.GetComponent<PlayerMovement>();
             playerMovement.SetPassiveFromLoadout(networkGamePlayer.PlayerLoadout);
 
+            PlayerNameTag playerNameTag = playerInstance.GetComponent<PlayerNameTag>();
+            playerNameTag.SetPlayerName(networkGamePlayer.DisplayName);
 
             if (currentTeam != firstTeam)
                 nextIndex++;
