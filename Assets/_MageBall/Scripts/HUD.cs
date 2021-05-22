@@ -236,10 +236,10 @@ namespace MageBall
             switch (scoreHandler.Winner)
             {
                 case Winner.RedTeam:
-                    matchEndText.text = "<color=\"red\">RED</color> TEAM WINS!";
+                    matchEndText.text = $"<color=red>{Names.RedTeamName}</color> WIN!";
                     break;
                 case Winner.BlueTeam:
-                    matchEndText.text = "<color=\"blue\">BLUE</color> TEAM WINS!";
+                    matchEndText.text = $"<color=blue>{Names.BlueTeamName}</color> TEAM WINS!";
                     break;
                 case Winner.Tie:
                     matchEndText.text = "IT'S A TIE!";
@@ -275,28 +275,27 @@ namespace MageBall
         {
             goalScoredUI.SetActive(true);
             TMP_Text goalScoredText = goalScoredUI.GetComponentInChildren<TMP_Text>();
-            if (goalScoredText != null)
+            if(goalScoredText == null)
             {
-                goalScoredText.text = $"<color=\"{team.ToString().ToLower()}\">{team.ToString().ToUpper()}</color> TEAM SCORES";
-            }
-            else
-            {
-                Debug.LogError("OnScoreChanged, goalScoreText not found");
+                Debug.LogError("OnScoreChanged, goalScoredText not found");
                 return;
             }
             StartCoroutine(DisableGoalScoredUI());
 
-
-
+            string color = "white";
             switch (team)
             {
                 case Team.Red:
+                    color = "red";
                     redTeamScoreText.text = newScore.ToString();
                     break;
                 case Team.Blue:
+                    color = "blue";
                     blueTeamScoreText.text = newScore.ToString();
                     break;
             }
+
+            goalScoredText.text = $"<color={color}>{Names.NameFromTeam(team).ToUpper()}</color> SCORE";
         }
 
         private IEnumerator DisableGoalScoredUI()
