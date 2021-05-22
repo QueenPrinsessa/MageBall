@@ -76,7 +76,8 @@ PrefabInstance:
         under Creative Commons BY Attribution 4.0 License\r\nhttp://creativecommons.org/licenses/by/4.0/\n\nIn-game
         Music: Dungeons and Dragons by Alexander Nakarada (www.serpentsoundstudios.com)\r\nLicensed
         under Creative Commons BY Attribution 4.0 License\r\nhttp://creativecommons.org/licenses/by/4.0/\n\nMinimize
-        & Maximize sound effect: Retro_Pew_Shot.wav by MATRIXXX https://creativecommons.org/licenses/by/3.0/"
+        & Maximize sound effect: Retro_Pew_Shot.wav by MATRIXXX https://creativecommons.org/licenses/by/3.0/\n\nMatch
+        over sound: referee-whistle.wav by Pablo-F licensed under CC BY 3.0 https://creativecommons.org/licenses/by/3.0/"
       objectReference: {fileID: 0}
     - target: {fileID: 7165119568293341203, guid: 3c89c57cfb866bb4a9fa9a83324efafd,
         type: 3}

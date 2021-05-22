@@ -7,6 +7,9 @@ namespace MageBall
 {
     public class MatchTimer : NetworkBehaviour
     {
+
+        [SerializeField] private AudioSource gameOverAudioSource;
+
         private Coroutine timerRoutine;
         private bool hasMatchEnded = false;
 
@@ -67,6 +70,7 @@ namespace MageBall
         [ClientRpc]
         private void RpcInvokeMatchEnd()
         {
+            gameOverAudioSource.Play();
             MatchEnd?.Invoke();
         }
     }
