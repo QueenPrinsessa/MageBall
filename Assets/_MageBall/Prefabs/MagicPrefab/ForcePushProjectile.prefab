@@ -187,7 +187,7 @@ MonoBehaviour:
   collider: {fileID: 6540593512317734005}
   flightSpeed: 50
   explosionRadius: 4
-  explosionForce: 1000
+  explosionForce: 1100
   vfxDuration: 3
   forcePushHitVFX: {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112,
     type: 3}
