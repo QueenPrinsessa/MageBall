@@ -14,6 +14,8 @@ namespace MageBall
         public static readonly string QualityPlayerPrefsKey = "GraphicsQuality";
         public static readonly string WindowModePlayerPrefsKey = "WindowMode";
         public static readonly string MasterVolumePlayerPrefsKey = "MasterVolume";
+        public static readonly string MusicVolumePlayerPrefsKey = "MusicVolume";
+        public static readonly string EffectsVolumePlayerPrefsKey = "EffectsVolume";
         public static readonly string MouseSensitivityPlayerPrefsKey = "MouseSensitivity";
         public static readonly string InvertMouseXAxisPlayerPrefsKey = "InvertMouseX";
         public static readonly string InvertMouseYAxisPlayerPrefsKey = "InvertMouseY";
@@ -33,7 +35,9 @@ namespace MageBall
         [SerializeField] private Toggle invertMouseYToggle;
 
         [Header("Sound settings")]
-        [SerializeField] private Slider volumeSlider;
+        [SerializeField] private Slider masterVolumeSlider;
+        [SerializeField] private Slider musicVolumeSlider;
+        [SerializeField] private Slider effectsVolumeSlider;
         [SerializeField] private AudioMixer audioMixer;
 
         public event Action OptionsMenuOpened;
@@ -81,7 +85,9 @@ namespace MageBall
             SetWindowMode(windowModeDropdown.value);
             SetQuality(graphicsQualityDropdown.value);
             SetMouseSensitivity(mouseSensitivitySlider.value);
-            SetMasterVolume(volumeSlider.value);
+            SetMasterVolume(masterVolumeSlider.value);
+            SetMusicVolume(musicVolumeSlider.value);
+            SetEffectsVolume(effectsVolumeSlider.value);
             SetInvertMouseXAxis(invertMouseXToggle.isOn);
             SetInvertMouseYAxis(invertMouseYToggle.isOn);
         }
@@ -97,7 +103,9 @@ namespace MageBall
             resolutionIndex = PlayerPrefs.GetInt(ResolutionPlayerPrefsKey, resolutionIndex);
             int quality = PlayerPrefs.GetInt(QualityPlayerPrefsKey, QualitySettings.GetQualityLevel());
             int windowMode = PlayerPrefs.GetInt(WindowModePlayerPrefsKey, (int)Screen.fullScreenMode);
-            float masterVolume = PlayerPrefs.GetFloat(MasterVolumePlayerPrefsKey, 0f);
+            float masterVolume = PlayerPrefs.GetFloat(MasterVolumePlayerPrefsKey, 1f);
+            float musicVolume = PlayerPrefs.GetFloat(MusicVolumePlayerPrefsKey, 1f);
+            float effectsVolume = PlayerPrefs.GetFloat(EffectsVolumePlayerPrefsKey, 1f);
             float mouseSensitivity = PlayerPrefs.GetFloat(MouseSensitivityPlayerPrefsKey, 1f);
             int invertMouseX = PlayerPrefs.GetInt(InvertMouseXAxisPlayerPrefsKey, Convert.ToInt32(false));
             int invertMouseY = PlayerPrefs.GetInt(InvertMouseYAxisPlayerPrefsKey, Convert.ToInt32(false));
@@ -106,8 +114,9 @@ namespace MageBall
             graphicsQualityDropdown.value = quality;
             windowModeDropdown.value = windowMode;
             mouseSensitivitySlider.value = mouseSensitivity;
-            volumeSlider.value = masterVolume;
-
+            masterVolumeSlider.value = masterVolume;
+            musicVolumeSlider.value = musicVolume;
+            effectsVolumeSlider.value = effectsVolume;
             invertMouseXToggle.isOn = Convert.ToBoolean(invertMouseX);
             invertMouseYToggle.isOn = Convert.ToBoolean(invertMouseY);
         }
@@ -160,12 +169,27 @@ namespace MageBall
 
         public void SetMasterVolume(float volume)
         {
-            audioMixer.SetFloat("MasterVolume", volume);
-            PlayerPrefs.SetFloat(MasterVolumePlayerPrefsKey, volume);
+            SetVolumeLogarithmically("MasterVolume", volume, MasterVolumePlayerPrefsKey);
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            SetVolumeLogarithmically("MusicVolume", volume, MusicVolumePlayerPrefsKey);
+        }
+        public void SetEffectsVolume(float volume)
+        {
+            SetVolumeLogarithmically("EffectsVolume", volume, EffectsVolumePlayerPrefsKey);
+        }
+
+        private void SetVolumeLogarithmically(string name, float volume, string playerPrefsKey)
+        {
+            audioMixer.SetFloat(name, Mathf.Log10(volume) * 20);
+            PlayerPrefs.SetFloat(playerPrefsKey, volume);
         }
 
         public void OpenMenu()
         {
+            RestoreSettingsFromPrefs();
             optionsCanvas.SetActive(true);
             OptionsMenuOpened?.Invoke();
         }
