@@ -21,6 +21,11 @@ namespace MageBall
         [SerializeField] private GameObject pauseMenuPrefab;
         [SerializeField] private float barMovingSpeed = 0.1f;
 
+        [Header("Sounds")]
+        [SerializeField] private AudioClip[] countdownBeepClips;
+        [SerializeField] private AudioClip countdownGoClip;
+        [SerializeField] private AudioSource audioSource;
+
         private float manaBarMaskWidth;
         private Coroutine updateManaBarCoroutine;
         private PauseMenu pauseMenu;
@@ -108,10 +113,12 @@ namespace MageBall
             while (networkGamePlayerMageBall.IsFrozen)
             {
                 countdownText.text = seconds.ToString();
+                audioSource.PlayOneShot(countdownBeepClips[Random.Range(0, countdownBeepClips.Length)]);
                 yield return new WaitForSeconds(1);
                 seconds--;
             }
             countdownText.text = "GO";
+            audioSource.PlayOneShot(countdownGoClip);
 
             yield return new WaitForSeconds(1);
 

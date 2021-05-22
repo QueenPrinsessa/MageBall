@@ -10,6 +10,7 @@ namespace MageBall
     public class Goal : NetworkBehaviour
     {
         [SerializeField] private Team team;
+        [SerializeField] private AudioSource audioSource;
         private BoxCollider goalCollider;
         public event Action<Team> score;
 
@@ -26,8 +27,19 @@ namespace MageBall
             if (!other.CompareTag(Tags.BallTag))
                 return;
 
-            if (goalCollider.bounds.Contains(other.bounds.min) && goalCollider.bounds.Contains(other.bounds.max))
-                score?.Invoke(team);
+            if (!goalCollider.bounds.Contains(other.bounds.min) && goalCollider.bounds.Contains(other.bounds.max))
+                return;
+
+            RpcPlayGoalSound();
+
+            score?.Invoke(team);
+        }
+
+        [ClientRpc]
+        private void RpcPlayGoalSound()
+        {
+            if (audioSource != null)
+                audioSource.Play();
         }
     }
 }

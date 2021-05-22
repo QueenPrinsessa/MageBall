@@ -193,6 +193,12 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 4190847135920946312, guid: c0f0875e2be995b4fbb1ee07607c8bc8,
     type: 3}
   barMovingSpeed: 0.1
+  countdownBeepClips:
+  - {fileID: 8300000, guid: 8658c69bff7c191498390743d99b40ad, type: 3}
+  - {fileID: 8300000, guid: d42d23dc434ca39438e004eabf049d5d, type: 3}
+  - {fileID: 8300000, guid: a9828351f9e7f99419667b81135c4509, type: 3}
+  countdownGoClip: {fileID: 8300000, guid: a6c15e19b67fe1b4291d5a7ab20d4d59, type: 3}
+  audioSource: {fileID: -4896611526181679353}
 --- !u!114 &1425847055805290944
 MonoBehaviour:
   m_ObjectHideFlags: 0
