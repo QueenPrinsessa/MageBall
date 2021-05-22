@@ -224,7 +224,7 @@ MonoBehaviour:
   syncInterval: 0.1
   increasedMana: {fileID: 11400000, guid: 1df1c58fb08e58f4e933c9e2e242f293, type: 2}
   maxMana: 100
-  baseRechargeRate: 20
+  baseRechargeRate: 25
 --- !u!114 &-6746422148729648931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
-  manaCost: 30
+  manaCost: 25
   aimOffset: 0
   range: 40
   hitRadius: 0.3
@@ -320,7 +320,7 @@ MonoBehaviour:
   syncMode: 1
   syncInterval: 0
   manaCost: 30
-  aimOffset: 2
+  aimOffset: 0.2
   forcePushPrefab: {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4,
     type: 3}
 --- !u!114 &4445340136976529315
@@ -337,9 +337,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
-  manaCost: 30
+  manaCost: 25
   aimOffset: 0
-  range: 60
+  range: 30
   hitRadius: 0.3
   linePrefab: {fileID: 6706628073047153593, guid: b9c8ef98fc488254a9f2330baafcffca,
     type: 3}
@@ -363,11 +363,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 1
   syncInterval: 0
-  manaCost: 30
+  manaCost: 35
   aimOffset: -1.5
   boxPrefab: {fileID: 6232933236469191458, guid: b82994e47cea50644bce0b16a6c9c2e2,
     type: 3}
-  force: 60
+  force: 45
 --- !u!114 &2230629447617049366
 MonoBehaviour:
   m_ObjectHideFlags: 0
