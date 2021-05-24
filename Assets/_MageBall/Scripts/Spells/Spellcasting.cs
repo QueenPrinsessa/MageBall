@@ -96,7 +96,6 @@ namespace MageBall
 
         private Spell GetSpell(Spells spell)
         {
-            TargetEnableSpell(spell);
 
             switch (spell)
             {
@@ -114,35 +113,6 @@ namespace MageBall
                     return GetComponent<Minimize>();
                 default:
                     return GetComponent<ForcePush>();
-            }
-        }
-
-        [TargetRpc]
-        private void TargetEnableSpell(Spells spell)
-        {
-            switch (spell)
-            {
-                case Spells.ForcePush:
-                    GetComponent<ForcePush>().enabled = true;
-                    return;
-                case Spells.ForcePull:
-                    GetComponent<ForcePull>().enabled = true;
-                    return;
-                case Spells.ForceFly:
-                    GetComponent<ForceFly>().enabled = true;
-                    return;
-                case Spells.Boxmancy:
-                    GetComponent<Boxmancy>().enabled = true;
-                    return;
-                case Spells.Maximize:
-                    GetComponent<Maximize>().enabled = true;
-                    return;
-                case Spells.Minimize:
-                    GetComponent<Minimize>().enabled = true;
-                    return;
-                default:
-                    GetComponent<ForcePush>().enabled = true;
-                    return;
             }
         }
 
