@@ -141,6 +141,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 2324475297525008850, guid: a241be52728a77c4291b61424d3bfb25,
+        type: 3}
+      propertyPath: m_TagString
+      value: Spell
+      objectReference: {fileID: 0}
     - target: {fileID: 2400847461244022255, guid: a241be52728a77c4291b61424d3bfb25,
         type: 3}
       propertyPath: m_RootOrder
