@@ -38,7 +38,7 @@ namespace MageBall
             goals = FindObjectsOfType<Goal>();
 
             foreach (Goal goal in goals)
-                goal.score += OnScore;
+                goal.Score += OnScore;
 
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 
@@ -50,7 +50,7 @@ namespace MageBall
         private void OnDestroy()
         {
             foreach (Goal goal in goals)
-                goal.score -= OnScore;
+                goal.Score -= OnScore;
 
             MatchTimer matchTimer = FindObjectOfType<MatchTimer>();
 

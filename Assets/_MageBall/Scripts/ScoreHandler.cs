@@ -40,7 +40,7 @@ namespace MageBall
             Goal[] goals = FindObjectsOfType<Goal>();
 
             foreach (Goal goal in goals)
-                goal.score += OnScore;
+                goal.Score += OnScore;
         }
 
         private void OnRedTeamScoreUpdated(int oldScore, int newScore) => ScoreChanged?.Invoke(Team.Red, newScore);
@@ -52,7 +52,7 @@ namespace MageBall
             Goal[] goals = FindObjectsOfType<Goal>();
 
             foreach (Goal goal in goals)
-                goal.score -= OnScore;
+                goal.Score -= OnScore;
         }
 
         [Server]

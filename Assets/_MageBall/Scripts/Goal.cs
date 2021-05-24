@@ -12,7 +12,7 @@ namespace MageBall
         [SerializeField] private Team team;
         [SerializeField] private AudioSource audioSource;
         private BoxCollider goalCollider;
-        public event Action<Team> score;
+        public event Action<Team> Score;
 
         public BoxCollider GoalCollider => goalCollider;
 
@@ -27,12 +27,12 @@ namespace MageBall
             if (!other.CompareTag(Tags.BallTag))
                 return;
 
-            if (!goalCollider.bounds.Contains(other.bounds.min) && goalCollider.bounds.Contains(other.bounds.max))
+            if (!(goalCollider.bounds.Contains(other.bounds.min) && goalCollider.bounds.Contains(other.bounds.max)))
                 return;
 
             RpcPlayGoalSound();
 
-            score?.Invoke(team);
+            Score?.Invoke(team);
         }
 
         [ClientRpc]
