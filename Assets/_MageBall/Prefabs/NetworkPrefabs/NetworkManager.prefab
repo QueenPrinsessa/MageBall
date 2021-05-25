@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5081799449140713992}
   - component: {fileID: 5081799449140713999}
-  - component: {fileID: 5081799449140713998}
+  - component: {fileID: 6977438148764102122}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -53,7 +53,7 @@ MonoBehaviour:
   serverBatchInterval: 0
   offlineScene: Assets/_MageBall/Scenes/MainMenu.unity
   onlineScene: 
-  transport: {fileID: 5081799449140713998}
+  transport: {fileID: 6977438148764102122}
   networkAddress: localhost
   maxConnections: 4
   disconnectInactiveConnections: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   waitBeforeReturnToLobbyInSeconds: 3
   matchLengthInMinutes: 5
   selectedArena: 2
---- !u!114 &5081799449140713998
+--- !u!114 &6977438148764102122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,16 +102,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5081799449140713997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Script: {fileID: 11500000, guid: 872fa23ef6e77334ca452ce16f6cd091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: 7777
-  NoDelay: 1
-  Interval: 10
-  FastResend: 2
-  CongestionWindow: 0
-  SendWindowSize: 8192
-  ReceiveWindowSize: 8192
-  debugLog: 0
-  statisticsGUI: 0
-  statisticsLog: 0
+  port: 7777
+  LogType: 2
+  DebugDisplay: 0
+  serverBindsAll: 1
+  serverBindAddress: 
+  serverMaxPeerCapacity: 10
+  serverMaxNativeWaitTime: 1
+  clientMaxNativeWaitTime: 3
+  clientStatusUpdateInterval: -1
+  Channels: 0100000002000000
+  PacketBufferCapacity: 4096
+  MaxAllowedPacketSize: 33554432

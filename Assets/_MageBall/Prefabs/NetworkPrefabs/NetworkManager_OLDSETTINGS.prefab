@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5081799449140713997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5081799449140713992}
+  - component: {fileID: 5081799449140713999}
+  - component: {fileID: 5081799449140713998}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5081799449140713992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081799449140713997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1330.1077, y: 644.9488, z: -393.7526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5081799449140713999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081799449140713997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1254abc816c064db300ef7936fd542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  PersistNetworkManagerToOfflineScene: 0
+  runInBackground: 1
+  autoStartServerBuild: 1
+  serverTickRate: 60
+  serverBatching: 1
+  serverBatchInterval: 0
+  offlineScene: Assets/_MageBall/Scenes/MainMenu.unity
+  onlineScene: 
+  transport: {fileID: 5081799449140713998}
+  networkAddress: localhost
+  maxConnections: 4
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  autoCreatePlayer: 0
+  playerSpawnMethod: 0
+  spawnPrefabs:
+  - {fileID: 8021760743681711217, guid: f71868b9ba8155d469df12889c4a8d77, type: 3}
+  - {fileID: 8021760743681711217, guid: 9d82e25b01ed07a43b4afd414c43bfbf, type: 3}
+  - {fileID: 3939426093137187278, guid: 4ff97b2c20f18a9478bfd420622b5bbe, type: 3}
+  - {fileID: 3606733632085325176, guid: 1f32d89305618ce468421eadf7f1b0b4, type: 3}
+  - {fileID: 3372314684515853893, guid: ee05f723b1a574e43aad820c1295b112, type: 3}
+  - {fileID: 1168097512498193527, guid: a237e6a769404434083ed0e53dbb9b35, type: 3}
+  - {fileID: 6459023908496999093, guid: a6b809572aaa56444af5c5debb72350f, type: 3}
+  - {fileID: 7109206152914753663, guid: 54fb85bf8d2256440acdfa6f6889f1db, type: 3}
+  - {fileID: 117802318632818859, guid: dd6866f305a459344b7d15cd56b184e0, type: 3}
+  - {fileID: 9181742627265919628, guid: 2f19e703378caed429889aa166e1b041, type: 3}
+  - {fileID: 6314229391345190451, guid: c1322d63dabc64241870a8313add7953, type: 3}
+  - {fileID: 6936871327302920534, guid: 22810dfd20961cd4c98780c7428cbfcb, type: 3}
+  - {fileID: 6706628073047153593, guid: be0b4a7f39235b842857093d8973d6c2, type: 3}
+  - {fileID: 6706628073047153593, guid: b9c8ef98fc488254a9f2330baafcffca, type: 3}
+  - {fileID: 6232933236469191458, guid: b82994e47cea50644bce0b16a6c9c2e2, type: 3}
+  - {fileID: 6706628073047153593, guid: adeff937aaa354b4f915e37847582b33, type: 3}
+  - {fileID: 6706628073047153593, guid: 6510b39928515b649ab98e15f4d0ffad, type: 3}
+  - {fileID: 1575739040324818152, guid: 31d4cf07815a5ca498a3ac7773d19c54, type: 3}
+  menuScene: Assets/_MageBall/Scenes/MainMenu.unity
+  networkRoomPlayerPrefab: {fileID: 4365084273300691981, guid: f71868b9ba8155d469df12889c4a8d77,
+    type: 3}
+  gamePlayerPrefab: {fileID: 8274515854195048484, guid: 9d82e25b01ed07a43b4afd414c43bfbf,
+    type: 3}
+  playerSpawnSystem: {fileID: 3939426093137187278, guid: 4ff97b2c20f18a9478bfd420622b5bbe,
+    type: 3}
+  waitBeforeControlsEnableInSeconds: 3
+  waitBeforeResetAfterGoalInSeconds: 1.5
+  waitBeforeReturnToLobbyInSeconds: 3
+  matchLengthInMinutes: 5
+  selectedArena: 2
+--- !u!114 &5081799449140713998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081799449140713997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Port: 7777
+  NoDelay: 1
+  Interval: 10
+  FastResend: 2
+  CongestionWindow: 0
+  SendWindowSize: 4096
+  ReceiveWindowSize: 4096
+  debugLog: 1
+  statisticsGUI: 1
+  statisticsLog: 0
