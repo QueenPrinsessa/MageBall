@@ -8,6 +8,7 @@ namespace MageBall
     {
 
         [SerializeField] private int powerUpDuration = 5;
+        private bool hasBeenPickedUp;
 
         public PowerUpSpawner Spawner { get; set; }
 
@@ -19,12 +20,14 @@ namespace MageBall
                 return;
 
             Spellcasting spellcasting = other.gameObject.GetComponent<Spellcasting>();
-
-            if (spellcasting == null)
+            HUD hud = other.gameObject.GetComponent<HUD>();
+            if (hasBeenPickedUp || spellcasting == null || hud == null)
                 return;
 
+            hasBeenPickedUp = true;
             NetworkServer.Destroy(gameObject);
             spellcasting.TargetEnablePowerUp(powerUpDuration);
+            hud.TargetPowerUpManaBar(powerUpDuration);
         }
     }
 }

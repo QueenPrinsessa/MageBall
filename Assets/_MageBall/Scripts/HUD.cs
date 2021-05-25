@@ -19,6 +19,8 @@ namespace MageBall
         [SerializeField] private Mask manaBarMask;
         [SerializeField] private Spellcasting spellcasting;
         [SerializeField] private GameObject pauseMenuPrefab;
+        [SerializeField] private Image manaBarBorder;
+        [SerializeField] private Color powerUpColor;
         [SerializeField] private float barMovingSpeed = 0.1f;
 
         [Header("Sounds")]
@@ -43,6 +45,20 @@ namespace MageBall
 
                 return networkManager = Mirror.NetworkManager.singleton as NetworkManagerMageBall;
             }
+        }
+
+        [TargetRpc]
+        public void TargetPowerUpManaBar(float duration)
+        {
+            StartCoroutine(PowerUpManaBar(duration));
+        }
+
+        public IEnumerator PowerUpManaBar(float duration)
+        {
+            Color borderColor = manaBarBorder.color;
+            manaBarBorder.color = powerUpColor;
+            yield return new WaitForSeconds(duration);
+            manaBarBorder.color = borderColor;
         }
 
         public override void OnStartAuthority()
