@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   port: 7777
   LogType: 2
-  DebugDisplay: 1
+  DebugDisplay: 0
   serverBindsAll: 1
   serverBindAddress: 
   serverMaxPeerCapacity: 10
