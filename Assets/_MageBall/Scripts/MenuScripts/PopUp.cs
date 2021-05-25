@@ -3,33 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUp : MonoBehaviour
+namespace MageBall
 {
-    [SerializeField] private GameObject popUpCanvas;
-
-    public bool IsOpen => popUpCanvas.activeInHierarchy;
-
-    public event Action PopUpOpened;
-    public event Action PopUpClosed;
-
-    private void Update()
+    public class PopUp : MonoBehaviour
     {
-        if (!IsOpen)
-            return;
+        [SerializeField] private GameObject popUpCanvas;
 
-        if (Input.GetButtonDown("Cancel"))
-            Close();
-    }
+        public bool IsOpen => popUpCanvas.activeInHierarchy;
 
-    public void Open()
-    {
-        popUpCanvas.SetActive(true);
-        PopUpOpened?.Invoke();
-    }
+        public event Action PopUpOpened;
+        public event Action PopUpClosed;
 
-    public void Close()
-    {
-        popUpCanvas.SetActive(false);
-        PopUpClosed?.Invoke();
+        private void Update()
+        {
+            if (!IsOpen)
+                return;
+
+            if (Input.GetButtonDown("Cancel"))
+                Close();
+        }
+
+        public void Open()
+        {
+            popUpCanvas.SetActive(true);
+            PopUpOpened?.Invoke();
+        }
+
+        public void Close()
+        {
+            popUpCanvas.SetActive(false);
+            PopUpClosed?.Invoke();
+        }
     }
 }

@@ -2,12 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-namespace QueenPrinsessa
+namespace MageBall
 {
-    /// <summary>
-    /// This script and the shader it uses is adapted from one of my older project
-    /// -QueenPrinsessa
-    /// </summary>
     public class Dissolve : NetworkBehaviour
     {
         [Header("Dissolve Settings")]

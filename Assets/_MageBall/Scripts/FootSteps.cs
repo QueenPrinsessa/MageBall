@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FootSteps : MonoBehaviour
+namespace MageBall
 {
-
-    [SerializeField] private AudioClip[] clips;
-
-    private AudioSource audioSource;
-
-    private void Awake()
+    public class FootSteps : MonoBehaviour
     {
-        audioSource = GetComponent<AudioSource>();
+
+        [SerializeField] private AudioClip[] clips;
+
+        private AudioSource audioSource;
+
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Step()
+        {
+            AudioClip clip = GetRandomClip();
+            audioSource.PlayOneShot(clip);
+        }
+
+        private AudioClip GetRandomClip()
+        {
+            return clips[UnityEngine.Random.Range(0, clips.Length)];
+        }
+
+
     }
-
-    private void Step()
-    {
-        AudioClip clip = GetRandomClip();
-        audioSource.PlayOneShot(clip);
-    }
-
-    private AudioClip GetRandomClip()
-    {
-        return clips[UnityEngine.Random.Range(0, clips.Length)];
-    }
-
-
 }

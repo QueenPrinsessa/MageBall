@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-[RequireComponent(typeof(Rigidbody))]
-public class ServerOnlyRigidbody : NetworkBehaviour
+namespace MageBall
 {
-    [SerializeField] private new Rigidbody rigidbody;
-
-    public override void OnStartServer()
+    [RequireComponent(typeof(Rigidbody))]
+    public class ServerOnlyRigidbody : NetworkBehaviour
     {
-        MakeRigidbodyKinematic();
-        rigidbody.isKinematic = false;
-    }
+        [SerializeField] private new Rigidbody rigidbody;
 
-    [ClientRpc]
-    private void MakeRigidbodyKinematic()
-    {
-        rigidbody.isKinematic = true;
+        public override void OnStartServer()
+        {
+            MakeRigidbodyKinematic();
+            rigidbody.isKinematic = false;
+        }
+
+        [ClientRpc]
+        private void MakeRigidbodyKinematic()
+        {
+            rigidbody.isKinematic = true;
+        }
     }
 }
