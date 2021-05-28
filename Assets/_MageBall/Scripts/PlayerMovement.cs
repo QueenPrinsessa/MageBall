@@ -19,7 +19,7 @@ namespace MageBall
         [SerializeField] private Passive jumpPassive;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip dashSound;
-        //[SerializeField] private GameObject dashVfx;
+        [SerializeField] private GameObject dashVfx;
 
         private CharacterController controller;
         private CharacterControllerGravity controllerGravity;
@@ -142,7 +142,8 @@ namespace MageBall
             canDash = false;
             controller.Move(direction * dashDistance);
             CmdPlayDashSound();
-
+            GameObject vfx = Instantiate(dashVfx, transform.position,dashVfx.transform.rotation);
+            NetworkServer.Spawn(vfx);
             yield return new WaitForSeconds(dashCooldown);
 
             canDash = true;
@@ -159,5 +160,7 @@ namespace MageBall
         {
             audioSource.PlayOneShot(dashSound);
         }
+
+      
     }
 }

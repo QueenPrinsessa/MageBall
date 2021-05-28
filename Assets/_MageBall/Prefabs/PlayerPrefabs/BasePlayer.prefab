@@ -151,6 +151,7 @@ MonoBehaviour:
   jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
   audioSource: {fileID: -4896611526181679353}
   dashSound: {fileID: 8300000, guid: a06b7afb516227941b0f20f2bac70431, type: 3}
+  dashVfx: {fileID: 6811012314612864183, guid: d306e62c7b3714c47b9d09cd540e7f49, type: 3}
 --- !u!114 &-2797412249483956625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,9 +194,7 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 4190847135920946312, guid: c0f0875e2be995b4fbb1ee07607c8bc8,
     type: 3}
   manaBarBorder: {fileID: 3342594394526633592}
-  manaBarBackground: {fileID: 8826471934420809312}
   powerUpColor: {r: 0.8867924, g: 0.7395746, b: 0.12967247, a: 1}
-  powerUpBorderColor: {r: 0.4339623, g: 0.34842283, b: 0.030704875, a: 0}
   barMovingSpeed: 0.1
   countdownBeepClips:
   - {fileID: 8300000, guid: 8658c69bff7c191498390743d99b40ad, type: 3}
@@ -1079,18 +1078,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8826471934420809312 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4559210897238330279, guid: 57ef7327020bea0438fed648453fbf3e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4987876579337076167}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5508684950169733874 stripped
