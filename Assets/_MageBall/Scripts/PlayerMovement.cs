@@ -167,7 +167,8 @@ namespace MageBall
         {
             yield return new WaitForSeconds(time);
 
-            NetworkServer.Destroy(gameObject);
+            if(gameObject != null)
+                NetworkServer.Destroy(gameObject);
         }
 
       
