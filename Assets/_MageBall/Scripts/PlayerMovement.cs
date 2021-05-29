@@ -20,7 +20,7 @@ namespace MageBall
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip dashSound;
         [SerializeField] private GameObject dashVfx;
-
+        [SerializeField] private float dashVfxDuration = 2f;
         private CharacterController controller;
         private CharacterControllerGravity controllerGravity;
         private Animator animator;
@@ -140,18 +140,20 @@ namespace MageBall
         private IEnumerator Dashing(Vector3 direction)
         {
             canDash = false;
+            CmdDashOnServer(transform.position);
             controller.Move(direction * dashDistance);
-            CmdPlayDashSound();
-            GameObject vfx = Instantiate(dashVfx, transform.position,dashVfx.transform.rotation);
-            NetworkServer.Spawn(vfx);
+
             yield return new WaitForSeconds(dashCooldown);
 
             canDash = true;
         }
 
         [Command]
-        private void CmdPlayDashSound()
+        private void CmdDashOnServer(Vector3 position)
         {
+            GameObject vfx = Instantiate(dashVfx, position + Vector3.up, dashVfx.transform.rotation);
+            NetworkServer.Spawn(vfx);
+            StartCoroutine(DestroyAfterTime(vfx, dashVfxDuration));
             RpcPlayDashSound();
         }
 
@@ -159,6 +161,13 @@ namespace MageBall
         private void RpcPlayDashSound()
         {
             audioSource.PlayOneShot(dashSound);
+        }
+
+        private IEnumerator DestroyAfterTime(GameObject gameObject, float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            NetworkServer.Destroy(gameObject);
         }
 
       
