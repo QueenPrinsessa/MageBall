@@ -10,6 +10,8 @@ namespace MageBall
     /// </summary>
     public class Ball : NetworkBehaviour
     {
+        [SerializeField] private float velocityLimit = 20f;
+        [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private GameObject collisionVfx;
         [SerializeField] private AudioSource collisionSound;
         [SerializeField] private int collisionThreshold = 5;
@@ -26,6 +28,19 @@ namespace MageBall
                 NetworkServer.Spawn(vfx);
                 RpcPlaySound();
                 StartCoroutine(DestroyAfterTime(vfx, vfxDuration));
+            }
+        }
+
+        [ServerCallback]
+        private void FixedUpdate()
+        {
+            if (rigidbody.isKinematic)
+                return;
+
+            if (rigidbody.velocity.sqrMagnitude > velocityLimit * velocityLimit)
+            {
+                Vector3 ballMoveDirection = rigidbody.velocity.normalized;
+                rigidbody.velocity = velocityLimit * ballMoveDirection;
             }
         }
 
