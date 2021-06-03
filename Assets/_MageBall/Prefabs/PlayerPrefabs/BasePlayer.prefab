@@ -145,7 +145,7 @@ MonoBehaviour:
   jumpHeight: 1.8
   acceleration: 4
   deacceleration: 30
-  dashDistance: 10
+  dashDistance: 7
   dashCooldown: 2
   speedPassive: {fileID: 11400000, guid: c51e83ba07e1f9045983ab486e0b8337, type: 2}
   jumpPassive: {fileID: 11400000, guid: e3027e78db31f324bbcfa6dd1c0808f7, type: 2}
