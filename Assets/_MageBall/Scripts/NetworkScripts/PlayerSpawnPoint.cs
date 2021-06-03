@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvaring: Zoe 
+    /// </summary>
     public class PlayerSpawnPoint : MonoBehaviour
     {
 

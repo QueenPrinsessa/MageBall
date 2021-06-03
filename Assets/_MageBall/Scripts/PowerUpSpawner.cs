@@ -5,6 +5,9 @@ using Mirror;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Gustaf
+    /// </summary>
     public class PowerUpSpawner : NetworkBehaviour
     {
 

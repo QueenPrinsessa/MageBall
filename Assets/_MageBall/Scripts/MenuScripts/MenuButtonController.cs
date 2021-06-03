@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class MenuButtonController : MonoBehaviour
     {
         [SerializeField, Tooltip("Default is a vertical menu")] private bool isHorizontalMenu = false;

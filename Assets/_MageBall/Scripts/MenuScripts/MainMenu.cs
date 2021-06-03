@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class MainMenu : MonoBehaviour
     {
         [Header("Networking")]

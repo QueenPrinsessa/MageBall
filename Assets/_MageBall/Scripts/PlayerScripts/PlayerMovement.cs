@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Hammi
+    /// </summary>
     public class PlayerMovement : NetworkBehaviour
     {
 

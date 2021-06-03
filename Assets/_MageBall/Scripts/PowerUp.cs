@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MageBall 
 {
+    /// <summary>
+    /// Huvudansvarig: Gustaf
+    /// </summary>
     public class PowerUp : NetworkBehaviour
     {
 

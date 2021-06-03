@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class IpInput : MonoBehaviour
     {
 

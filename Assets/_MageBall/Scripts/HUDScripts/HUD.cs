@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Ansvariga: Gustaf, Hammi, Zoe
+    /// </summary>
     public class HUD : NetworkBehaviour
     {
         [Header("UI")]

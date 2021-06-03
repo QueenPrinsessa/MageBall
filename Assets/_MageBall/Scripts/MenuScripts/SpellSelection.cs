@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Ansvariga: Tonny, och Zoe
+    /// </summary>
     public class SpellSelection : NetworkBehaviour
     {
         public static readonly string MainSpellPlayerPrefsKey = "MainSpell";

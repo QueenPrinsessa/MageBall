@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class ActivateHUD : NetworkBehaviour
     {
 
@@ -12,7 +15,6 @@ namespace MageBall
         {
             HUD.SetActive(true);
         }
-
 
     }
 }

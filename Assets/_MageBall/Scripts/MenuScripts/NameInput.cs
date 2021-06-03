@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class NameInput : MonoBehaviour
     {
         public const string PlayerPrefsDisplayNameKey = "DisplayName";

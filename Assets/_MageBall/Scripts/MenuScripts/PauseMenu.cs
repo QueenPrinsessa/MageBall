@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class PauseMenu : MonoBehaviour
     {
         [Header("UI")]

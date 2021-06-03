@@ -5,6 +5,9 @@ using Mirror;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     public class ServerOnlyRigidbody : NetworkBehaviour
     {

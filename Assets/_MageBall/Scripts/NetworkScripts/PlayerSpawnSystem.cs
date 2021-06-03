@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvaring: Zoe 
+    /// </summary>
     public class PlayerSpawnSystem : NetworkBehaviour
     {
         [Header("Male player prefabs")]

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     [RequireComponent(typeof(BoxCollider))]
     public class Goal : NetworkBehaviour
     {

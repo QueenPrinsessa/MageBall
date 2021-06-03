@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class PopUp : MonoBehaviour
     {
         [SerializeField] private GameObject popUpCanvas;

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class RandomizeSkinColor : NetworkBehaviour
     {
         [SerializeField] private new Renderer renderer;

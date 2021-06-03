@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Tonny
+    /// </summary>
     public class FootSteps : MonoBehaviour
     {
 

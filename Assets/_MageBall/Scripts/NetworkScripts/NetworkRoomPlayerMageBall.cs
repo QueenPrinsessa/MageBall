@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvaring: Zoe 
+    /// </summary>
     public class NetworkRoomPlayerMageBall : NetworkBehaviour
     {
         private static readonly string DefaultPlayerName = "Player";

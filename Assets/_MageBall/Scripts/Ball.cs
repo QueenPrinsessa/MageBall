@@ -5,6 +5,9 @@ using Mirror;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Gustaf
+    /// </summary>
     public class Ball : NetworkBehaviour
     {
         [SerializeField] private GameObject collisionVfx;
