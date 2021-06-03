@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 namespace MageBall
 {
-
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     [RequireComponent(typeof(Button), typeof(Animator))]
     public class MenuButton : MonoBehaviour
     {

@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvaring: Zoe 
+    /// </summary>
     public class NetworkGamePlayerMageBall : NetworkBehaviour
     {
         private static readonly string DefaultPlayerName = "Player";

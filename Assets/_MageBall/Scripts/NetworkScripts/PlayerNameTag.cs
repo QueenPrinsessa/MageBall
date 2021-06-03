@@ -6,6 +6,9 @@ using TMPro;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Hammi
+    /// </summary>
     public class PlayerNameTag : NetworkBehaviour
     {
         [SyncVar(hook = nameof(OnNameChange))]

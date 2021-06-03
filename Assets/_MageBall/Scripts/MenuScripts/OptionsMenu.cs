@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     public class OptionsMenu : MonoBehaviour
     {
 

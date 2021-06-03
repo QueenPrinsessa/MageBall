@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvaring: Zoe 
+    /// </summary>
     public class NetworkManagerMageBall : NetworkManager
     {
         [SerializeField, Scene] private string menuScene = string.Empty;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Hammi
+    /// </summary>
     public class Billboard : MonoBehaviour
     {
         private Transform mainCamera;

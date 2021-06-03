@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Zoe
+    /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class CharacterControllerGravity : NetworkBehaviour
     {

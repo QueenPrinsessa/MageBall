@@ -7,6 +7,9 @@ using System;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Huvudansvarig: Hammi
+    /// </summary>
     public class ThirdPersonCamera : NetworkBehaviour
     {
 

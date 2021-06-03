@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MageBall
 {
+    /// <summary>
+    /// Ansvariga: Tonny, och Zoe
+    /// </summary>
     public struct PlayerLoadout
     {
         public PlayerLoadout(Spells mainSpell, Spells offhandSpell, Spells extraSpell, PlayerModel playerModel, Passives passive)
