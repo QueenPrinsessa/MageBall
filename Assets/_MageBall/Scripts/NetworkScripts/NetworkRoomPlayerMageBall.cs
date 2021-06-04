@@ -79,6 +79,7 @@ namespace MageBall
             DontDestroyOnLoad(gameObject);
             NetworkManager.NetworkRoomPlayers.Add(this);
             UpdateDisplay();
+            NetworkManager.NotifyPlayersOfReadyState();
         }
 
         public override void OnStopClient()
@@ -125,7 +126,10 @@ namespace MageBall
             if (!IsHost)
                 return;
 
-            startGameButton.Selectable = readyToStart;
+            //if (NetworkManager.numPlayers > 1)
+                startGameButton.Selectable = readyToStart;
+            //else
+               // startGameButton.Selectable = true;
         }
 
         [Command]
