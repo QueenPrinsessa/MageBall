@@ -48,6 +48,11 @@ namespace MageBall
             if (menuButtonController.Index != index)
                 buttonDeselected.Invoke();
 
+            if (!Selectable)
+                animator.SetBool("Selectable", false);
+            else
+                animator.SetBool("Selectable", true);
+
             if (menuButtonController.Index != index || !Selectable)
             {
                 animator.SetBool("Selected", false);
