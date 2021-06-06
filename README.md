@@ -10,6 +10,9 @@ För att öppna med Unity Hub:
 4. Klicka på projektet för att öppna det
 5. Öppna MainMenu scenen under _MageBall -> Scenes
 
+Köra spelet själv:
+Tryck på Create Game, Toggle Ready och tryck sedan Start Game för att komma in i spelet.
+
 Testa multiplayerfunktionalitet:
 
 Alla:
